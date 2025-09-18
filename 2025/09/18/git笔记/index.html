@@ -1,0 +1,1779 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>git笔记 | NINGXIU's 学习博客</title><meta name="author" content="NINGXIU"><meta name="copyright" content="NINGXIU"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一章 概述1、Git 历史同生活中的许多伟大事件一样，Git 诞生于一个极富纷争大举创新的年代。Linux 内核开源项目有着为数众广的参与者。绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。到 2002 年，整个项目组开始启用分布式版本控制系统 BitKeeper 来管理和维护代码。 到 2005 年的时候，开发 BitKeeper 的商业公">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git笔记">
+<meta property="og:url" content="https://ningxiu2978.github.io/2025/09/18/git%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="NINGXIU&#39;s 学习博客">
+<meta property="og:description" content="第一章 概述1、Git 历史同生活中的许多伟大事件一样，Git 诞生于一个极富纷争大举创新的年代。Linux 内核开源项目有着为数众广的参与者。绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。到 2002 年，整个项目组开始启用分布式版本控制系统 BitKeeper 来管理和维护代码。 到 2005 年的时候，开发 BitKeeper 的商业公">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ningxiu2978.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-09-18T00:51:04.342Z">
+<meta property="article:modified_time" content="2025-09-18T00:54:27.491Z">
+<meta property="article:author" content="NINGXIU">
+<meta property="article:tag" content="Git#文章标签">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ningxiu2978.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "git笔记",
+  "url": "https://ningxiu2978.github.io/2025/09/18/git%E7%AC%94%E8%AE%B0/",
+  "image": "https://ningxiu2978.github.io/img/butterfly-icon.png",
+  "datePublished": "2025-09-18T00:51:04.342Z",
+  "dateModified": "2025-09-18T00:54:27.491Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "NINGXIU",
+      "url": "https://ningxiu2978.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ningxiu2978.github.io/2025/09/18/git%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'git笔记',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">NINGXIU's 学习博客</span></a><a class="nav-page-title" href="/"><span class="site-name">git笔记</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">git笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-18T00:51:04.342Z" title="发表于 2025-09-18 08:51:04">2025-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-18T00:54:27.491Z" title="更新于 2025-09-18 08:54:27">2025-09-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h3><h4 id="1、Git-历史"><a href="#1、Git-历史" class="headerlink" title="1、Git 历史"></a>1、Git 历史</h4><p>同生活中的许多伟大事件一样，Git 诞生于一个极富纷争大举创新的年代。Linux 内核开源项目有着为数众广的参与者。绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。到 2002 年，整个项目组开始启用分布式版本控制系统 BitKeeper 来管理和维护代码。</p>
+<p>到 2005 年的时候，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了免费使用 BitKeeper 的权力。这就迫使 Linux 开源社区（特别是 Linux的缔造者 Linus Torvalds ）不得不吸取教训，只有开发一套属于自己的版本控制系统才不至于重蹈覆辙。他们对新的系统订了若干目标：</p>
+<p>• 速度</p>
+<p>• 简单的设计</p>
+<p>• 对非线性开发模式的强力支持（允许上千个并行开发的分支）</p>
+<p>• 完全分布式</p>
+<p>• 有能力高效管理类似 Linux 内核一样的超大规模项目（速度和数据量）</p>
+<h4 id="2、Git-定义"><a href="#2、Git-定义" class="headerlink" title="2、Git 定义"></a>2、Git 定义</h4><p>Git 是一个开源的<strong>分布式版本控制系统</strong>（Distributed Version Control System，简称 <strong>DVCS</strong>），仓库类型分为：本地仓库和远程仓库：</p>
+<blockquote>
+<p>**本地仓库：**开发人员自己电脑上的 Git 仓库</p>
+<p>**远程仓库：**是在远程服务器上的 Git 仓库</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Git 是目前世界上最先进、最流行的版本控制系统，可以快速高效地处理从很小到非常大的项目版本管理。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">它没有中央服务器的概念，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了，</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>下图就是分布式版本控制工具管理方式：</p>
+<p> <img src="/images/1649389470153.png" alt="1649389470153"></p>
+<blockquote>
+<p>Clone：克隆，就是将远程仓库复制到本地</p>
+<p>Push：推送，就是将本地仓库代码上传到远程仓库</p>
+<p>Pull：拉取，就是将远程仓库代码下载到本地仓库</p>
+</blockquote>
+<p>特点：项目越大越复杂，协同开发者越多，越能体现出 Git 的高性能和高可用性</p>
+<h4 id="3、Git-特性和优势"><a href="#3、Git-特性和优势" class="headerlink" title="3、Git 特性和优势"></a>3、Git 特性和优势</h4><p>Git 之所以快速和高效，主要依赖于它的如下两个特性： </p>
+<ol>
+<li>直接记录快照，而非差异比较</li>
+<li>近乎所有操作都是本地执行，不需要联网</li>
+</ol>
+<p>特性一：git的记录快照</p>
+<p>Git 快照是在原有文件版本的基础上重新生成一份新的文件，类似于备份。为了效率，如果文件没有修改，Git  不再重新存储该文件，而是只保留一个链接指向之前存储的文件。</p>
+<p><img src="/images/image-20220120164011550.png" alt="image-20220120164011550"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">解析：</span></span><br><span class="line"><span class="comment">version1：文件A、B、C</span></span><br><span class="line"><span class="comment">version2：A 和 C 更新为 A1 C1，  B 没有更新，不备份</span></span><br><span class="line"><span class="comment">version3：C1 更新为 C2，  A1 和 B 没有更新，不备份</span></span><br><span class="line"><span class="comment">version4：A1 B 更新为 A2 B1，  C2 没有更新，不备份</span></span><br><span class="line"><span class="comment">...</span></span><br></pre></td></tr></table></figure>
+
+<p>优缺点：</p>
+<blockquote>
+<p>缺点：占用磁盘空间较大 </p>
+<p>优点：版本切换时非常快，因为每个版本都是完整的文件快照，切换版本时直接恢复目标版本的快照即可。</p>
+<p>特点：空间换时间</p>
+</blockquote>
+<p>特性二：在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。 </p>
+<p>特性： </p>
+<blockquote>
+<ol>
+<li>断网后依旧可以在本地对项目进行版本管理 </li>
+<li>联网后，把本地修改的记录同步到云端服务器即可</li>
+</ol>
+</blockquote>
+<p>Git的优势还有：</p>
+<ol>
+<li>尽可能添加数据而不是删除或修改数据</li>
+<li>分支操作非常快捷流畅</li>
+<li>与 Linux 命令全面兼容</li>
+</ol>
+<h4 id="Git-应用场景"><a href="#Git-应用场景" class="headerlink" title="Git 应用场景"></a><strong>Git 应用场景</strong></h4><ol>
+<li>写作（作家、演说家、编剧）</li>
+<li>程序开发</li>
+<li>起草法律条款</li>
+<li>写学术论文</li>
+</ol>
+<h4 id="4、Git-与-SVN-比较"><a href="#4、Git-与-SVN-比较" class="headerlink" title="4、Git 与 SVN 比较"></a>4、Git 与 SVN 比较</h4><p>SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就郁闷了。</p>
+<p>下图就是标准的集中式版本控制工具管理方式：</p>
+<p><img src="/images/image-20220120161052411.png" alt="image-20220120161052411"></p>
+<p>集中管理方式在一定程度上看到其他开发人员在干什么，而管理员也可以很轻松掌握每个人的开发权限。</p>
+<p>svn：传统的版本控制系统是基于差异的版本控制（每次记录的是变化的内容），它们存储的是一组基本文件和每个文件随时间逐步累积的差异。</p>
+<p><img src="/images/image-20220702101919039.png" alt="image-20220702101919039"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">解析：</span></span><br><span class="line"><span class="comment">初始版本1 中有三个文件 A B C</span></span><br><span class="line"><span class="comment">升级到版本2：在版本2中记录的是文件A变化的内容 🔺1  和 文件C变化的内容 🔺1</span></span><br><span class="line"><span class="comment">升级到版本3：在版本3中记录文件c的变化内容 🔺2</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">切换到版本3，需要在初始文件 A 应用一次差异，在初始文件 C 上应用2次差异</span></span><br><span class="line"><span class="comment">如果是切换版本5，需要在初始文件 A 上应用2次差异，在初始文件 B 上应用2次差异，在初始文件 C 上应用2次差异</span></span><br></pre></td></tr></table></figure>
+
+<p>优缺点：</p>
+<blockquote>
+<p>好处：节省磁盘空间</p>
+<p>缺点：耗时、效率低 在每次切换版本的时候，都需要在基本文件的基础上，应用每个差异，从而生成目标版本对应的文件。</p>
+</blockquote>
+<h5 id="集中式和分布式版本控制系统的区别？"><a href="#集中式和分布式版本控制系统的区别？" class="headerlink" title="集中式和分布式版本控制系统的区别？"></a><strong>集中式和分布式版本控制系统的区别？</strong></h5><p>集中式<code>SVN</code>，分布式<code>git</code>，区别如下：</p>
+<p>集中式的缺点：</p>
+<ol>
+<li><p>必须联网才能工作</p>
+</li>
+<li><p>中央服务器出问题了，就没法工作</p>
+</li>
+<li><p>分支速度慢</p>
+</li>
+</ol>
+<p>分布式的优点：</p>
+<ol>
+<li>不需要联网，也可以工作。</li>
+<li>没有中央服务，每台自己就是服务器。</li>
+<li>没有全局分支，自己的服务器可以创建<code>n</code>个分支，速度极快。</li>
+</ol>
+<h5 id="git和svn的区别"><a href="#git和svn的区别" class="headerlink" title="git和svn的区别"></a>git和svn的区别</h5><ul>
+<li>1.Git 是分布式的，SVN集中式<br>2.Git 把内容按元数据方式存储，而 SVN 是按文件<br>3.Git 分支和 SVN 的分支不同<br>4.Git 没有一个全局的版本号，而 SVN 有<br>5.Git 的内容完整性要优于 SVN</li>
+</ul>
+<h4 id="5、Git-中的三个区域"><a href="#5、Git-中的三个区域" class="headerlink" title="5、Git 中的三个区域"></a>5、Git 中的三个区域</h4><p>使用 Git 管理的项目，拥有三个区域，分别是：</p>
+<ol>
+<li>工作区：本地处理工作的区域（写代码，修改代码）</li>
+<li>暂存区：已完成的工作临时存放区域， 等待被提交</li>
+<li>Git 仓库：最终的存放区域</li>
+</ol>
+<p><img src="/images/image-20220120162447751.png" alt="image-20220120162447751"></p>
+<p>解析：</p>
+<blockquote>
+<p>工作区就是电脑里能看到的目录，存放项目或者文件的目录；</p>
+<p>在这个工作目录中的 <code>.git</code> 隐藏文件夹才是版本库；</p>
+<p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。</p>
+<p>当我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，git commit就是往master分支上提交更改。</p>
+<p>可以简单理解为，需要提交的文件修改后通通放到暂存区，然后，一次性将暂存区的所有修改提交到分支。</p>
+</blockquote>
+<p><img src="/images/1649420594320.png" alt="1649420594320"></p>
+<h4 id="6、Git-中的三种状态"><a href="#6、Git-中的三种状态" class="headerlink" title="6、Git 中的三种状态"></a>6、Git 中的三种状态</h4><p>使用 Git 管理的项目，拥有三个状态，分别是：</p>
+<ol>
+<li>modified（已修改）：表示修改了文件，但还没 将修改的结果放到暂存区</li>
+<li>staged（已暂存）：表示对已修改文件的当前版本做了标记，让它包含在下次提交的列表中</li>
+<li>committed（已提交）：表示文件已经安全地保存 在本地的 Git 仓库中</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>工作区的文件被修改了，但还没有放到暂存区，就是已修改状态。 </p>
+<p>如果文件已修改并放入暂存区，就属于已暂存状态。 </p>
+<p>如果 Git 仓库中保存着特定版本的文件，就属于已提交状态。</p>
+</blockquote>
+<h4 id="7、Git-和代码托管中心"><a href="#7、Git-和代码托管中心" class="headerlink" title="7、Git 和代码托管中心"></a>7、Git 和代码托管中心</h4><p>代码托管中心的作用是：维护远程库</p>
+<p>局域网环境下：gitlab 服务器（可以自己搭建的服务器）</p>
+<p>联网环境下：github 和 码云(gitee)</p>
+<p>注意：</p>
+<blockquote>
+<p>git 和 github 是两个完全没有关系的概念，</p>
+<ul>
+<li>git 是版本控制工具，管理本地仓库</li>
+<li>GitHub 是远程仓库托管中心</li>
+</ul>
+</blockquote>
+<h4 id="Git-与-GitHub-区别？"><a href="#Git-与-GitHub-区别？" class="headerlink" title="Git 与 GitHub 区别？"></a><strong>Git 与 GitHub 区别？</strong></h4><p><code>git</code>是一个版本控制系统，而<code>github</code>是一个在线开源托管网站。你可以使用<code>git</code>上传源码到<code>github</code>开源网站上去。</p>
+<h4 id="8、Git-工作流程"><a href="#8、Git-工作流程" class="headerlink" title="8、Git 工作流程"></a>8、Git 工作流程</h4><p>一般工作流程如下：</p>
+<ol>
+<li><p>从远程仓库中克隆 Git 资源作为本地仓库；</p>
+</li>
+<li><p>从本地仓库中 checkout 代码到工作区，然后进行代码修改；</p>
+</li>
+<li><p>在提交前先将代码提交到暂存区；</p>
+</li>
+<li><p>提交到本地仓库，本地仓库中保存修改的各个历史版本；</p>
+</li>
+<li><p>在修改完成后，需要和团队成员共享代码时，可以将代码 push 到远程仓库（git仓库）。</p>
+</li>
+</ol>
+<p>下图展示了 Git 的工作流程：</p>
+<p><img src="/images/image-20220120161200821.png" alt="image-20220120161200821"></p>
+<h4 id="9、本地库和远程库"><a href="#9、本地库和远程库" class="headerlink" title="9、本地库和远程库"></a>9、本地库和远程库</h4><p>作用是协作开发</p>
+<p>9.1 团队内部协作</p>
+<p><img src="/images/image-20220121094929840.png" alt="image-20220121094929840"></p>
+<p>9.2 跨团队协作</p>
+<p><img src="/images/image-20220121095004167.png" alt="image-20220121095004167"></p>
+<h3 id="第二章-环境准备"><a href="#第二章-环境准备" class="headerlink" title="第二章 环境准备"></a>第二章 环境准备</h3><p>最早Git是在Linux上开发的，很长一段时间内，Git也只能在Linux和Unix系统上跑。不过，慢慢地有人把它移植到了Windows上。现在，Git可以在Linux、Unix、Mac和Windows这几大平台上正常运行了。由于开发机大多数情况都是windows，所以这里讲解windows下的git的安装及使用</p>
+<h4 id="1、Git"><a href="#1、Git" class="headerlink" title="1、Git"></a>1、Git</h4><h5 id="1-1-软件下载"><a href="#1-1-软件下载" class="headerlink" title="1.1 软件下载"></a>1.1 软件下载</h5><p>下载地址：<a target="_blank" rel="noopener" href="https://git-scm.com/download">https://git-scm.com/download</a></p>
+<p><img src="/images/image-20220116175704641.png" alt="image-20220116175704641"></p>
+<p><img src="/images/image-20220120195338915.png" alt="image-20220120195338915"></p>
+<p>淘宝镜像下载安装</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">https://npm.taobao.org/mirrors/git-for-windows/</a></li>
+</ul>
+<h6 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h6><ul>
+<li>因为git是命令行工具，默认安装再C盘，不要装作含中文的目录下，建议一路下一步安装</li>
+</ul>
+<h5 id="1-2-软件安装"><a href="#1-2-软件安装" class="headerlink" title="1.2 软件安装"></a>1.2 软件安装</h5><p>git的安装一路点击“下一步”，使用默认的选项即可</p>
+<p>安装详解：</p>
+<ol>
+<li>安装 git for windows</li>
+</ol>
+<p><img src="/images/image-20220120195512350.png" alt="image-20220120195512350"></p>
+<ol start="2">
+<li>选择安装路径：使用非中文没有空格的目录</li>
+</ol>
+<p><img src="/images/image-20220120195638848.png" alt="image-20220120195638848"></p>
+<ol start="3">
+<li>选择组件：默认</li>
+</ol>
+<p><img src="/images/image-20220120214355422.png" alt="image-20220120214355422"></p>
+<p>选项解析：</p>
+<blockquote>
+<p>Additional icons ： 否创建图标</p>
+<ul>
+<li>On the Desktop ：在桌面</li>
+</ul>
+<p>Windows Explorer integration：集成右键功能</p>
+<ul>
+<li>Git Bash Here</li>
+<li>Git GUI Here</li>
+</ul>
+<p>Git LFS (Large File Support)：git大文件支持</p>
+<p>Associate .git* configuration files with the default text editorAssociate .sh files to be run with Bash：打开 git 配置文件的默认文本编辑器</p>
+</blockquote>
+<ol start="4">
+<li>选择开始目录文件：默认</li>
+</ol>
+<p><img src="/images/image-20220120211802166.png" alt="image-20220120211802166"></p>
+<ol start="5">
+<li>选择默认文本编辑器：使用默认的 vim 编辑器</li>
+</ol>
+<p><img src="/images/image-20220120213318399.png" alt="image-20220120213318399"></p>
+<ol start="6">
+<li>初始化分支名称：默认</li>
+</ol>
+<p><img src="/images/image-20220120214734207.png" alt="image-20220120214734207"></p>
+<p>解析：</p>
+<blockquote>
+<p>Let Git decide：让 git 决定</p>
+<ul>
+<li>.Let Git use its default branch name (currently: “master”) for the initial branchin newly created repositories. The Git project intends to change this default toa more inclusive name in the near future.</li>
+</ul>
+<p>让 git 使用初始化生成的分支，默认名称为 master…</p>
+</blockquote>
+<ol start="7">
+<li>调整环境变量：可以选择第一项，也可以使用默认的推荐选项（第二项）</li>
+</ol>
+<p><img src="/images/image-20220120220134475.png" alt="image-20220120220134475"></p>
+<p>解析：</p>
+<blockquote>
+<p>Use Git from Git Bash only:</p>
+<ul>
+<li>这是最多的选择，将不会改变你的环境，但是只能在 git bash 中执行 git 命令</li>
+</ul>
+<p>Git from the command line and also from 3rd-party software</p>
+<ul>
+<li>推荐，这个选项只给你的path添加了一些最小的git包装器，可以从 git bash 中使用git，也可以从命令提示符等以及任何第三方软件中寻找 git</li>
+</ul>
+<p>use Git and optional Unix tools from the Command Prompt</p>
+<ul>
+<li>警告：这个选项会修改 path，覆盖 windows的一些命令，如“查找” 和 “排序”…  不推荐</li>
+</ul>
+</blockquote>
+<ol start="8">
+<li>选择可知行文件：默认自带的 ssh.exe</li>
+</ol>
+<p><img src="/images/image-20220120220813970.png" alt="image-20220120220813970"></p>
+<p>解析：</p>
+<blockquote>
+<p>Use bundled OpenSSH：使用自带的 ssh.exe（可执行文件）</p>
+<ul>
+<li>This uses ssh.exe that comes with Git.)</li>
+</ul>
+<p>Use external OpenSSH：使用外部的可执行文件</p>
+<ul>
+<li>NEW!This uses an external ssh.exe.Git will not install its own OpenSSH(and related) binaries but use them as found on the PATH.</li>
+</ul>
+</blockquote>
+<ol start="9">
+<li>选择传输协议：默认</li>
+</ol>
+<p><img src="/images/image-20220120221400697.png" alt="image-20220120221400697"></p>
+<p>解析：</p>
+<blockquote>
+<p>Use the openSSL library</p>
+<ul>
+<li>使用通用的 openSSL 库建立连接，推荐</li>
+</ul>
+<p>Use the native Windows Secure Channel library</p>
+<ul>
+<li>本地windows安全通道连接有一定的局限性，不推荐使用</li>
+</ul>
+</blockquote>
+<ol start="10">
+<li>配置文本结束符：默认</li>
+</ol>
+<p><img src="/images/image-20220120221628050.png" alt="image-20220120221628050"></p>
+<p>解析：</p>
+<blockquote>
+<p>checkout Windows-style, commit Unix-style line endings</p>
+<ul>
+<li>Git will convert LF to CRLF when checking out text files. When committingtext files,CRLF will be converted to LF. For cross-platform projects,<br>this is the recommended setting on Windows (“core.autocrIf” is set to “true”).</li>
+</ul>
+<p>检出文件时将 LF 转换为 CRLF, 提交时将 CRLF 转换为 LF（windows 和 Unix 系统换行符不一样，这个选项会帮我们做转换）</p>
+<p>Checkout as-is, commit Unix-style line endings</p>
+<ul>
+<li>Git will not perform any conversion when checking out text files. When committing text files,CRLF will be converted to LF.For cross-platform projects,this is the recommended setting on Unix (“core.autocrlf” is set to “input”).</li>
+</ul>
+<p>Checkout as-is, commit as-is</p>
+<ul>
+<li>Git will not perform any conversions when checking out or committingtext files. Choosing this option is not recommended for cross-platformprojects (“core.autocrlf” is set to “false”).</li>
+</ul>
+</blockquote>
+<ol start="11">
+<li>配置 git 终端：默认</li>
+</ol>
+<p><img src="/images/image-20220120222248457.png" alt="image-20220120222248457"></p>
+<p>解析：</p>
+<blockquote>
+<p>Use MinTTY (the default terminal of MSYS2)</p>
+<ul>
+<li>Git Bash will use MinTTY as terminal emulator, which sports a resizable window,non-rectangular selections and a Unicode font. Windows console programs(suchas interactive Python) must be launched via ‘winpty&#96; to work in MinTTY.</li>
+</ul>
+<p>使用 git 自带的默认终端（推荐，命令和 linux 命令兼容）</p>
+<p>use Windows’ default console window</p>
+<ul>
+<li>Git will use the default console window of Windows (“cmd.exe”), which works wellwith Win32 console programs such as interactive Python or node.js, but has avery limited default scroll-back, needs to be configured to use a Unicode font inorder to display non-ASCII characters correctly, and prior to Windows 10 itswindow was not freely resizable and it only allowed rectangular text selections.</li>
+</ul>
+<p>使用 windows 默认的的命令提示符（可能会有命令冲突，不推荐）</p>
+</blockquote>
+<ol start="12">
+<li>选择 git pull 默认行为：默认</li>
+</ol>
+<p><img src="/images/image-20220120222942302.png" alt="image-20220120222942302"></p>
+<ol start="13">
+<li>启用授权管理器：默认</li>
+</ol>
+<p><img src="/images/image-20220120223020196.png" alt="image-20220120223020196"></p>
+<ol start="14">
+<li>启用文件缓存：默认</li>
+</ol>
+<p><img src="/images/image-20220120223202941.png" alt="image-20220120223202941"></p>
+<ol start="15">
+<li>最后是一些新的功能，可以不勾选，直接 Install 安装</li>
+</ol>
+<p><img src="/images/image-20220120223448047.png" alt="image-20220120223448047"></p>
+<ol start="16">
+<li>安装成功</li>
+</ol>
+<p>最后取消勾选”View Release Notes（视图版本说明，不需要）” → finish</p>
+<p><img src="/images/image-20220120200126556.png" alt="image-20220120200126556"></p>
+<ol start="17">
+<li>检测是否安装成功</li>
+</ol>
+<p>任意位置右键，有 <code>Git GUI Here</code> 和 <code>Git Bash Here</code>  表示安装成功</p>
+<p><img src="/images/image-20220120200313368.png" alt="image-20220120200313368"></p>
+<h6 id="验证安装成功"><a href="#验证安装成功" class="headerlink" title="验证安装成功"></a>验证安装成功</h6><ul>
+<li><ol>
+<li>win菜单 打开运行命令</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>打开 CMD 命名窗口</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>在命令行中输入  git –version 然后会打印出版本号</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>安装成功</li>
+</ol>
+</li>
+</ul>
+<h4 id="2、TortoiseGit"><a href="#2、TortoiseGit" class="headerlink" title="2、TortoiseGit"></a>2、TortoiseGit</h4><h5 id="2-1-软件介绍"><a href="#2-1-软件介绍" class="headerlink" title="2.1 软件介绍"></a>2.1 软件介绍</h5><p>TortoiseGit 其实是一款开源的git的版本控制系统，也叫海龟git。TortoiseGit提供了人性化的图形化界面，不用像Git一样输入许多语句，像git init、git add、git commit这些语句就通通不用记了。轻松使用鼠标，就可以完成代码的提交和上传。对于使用本地Git的新手来说，TortoiseGit更加简便，更加容易上手。</p>
+<h5 id="2-2-软件下载"><a href="#2-2-软件下载" class="headerlink" title="2.2 软件下载"></a>2.2 软件下载</h5><p>地址：<a target="_blank" rel="noopener" href="https://tortoisegit.org/download/">https://tortoisegit.org/download/</a></p>
+<p><img src="/images/1649404213139.png" alt="1649404213139"></p>
+<p><img src="/images/1649404094615.png" alt="1649404094615"></p>
+<h5 id="2-3-软件安装"><a href="#2-3-软件安装" class="headerlink" title="2.3 软件安装"></a>2.3 软件安装</h5><p>TortoiseGit 安装一路点击“下一步”，使用默认的选项即可</p>
+<p>安装详解：</p>
+<ol>
+<li>下一步</li>
+</ol>
+<p><img src="/images/1649404515552.png" alt="1649404515552"></p>
+<ol start="2">
+<li>下一步</li>
+</ol>
+<p><img src="/images/1649404561816.png" alt="1649404561816"></p>
+<ol start="3">
+<li>客户端选择推荐的 “基于Putty…, 更好的与 windows 集成”，下一步：</li>
+</ol>
+<p><img src="/images/1649404692787.png" alt="1649404692787"></p>
+<ol start="4">
+<li>自定义安装路径，下一步：</li>
+</ol>
+<p><img src="/images/1649404764229.png" alt="1649404764229"></p>
+<ol start="5">
+<li>install，安装</li>
+</ol>
+<p><img src="/images/1649404798455.png" alt="1649404798455"></p>
+<ol start="6">
+<li>取消勾选，完成</li>
+</ol>
+<p><img src="/images/1649404892111.png" alt="1649404892111"></p>
+<h5 id="2-4-安装中文语言包"><a href="#2-4-安装中文语言包" class="headerlink" title="2.4 安装中文语言包"></a>2.4 安装中文语言包</h5><p>中文语言包并不是必选项。可以根据个人情况来选择安装。</p>
+<p><img src="/images/1649405330089.png" alt="1649405330089"></p>
+<p>点击中文语言语言安装包，直接下一步完成即可</p>
+<p>在 TortoiseGit 的设置中可以选择语言：</p>
+<p><img src="/images/1649405549559.png" alt="1649405549559"></p>
+<p><img src="/images/1649406043798.png" alt="1649406043798"></p>
+<h4 id="3、代码托管服务"><a href="#3、代码托管服务" class="headerlink" title="3、代码托管服务"></a>3、代码托管服务</h4><h5 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h5><p>前面我们已经知道了Git中存在两种类型的仓库，即本地仓库和远程仓库。那么我们如何搭建Git远程仓库呢？我们可以借助互联网上提供的一些代码托管服务来实现，其中比较常用的有GitHub、码云、GitLab等。</p>
+<h6 id="知名远程仓库网站"><a href="#知名远程仓库网站" class="headerlink" title="知名远程仓库网站"></a>知名远程仓库网站</h6><p><strong>gitHub</strong>（ 地址：<a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a> ）是一个面向开源及私有软件项目的托管平台，因为只支持Git 作为唯一的版本库格式进行托管，故名gitHub</p>
+<p><strong>码云</strong>（地址： <a target="_blank" rel="noopener" href="https://gitee.com/">https://gitee.com/</a> ）是国内的一个代码托管平台，由于服务器在国内，所以相比于GitHub，码云速度会更快</p>
+<p><strong>GitLab</strong> （地址： <a target="_blank" rel="noopener" href="https://about.gitlab.com/">https://about.gitlab.com/</a> ）是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务</p>
+<p><strong>内网仓库</strong><br>gitlab是使用java开发的一个内网仓库</p>
+<h5 id="3-2-创建-GitHub账号"><a href="#3-2-创建-GitHub账号" class="headerlink" title="3.2 创建 GitHub账号"></a>3.2 创建 GitHub账号</h5><p>访问 github 官方网站<a target="_blank" rel="noopener" href="https://github.com/%EF%BC%8C%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7">https://github.com/，注册账号</a></p>
+<p>第一步：Sign up</p>
+<p><img src="/images/image-20220121100558510.png" alt="image-20220121100558510"></p>
+<p>第二步：填入注册信息</p>
+<blockquote>
+<p>账号：24932***<a href="mailto:&#56;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#x6d;">8@qq.com</a></p>
+<p>密码：p***</p>
+<p>用户名：pan0506</p>
+</blockquote>
+<p><img src="/images/image-20220121101452178.png" alt="image-20220121101452178"></p>
+<p>第三步：注册成功</p>
+<p>选择免费版本，忽略兴趣选项，注册成功后自动登入githhub</p>
+<p><img src="/images/image-20220121101610500.png" alt="image-20220121101610500"></p>
+<p>注册成功后点击 Create Repository 就可以创建远程仓库了</p>
+<h5 id="3-3-创建gitee账号"><a href="#3-3-创建gitee账号" class="headerlink" title="3.3 创建gitee账号"></a>3.3 创建gitee账号</h5><p><strong>推荐使用</strong>：由于服务器在国内，所以相比于GitHub，码云速度会更快</p>
+<p>访问码云官方网站<a target="_blank" rel="noopener" href="https://gitee.com/%EF%BC%8C%E9%80%89%E6%8B%A9%E6%B3%A8%E5%86%8C%EF%BC%9A">https://gitee.com/，选择注册：</a></p>
+<p><img src="/images/1649473826115.png" alt="1649473826115"></p>
+<p>填入注册信息</p>
+<blockquote>
+<p>用户名：pan0506</p>
+<p>邮箱：343268***@qq.com</p>
+<p>密码：p***</p>
+</blockquote>
+<p><img src="/images/1649474051474.png" alt="1649474051474"></p>
+<h5 id="3-4-创建Git远程仓库"><a href="#3-4-创建Git远程仓库" class="headerlink" title="3.4 创建Git远程仓库"></a>3.4 创建Git远程仓库</h5><p>登录成功后即可创建 “我的仓库”</p>
+<p><img src="/images/1649474678908.png" alt="1649474678908"></p>
+<p>填写仓库名称（其他选项默认即可），点击创建</p>
+<p><img src="/images/1649480046030.png" alt="1649480046030"></p>
+<p>初始化 readme 文件（可以不需要）：</p>
+<p><img src="/images/1649480110481.png" alt="1649480110481"></p>
+<p>设置仓库开源：</p>
+<p><img src="/images/1649480221327.png" alt="1649480221327"></p>
+<p>完成：</p>
+<p><img src="/images/1649480256550.png" alt="1649480256550"></p>
+<p>每个Git远程仓库都会对应一个网络地址，可以点击克隆&#x2F;下载按钮弹出窗口并点击复制按钮获得这个网络地址：</p>
+<p><img src="/images/1649480333274.png" alt="1649480333274"></p>
+<p>当前创建的远程仓库对应的地址为：</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/pan0506/my-repo1.git">https://gitee.com/pan0506/my-repo1.git</a></p>
+<h5 id="3-5-设置其他仓库成员"><a href="#3-5-设置其他仓库成员" class="headerlink" title="3.5 设置其他仓库成员"></a>3.5 设置其他仓库成员</h5><p>前面已经在码云上创建了自己的远程仓库，目前仓库成员只有自己一个人（身份为管理员）。在企业实际开发中，一个项目往往是由多个人共同开发完成的，为了使多个参与者都有权限操作远程仓库，就需要邀请其他项目参与者成为当前仓库的成员。</p>
+<p>在 【管理】选项 </p>
+<p>→ 仓库成员管理 </p>
+<p>→ 开发者（当前仓库除了创建的人是管理员，其他用户一般都是开发人员） </p>
+<p>→ 添加仓库成员</p>
+<p>→ 邀请用户：</p>
+<p><img src="/images/1649481004315.png" alt="1649481004315"></p>
+<p>邀请的方式有多种，可以通过链接邀请，也可以直接添加：</p>
+<p><img src="/images/1649481352626.png" alt="1649481352626"></p>
+<p>注意：</p>
+<p>直接添加可以输入其他用户的个性邮箱或者注册时的用户名（必须是存在的用户）：</p>
+<p><img src="/images/1649481633942.png" alt="1649481633942"></p>
+<p>点击添加后提交，会将邀请信息发送到对方的用户邮箱，对方同意后，即可参与项目开发，即：代码的下载、修改、推送等操纵</p>
+<h3 id="第三章-GitBash管理文件版本"><a href="#第三章-GitBash管理文件版本" class="headerlink" title="第三章 GitBash管理文件版本"></a>第三章 GitBash管理文件版本</h3><h4 id="1、-本地仓库操作"><a href="#1、-本地仓库操作" class="headerlink" title="1、 本地仓库操作"></a>1、 本地仓库操作</h4><h5 id="1-1-初始化本地仓库"><a href="#1-1-初始化本地仓库" class="headerlink" title="1.1 初始化本地仓库"></a>1.1 初始化本地仓库</h5><h6 id="1-1-1-获取方式"><a href="#1-1-1-获取方式" class="headerlink" title="1.1.1 获取方式"></a>1.1.1 获取方式</h6><p>获取（初始化）git 仓库的方式有两种：</p>
+<ul>
+<li>将尚未进行版本控制的本地目录转换为 Git 仓库</li>
+<li>从其它服务器克隆一个已存在的 Git 仓库（后面演示）</li>
+</ul>
+<p>以上两种方式都能够在自己的电脑上得到一个可用的 Git 仓</p>
+<h6 id="1-1-2-命令"><a href="#1-1-2-命令" class="headerlink" title="1.1.2 命令"></a>1.1.2 命令</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Linux 常用命令</p>
+<blockquote>
+<p>清屏命令：clear</p>
+<p>快捷键：Ctrl + L</p>
+<p>重启终端：reset</p>
+</blockquote>
+<h6 id="1-1-3-步骤"><a href="#1-1-3-步骤" class="headerlink" title="1.1.3 步骤"></a>1.1.3 步骤</h6><p>如果自己有一个尚未进行版本控制的项目目录，想要用 Git 来控制它，需要执行如下两个步骤：</p>
+<ol>
+<li>在项目目录中，通过鼠标右键打开“Git Bash”</li>
+<li>执行 git init 命令将当前的目录转化为 Git 仓库</li>
+</ol>
+<p>在工作空间新建一个 gitRepository 目录，测试 git 操作：</p>
+<p>在当前 gitRepository 目录中新建仓库1：repo1 </p>
+<p>在当前目录 repo1  中右键  →  Git Bash Here，打开 git 命令行窗口</p>
+<p>输入 <code>git init</code> 命令初始化本地仓库</p>
+<p><img src="/images/1649402358518.png" alt="1649402358518"></p>
+<p>注意：</p>
+<blockquote>
+<p><code>git init</code> 命令会创建一个名为 <code>.git</code> 的隐藏目录，这个 <code>.git</code> 目录就是当前项目的 Git 仓库，</p>
+<p>里面包含了初始的必要 文件，这些文件是 Git 仓库的必要组成部分。</p>
+<p><code>.git</code> 目录中存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改</p>
+</blockquote>
+<p>概念：</p>
+<blockquote>
+<p>版本库：“.git”目录就是版本库，将来文件都需要保存到版本库中。</p>
+<p>工作目录：包含 “.git”目录的目录，也就是.git目录的上一级目录就是工作目录。</p>
+<p>只有工作目录中的文件才能保存到版本库中。</p>
+</blockquote>
+<h5 id="1-2-配置用户信息"><a href="#1-2-配置用户信息" class="headerlink" title="1.2 配置用户信息"></a>1.2 配置用户信息</h5><h6 id="1-2-1-签名形式"><a href="#1-2-1-签名形式" class="headerlink" title="1.2.1 签名形式"></a>1.2.1 签名形式</h6><p>设置自己的用户名和邮件地址（设置签名）。通过 Git 对项目进行版本管理的时候，Git 需要使用这些基本信息，来记录是谁对项目进行了操作，</p>
+<p>例如：</p>
+<blockquote>
+<p>用户名：pan</p>
+<p>Email 地址：<a href="mailto:&#x70;&#97;&#110;&#48;&#x35;&#48;&#54;&#x40;&#x63;&#99;&#46;&#x63;&#x6f;&#109;">pan0506@cc.com</a></p>
+</blockquote>
+<p>注意：</p>
+<blockquote>
+<p>用户名可以和邮箱名称不一致，邮箱也可以是不存在的</p>
+<p>这个签名（用户名和邮箱）的作用：是区分开发人员的身份</p>
+<p>这里的设置的签名和登录远程仓库（GitHub 或 码云）的账号密码没有任何关系，可以是不存在的用户名和邮箱</p>
+</blockquote>
+<h6 id="1-2-2-查看配置项"><a href="#1-2-2-查看配置项" class="headerlink" title="1.2.2 查看配置项"></a>1.2.2 查看配置项</h6><p>查看配置信息： <code>git config --list</code></p>
+<p><img src="/images/1649395665053.png" alt="1649395665053"></p>
+<p>解析：</p>
+<blockquote>
+<p>我们发现这里面并没有用户信息，所以需要我们去配置用户信息</p>
+</blockquote>
+<h6 id="1-2-3-命令"><a href="#1-2-3-命令" class="headerlink" title="1.2.3 命令"></a>1.2.3 命令</h6><p>用户的信息可以设置为两个级别</p>
+<ol>
+<li>仓库级别（也叫项目级别）：仅在当前本地仓库范围有效</li>
+</ol>
+<p>命令：</p>
+<blockquote>
+<p><code>git config user.name &quot;pan_pro&quot;</code> 命令设置仓库级别用户名（pro表示项目级别）</p>
+<p><code>git config user.email &quot;pan0506@cc.com&quot;</code>  命令设置邮箱</p>
+<p>使用  <code>git config --list</code> 或者  <code>cat .git/config</code>  命令查看 配置的信息</p>
+</blockquote>
+<p><img src="/images/1649402466437.png" alt="1649402466437"></p>
+<ol start="2">
+<li>全局范围（也叫系统用户级别）：登录当前操作系统的用户范围</li>
+</ol>
+<p>命令：</p>
+<blockquote>
+<p><code>git config --global user.name &quot;pan_glb&quot;</code> 设置全局范围用户名（gib表示全局配置）</p>
+<p><code>git config --global user.email &quot;pan0506@cc.com&quot;</code>  设置全范围别邮箱</p>
+<p>使用  <code>git config --list</code> 或者 <code>cat ~/.gitconfig</code>：查看当前系统用户家目录（c&#x2F;users&#x2F;cc&#x2F;.gitconfig）中保存的信息。</p>
+</blockquote>
+<p><img src="/images/1649402677809.png" alt="1649402677809"></p>
+<p>（<code>~</code> 表示当前系统用户的家目录：c&#x2F;user&#x2F;cc）</p>
+<p><img src="/images/image-20220124100732426.png" alt="image-20220124100732426"></p>
+<h6 id="1-2-4-签名的优先级"><a href="#1-2-4-签名的优先级" class="headerlink" title="1.2.4 签名的优先级"></a>1.2.4 签名的优先级</h6><p>就近原则：</p>
+<blockquote>
+<p>项目级别优先于系统用户级别，二者都有时采用项目级别的签名</p>
+<p>如果只有系统用户级别的签名，就以系统用户级别的签名为准</p>
+</blockquote>
+<p>注意：</p>
+<blockquote>
+<p>仓库级别和全局级别，必须存在一个，不允许二者都没有</p>
+</blockquote>
+<h6 id="1-2-5-小结"><a href="#1-2-5-小结" class="headerlink" title="1.2.5 小结"></a>1.2.5 小结</h6><p>在 linux 系统中，git 的命令都是以 git 开头（主命令），后面跟其他的命令，</p>
+<p>例如：<code>git config</code>，表示配置命令</p>
+<p>还可以在命令后面使用 <code>--</code>添加一些参数，</p>
+<p>例如：<code>git config --golbal</code>，表示全局配置 </p>
+<h5 id="1-3-查看状态（status）"><a href="#1-3-查看状态（status）" class="headerlink" title="1.3 查看状态（status）"></a>1.3 查看状态（status）</h5><h6 id="1-3-1-准备测试文件"><a href="#1-3-1-准备测试文件" class="headerlink" title="1.3.1 准备测试文件"></a>1.3.1 准备测试文件</h6><p>在当前目录中新建一个 test.txt 文件用于测试基本操作</p>
+<p><img src="/images/1649402767041.png" alt="1649402767041"></p>
+<h6 id="1-3-2-命令"><a href="#1-3-2-命令" class="headerlink" title="1.3.2 命令"></a>1.3.2 命令</h6><p>可以使用 <code>git status</code> 命令查看文件处于什么状态</p>
+<p><img src="/images/1649402795443.png" alt="i"></p>
+<p>解析：</p>
+<blockquote>
+<p>没有未追踪文件：</p>
+<blockquote>
+<p>on branch master：表示当前在 master 分支上</p>
+<p>no commits yet：没有任何提交</p>
+<p>nothing to commit ：没有可以提交的东西</p>
+<p>(create&#x2F;copy files and use “git add” to track)：使用 <code>git add</code> 命令追踪创建或者复制的文件（即使用 git 管理文件）</p>
+</blockquote>
+<p>有未追踪文件：</p>
+<blockquote>
+<p> Untracked files: 未追踪文件<br> (use “git add <file>…” to include in what will be committed)：使用<code>git add</code>包含到将要提交的文件（保存到暂存区）<br>    test.txt   ：文件名称</p>
+<p> nothing added to commit but untracked files present (use “git add” to track)：没有添加提交但是有未追踪的文件</p>
+</blockquote>
+</blockquote>
+<p>使用 <code>git status</code> 输出的状态报告很详细，但有些繁琐。</p>
+<p>如果希望以精简的方式显示文件的状态，可以使用 <code>git status -s</code> 或者 <code> git status --short</code>命令，</p>
+<p>其中 <code>-s</code> 是 <code>--short</code> 的简写形式，</p>
+<p>如果有未跟踪文件，前面有红色的 <code>??</code> 标记</p>
+<p><img src="/images/1649402825361.png" alt="1649402825361"></p>
+<h5 id="1-4-跟踪文件"><a href="#1-4-跟踪文件" class="headerlink" title="1.4 跟踪文件"></a>1.4 跟踪文件</h5><h6 id="1-4-1-添加到暂存区（add）"><a href="#1-4-1-添加到暂存区（add）" class="headerlink" title="1.4.1 添加到暂存区（add）"></a>1.4.1 添加到暂存区（add）</h6><p>使用命令 <code>git add</code> 开始跟踪文件（即：将文件添加到暂存区），然后查看状态</p>
+<p><img src="/images/1649402861306.png" alt="1649402861306"></p>
+<p>解析：</p>
+<blockquote>
+<p>Changes to be committed:  改变成将要提交的文件（保存到暂存区的文件）<br>(use “git rm –cached <file>…” to unstage)：可以使用 <code>git rm --cached</code> 取消文件跟踪<br>  new file:   test.txt</p>
+</blockquote>
+<h6 id="1-4-1-取消跟踪（rm）"><a href="#1-4-1-取消跟踪（rm）" class="headerlink" title="1.4.1 取消跟踪（rm）"></a>1.4.1 取消跟踪（rm）</h6><p>使用命令 <code>git rm --cached 文件名</code> 命令取消跟踪文件（从暂存区删除文件，本地工作区文件还在，不是删除本地文件）</p>
+<p><img src="/images/1649402919131.png" alt="1649402919131"></p>
+<h5 id="1-5-提交更新（commit）"><a href="#1-5-提交更新（commit）" class="headerlink" title="1.5 提交更新（commit）"></a>1.5 提交更新（commit）</h5><p>使用 <code>git commit</code> 命令提交文件</p>
+<p>提交的方式有两种</p>
+<ul>
+<li><code>git commit 文件</code>，进入 vim 编辑器，编辑日志信息</li>
+<li><code>git commit -m &quot;message&quot; 文件</code>，在命令中添加日志message，直接提交</li>
+</ul>
+<h6 id="1-5-1-第一种方式"><a href="#1-5-1-第一种方式" class="headerlink" title="1.5.1 第一种方式"></a>1.5.1 第一种方式</h6><p><code>git commit 文件</code>，进入 vim 编辑器，编辑日志信息</p>
+<p>环境准备：将 test.txt 文件添加到暂存区（跟踪文件）</p>
+<p><img src="/images/1649402956550.png" alt="1649402956550"></p>
+<p>操作步骤：</p>
+<ol>
+<li>输入 <code>git commit test.txt</code> 命令， 进入 vim 编辑器</li>
+</ol>
+<p><img src="/images/1649402984011.png" alt="1649402984011"></p>
+<ol start="2">
+<li>进入 vim 编辑器</li>
+</ol>
+<p><img src="/images/1649403001925.png" alt="1649403001925"></p>
+<ol start="3">
+<li>在 vim 编辑器中输入提交日志内容</li>
+</ol>
+<p>步骤：</p>
+<blockquote>
+<p><code>:set nu</code> 命令可以显示行号</p>
+<p><code>a</code>  或者 <code>i</code> 命令切换为编辑模式，编辑日志内容</p>
+<p><code>Esc</code> 退出编辑模式</p>
+<p><code>:wq</code> + 回车，保存退出</p>
+</blockquote>
+<p><img src="/images/1649403058669.png" alt="1649403058669"></p>
+<ol start="4">
+<li>提交成功信息</li>
+</ol>
+<p><img src="/images/1649403086724.png" alt="1649403086724"></p>
+<p>解析：</p>
+<blockquote>
+<p>[master (root-commit)  e549da4]：表示在master主干根提交</p>
+<p>first commit, new file test.txt：提交的日志信息</p>
+<p>1 file changed, 1 insertion(+)：1个文件变化，1行内容（文本中的内容）</p>
+</blockquote>
+<ol start="5">
+<li>查询状态</li>
+</ol>
+<p><img src="/images/1649403124690.png" alt="1649403124690"></p>
+<p>解析：</p>
+<blockquote>
+<p>nothing to commit, working tree clean: 没有可以提交的，工作树很干净</p>
+</blockquote>
+<h6 id="1-5-2-第二种方式"><a href="#1-5-2-第二种方式" class="headerlink" title="1.5.2 第二种方式"></a>1.5.2 第二种方式</h6><p><code>git commit -m &quot;message&quot; 文件</code>，在命令中添加日志message，直接提交</p>
+<p>环境准备：</p>
+<ol>
+<li>修改文件内容（可以手动修改，也可以使用命令修改）</li>
+</ol>
+<p>命令修改步骤：</p>
+<blockquote>
+<p><code>vim test.txt</code>  命令进入文件</p>
+<p><code>:set nu</code> 命令显示行号</p>
+<p><code>a</code> 命令切换为编辑模式，修改内容</p>
+<p><code>Esc</code> 退出编辑</p>
+<p><code>:wq</code> + 回车 保存并退出文件</p>
+</blockquote>
+<p><img src="/images/1649403165047.png" alt="1649403165047"></p>
+<ol start="2">
+<li>修改后查看状态</li>
+</ol>
+<p><img src="/images/1649403188355.png" alt="1649403188355"></p>
+<p>解析</p>
+<blockquote>
+<p>Changes not staged for commit:  没有暂存到可以提交的区域</p>
+<p>(use “git add <file>…” to update what will be committed) ： 使用<code>git add</code> 命令 <em>更新</em> 到准备提交的区域</p>
+<p>(use “git restore <file>…” to discard changes in working directory)  ： 使用<code>git restore</code> 命令取消修改文件</p>
+<p>modified:   test.txt    修改的文件</p>
+<p>no changes added to commit (use “git add” and&#x2F;or “git commit -a”)   ：可以先add 再commit，也可以直接commit</p>
+</blockquote>
+<ol start="3">
+<li>先执行 <code>git add</code></li>
+</ol>
+<p><img src="/images/1649403212495.png" alt="1649403212495"></p>
+<p>出现了两行警告，解析：</p>
+<blockquote>
+<p>warning: LF will be replaced by CRLF in test.txt.   行末（换行符）LF 将会被转换为 CRLF<br>The file will have its original line endings in your working directory  不会修改工作空间的文件行末</p>
+</blockquote>
+<ol start="4">
+<li>查看状态</li>
+</ol>
+<p><img src="/images/1649403456430.png" alt="1649403456430"></p>
+<p>解析：</p>
+<blockquote>
+<p>Changes to be committed:  变为可提交的文件<br>(use “git restore –staged <file>…” to unstage)：可以使用 <code>git restore</code> 命令取消跟踪<br>  modified:   test.txt  修改的文件</p>
+</blockquote>
+<p><strong>在命令中添加日志信息，直接提交：</strong></p>
+<p>输入命令： <code>git commit -m &quot;second commit,modify test.txt&quot; test.txt</code></p>
+<p><img src="/images/1649403576130.png" alt="1649403576130"></p>
+<h5 id="1-6-综合练习：将java工程提交到版本库"><a href="#1-6-综合练习：将java工程提交到版本库" class="headerlink" title="1.6 综合练习：将java工程提交到版本库"></a>1.6 综合练习：将java工程提交到版本库</h5><h6 id="1-6-0-需求"><a href="#1-6-0-需求" class="headerlink" title="1.6.0 需求"></a>1.6.0 需求</h6><p>将 springbootShiro 项目提交到本地仓库，忽略不需要提交的文件</p>
+<h6 id="1-6-1-初始化本地仓库"><a href="#1-6-1-初始化本地仓库" class="headerlink" title="1.6.1 初始化本地仓库"></a>1.6.1 初始化本地仓库</h6><p>新建 repo2 目录，复制需要版本控制的 springbootShiro 到当前目录，</p>
+<p>执行<code>git init</code> 命令，初始化本地仓库：</p>
+<p><img src="/images/1649559207732.png" alt="1649559207732"></p>
+<h6 id="1-6-2-忽略文件或目录"><a href="#1-6-2-忽略文件或目录" class="headerlink" title="1.6.2 忽略文件或目录"></a>1.6.2 忽略文件或目录</h6><p>在此工程中，并不是所有文件都需要保存到版本库中的，</p>
+<p>例如 target 目录是编译后的目录，这个目录及目录下的文件就可以忽略。</p>
+<p>Git解决这个问题很简单，在Git工作区的根目录下创建一个特殊的 <code>.gitignore</code> 文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。</p>
+<p>步骤：</p>
+<blockquote>
+<p>工作区间的根目录中创建  <code>.gitignore</code> 文件</p>
+<p>编辑内容，填写忽略的文件名称（springbootShiro目录下的target目录）</p>
+</blockquote>
+<p><img src="/images/1649569006575.png" alt="1649569006575"></p>
+<p>注意文件中的内容：</p>
+<blockquote>
+<p><code>springbootShiro/target</code> 表示忽略 springbootShiro 目录下的 taget 文件和 target 目录</p>
+<p><code>springbootShiro/target/</code> 表示忽略 springbootShiro 目录下的 target 目录（不包括 target 文件）</p>
+</blockquote>
+<p>拓展：</p>
+<p>忽略文件语法规范：</p>
+<blockquote>
+<ul>
+<li><p>空行或是以 <code>#</code> 开头的行，即注释行将被忽略。</p>
+</li>
+<li><p>可以在前面添加正斜杠 <code>/</code> 来避免递归,下面的例子中可以很明白的看出来与下一条的区别。</p>
+</li>
+<li><p>可以在后面添加正斜杠<code> /</code> 来忽略文件夹，例如 <code>build/</code>c 即忽略 build文件夹。</p>
+</li>
+<li><p>可以使用 <code>!</code> 来否定忽略，即比如在前面用了 <code>*.apk</code> ，然后使用 <code>!a.apk</code> ，则这个 <code>a.apk</code> 不会被忽略。</p>
+</li>
+<li><p><code>*</code> 用来匹配零个或多个字符，如 <code>*.[oa]</code> 忽略所有以 <code>.o</code>或  <code>.a</code> 结尾</p>
+</li>
+<li><p><code>*~</code> 忽略所有以 <code>~</code> 结尾的文件（这种文件通常被许多编辑器标记为临时文件）；</p>
+</li>
+<li><p><code>[]</code> 用来匹配括号内的任一字符，如 <code>[abc]</code> ，也可以在括号内加连接符，如 <code>[0-9]</code> 匹配0至9的数； </p>
+</li>
+<li><p><code>?</code> 用来匹配单个字符。</p>
+</li>
+</ul>
+</blockquote>
+<p>看个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*.a      		// 表示忽略 .a 文件</span><br><span class="line"></span><br><span class="line">!lib.a   		// 但否定忽略 lib.a, 尽管已经在前面忽略了 .a 文件</span><br><span class="line"></span><br><span class="line">/TODO    		// 仅在当前目录下忽略 TODO 文件， 但不包括子目录下的 subdir/TODO</span><br><span class="line"></span><br><span class="line">build/			// 忽略 build/ 文件夹下的所有文件</span><br><span class="line"></span><br><span class="line">doc/*.txt		// 忽略 doc/notes.txt, 不包括 doc/server/arch.txt</span><br><span class="line"></span><br><span class="line">doc/**/*.pdf    // 忽略在 doc/  directory 下的所有的 .pdf 文件 </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h6 id="1-6-3-添加到暂存区"><a href="#1-6-3-添加到暂存区" class="headerlink" title="1.6.3 添加到暂存区"></a>1.6.3 添加到暂存区</h6><p>执行 <code>git add .</code> 命令，添加当前目录下的所有文件（夹）</p>
+<blockquote>
+<p> <code>git add .</code> 命令 表示添加当前目录下的所有文件（夹）添加到暂存区</p>
+<p> 注意：也可以进入到指定目录（cd  springbootShiro）执行 <code>git add .</code> 命令</p>
+</blockquote>
+<p><img src="/images/1649569244322.png" alt="1649569244322"></p>
+<p>查看 springbootShiro 目录发现，target 目录已经被忽略，没有添加到暂存区</p>
+<p><img src="/images/1649569300911.png" alt="1649569300911"></p>
+<h6 id="1-6-4-提交到本地仓库"><a href="#1-6-4-提交到本地仓库" class="headerlink" title="1.6.4 提交到本地仓库"></a>1.6.4 提交到本地仓库</h6><p>执行<code>git commit -m &quot;日志信息&quot;</code> 命令提交</p>
+<blockquote>
+<p>提交命令不使用文件名称，默认提交当前所有暂存区的文件</p>
+</blockquote>
+<p><img src="/images/1649569394593.png" alt="1649569394593"></p>
+<p>查看 springbootShiro 目录，发现此时 target 目录是被忽略的，没有提交到本地仓库：</p>
+<p><img src="/images/1649569422746.png" alt="1649569422746"></p>
+<h4 id="2、远程仓库操作"><a href="#2、远程仓库操作" class="headerlink" title="2、远程仓库操作"></a>2、远程仓库操作</h4><p>回顾Git工作流程</p>
+<p>前面通过命令或者 TortoiseGit 操作的都是本地仓库是，接下来我们要操作远程仓库，示意图：</p>
+<p>一般工作流程如下：</p>
+<ol>
+<li><p>从远程仓库中克隆 Git 资源作为本地仓库。</p>
+</li>
+<li><p>从本地仓库中 checkout 代码到工作区，然后进行代码修改</p>
+</li>
+<li><p>在提交前先将代码提交到暂存区。</p>
+</li>
+<li><p>提交到本地仓库，本地仓库中保存修改的各个历史版本。</p>
+</li>
+<li><p>在修改完成后，需要和团队成员共享代码时，可以将代码 push 到远程仓库（git仓库）。</p>
+</li>
+</ol>
+<p>下图展示了 Git 的工作流程：</p>
+<p><img src="D:/TyData/02-Java/P3-javaframe/image/image-20220120161200821.png" alt="image-20220120161200821"></p>
+<h5 id="2-1-克隆远程仓库"><a href="#2-1-克隆远程仓库" class="headerlink" title="2.1 克隆远程仓库"></a>2.1 克隆远程仓库</h5><p>克隆远程仓库也就是从远程把仓库复制一份到本地，克隆后会创建一个新的本地仓库。选择一个任意部署仓库的目录，然后克隆远程仓库。</p>
+<p>可以通过 Git 提供的命令从远程仓库进行克隆，将远程仓库克隆到本地</p>
+<p>在存放的目录中打开 GitBash 窗口，输入命令：<code>git clone 远程仓库地址</code>：</p>
+<p><img src="/images/1649488024658.png" alt="1649488024658"></p>
+<h5 id="2-2-查看远程仓库"><a href="#2-2-查看远程仓库" class="headerlink" title="2.2 查看远程仓库"></a>2.2 查看远程仓库</h5><p>如果想查看已经配置的远程仓库服务器，可以运行 git remote 命令。 它会列出指定的每一个远程服务器的简写。 如果已经克隆了远程仓库，那么至少应该能看到 origin ，这是 Git 克隆的仓库服务器的默认名字</p>
+<p><code>git remote</code> 命令：在克隆的仓库中查看远程仓库服务器名称：</p>
+<p><img src="/images/1649493209441.png" alt="1649493209441"></p>
+<p>解析：</p>
+<blockquote>
+<p>前面，我们克隆了远程仓库 myRepo1 到本地，其实这个远程仓库和本地仓库已经建立起关联关系，</p>
+<p>在这个克隆的远程仓库中执行 git remote 命令就能查询当前本地仓库和哪个远程仓库服务器（默认名称origin）建立了关联</p>
+</blockquote>
+<p><code>git remote -v</code> 命令可以列出远程仓库地址信息：</p>
+<p><img src="/images/1649493464997.png" alt="1649493464997"></p>
+<p>解析：</p>
+<blockquote>
+<p>通过这个命令列出了远程仓库的地址信息</p>
+<p>fetch：表示获取远程仓库链接的地址，即：可以从远程仓库获取代码</p>
+<p>push：表示推送本地仓库代码到远程仓库的地址，即：可以将本地仓库的代码推送到远程仓库</p>
+</blockquote>
+<p>如果我们想要查看更详细的信息，可以使用 <code>git remote show origin</code></p>
+<p><img src="/images/1649493860166.png" alt="1649493860166"></p>
+<p>**注意：**如果是本地仓库没有和远程仓库建立关联，那么输入查看命令是没有信息显示的，例如在前面我们自己创建的本地仓库 repo1 中查看：</p>
+<p><img src="/images/1649493701790.png" alt="1649493701790"></p>
+<h5 id="2-3-添加远程仓库"><a href="#2-3-添加远程仓库" class="headerlink" title="2.3 添加远程仓库"></a>2.3 添加远程仓库</h5><p>对于我们本地创建的Git仓库 repo1，是没有和远程仓库建立联系的，我们可以添加到指定的远程服务器上</p>
+<p><code>git remote add &lt;shortname&gt; &lt;url&gt;</code> 命令：添加一个新的远程 Git 仓库，同时指定一个可以引用的简写，</p>
+<p>示例：将本地仓库 repo1 添加到远程仓库（即：将本地仓库关联到远程仓库）</p>
+<p>在码云上新建一个远程仓库repo1（远程仓库和本地仓库名称可以不一致，但是建议保持一致）：</p>
+<p><img src="/images/1649495596667.png" alt="1649495596667"></p>
+<p>创建后，初始化 readme 文件和 设置为开源仓库</p>
+<p><img src="/images/1649495701201.png" alt="1649495701201"></p>
+<p>在本地仓库 repo1 中打开 GitBash，执行<code>git remote add &lt;remote-name&gt; &lt;url&gt;</code> 命令:</p>
+<blockquote>
+<p>shortname：通常使用默认的 origin，也可以自定义名称</p>
+<p>url：远程仓库的地址</p>
+</blockquote>
+<p><img src="/images/1649496082195.png" alt="1649496082195"></p>
+<p>添加成功后，就能查询到远程仓库的信息了</p>
+<p>练习：创建远程仓库 repo2，并将本地仓库 repo2 添加到该远程仓库</p>
+<h5 id="2-4-拉取远程仓库代码：git-pull"><a href="#2-4-拉取远程仓库代码：git-pull" class="headerlink" title="2.4 拉取远程仓库代码：git pull"></a>2.4 拉取远程仓库代码：git pull</h5><p>从远程仓库拉取代码的命令有两个：<code>get pull</code>  和 <code>get fetch</code></p>
+<p><code>git pull &lt;remote-name&gt; &lt;branch-name&gt;</code> 命令：是从远程仓库的指定分支获取最新版本并 merge（合并）到本地仓库</p>
+<p>注意：</p>
+<blockquote>
+<p>如果，当前本地仓库有文件，那么从原仓库拉取文件会报错：</p>
+<p>fatal: refusing to merge unrelated histories </p>
+</blockquote>
+<p><img src="/images/1649518104779.png" alt="1649518104779"></p>
+<p>解析：</p>
+<blockquote>
+<p>因为本地仓库有文件，从远程仓库拉取文件下来，可能会覆盖当前的文件，所以拉取失败</p>
+</blockquote>
+<p>解决方式：</p>
+<blockquote>
+<p>在拉取的命令后面添加参数选项：–allow-unrelated-histories</p>
+<p>表示强制拉取，并合并到本地仓库</p>
+</blockquote>
+<p>执行强制拉取并合并到本地的命令后会进入到日志界面，不需要填写日志的话直接<code>:wq!</code> 保存推出即可</p>
+<p><img src="/images/1649518362431.png" alt="1649518362431"></p>
+<p>拉取成功：</p>
+<p><img src="/images/1649518469914.png" alt="1649518469914"></p>
+<h5 id="2-5-拉取远程仓库代码：git-fetch"><a href="#2-5-拉取远程仓库代码：git-fetch" class="headerlink" title="2.5 拉取远程仓库代码：git fetch"></a>2.5 拉取远程仓库代码：git fetch</h5><p>环境准备：将本地仓库 repo1 删除，重新初始化，并关联远程仓库repo1</p>
+<p><img src="/images/1649519325832.png" alt="1649519325832"></p>
+<p><code>git fetch</code> 或者 <code>git fetch origin master</code> 命令：从远程仓库抓取文件</p>
+<blockquote>
+<p>执行完命令抓取命令后，远程仓库的的文件已经以二进制的文件形式抓取到本地仓库（.git 目录下的 objects 目录中）</p>
+<p>但是不会 merge 到本地工作空间（即：没有合并到工作空间中，不会显示）</p>
+</blockquote>
+<p><img src="/images/1649519370878.png" alt="1649519370878"></p>
+<p>上面抓取的结果我们可以看到抓取到的分支是 origin&#x2F;master，</p>
+<p>需要执行 <code>git merge origin/master</code> 命令 ，将同步到本地仓库的文件 merge（合并）到本地工作空间</p>
+<p><img src="/images/1649519651070.png" alt="1649519651070"></p>
+<p>pull 和 fetch 的区别：</p>
+<blockquote>
+<ol>
+<li><p>git pull 命令相当于  git fetch + git merge 两个命令的结合</p>
+</li>
+<li><p>建议使用 git fetch 命令获取远程仓库文件，因为：</p>
+</li>
+</ol>
+<p>git fetch是将远程主机的最新内容拉到本地，用户检查后决定是否合并到分支中，而git pull则是将远程主机的最新内容拉下来直接合并即：git pull &#x3D; git fetch + git merge，可能产生冲突需要手动解决 </p>
+<ol start="3">
+<li>当本地仓库存在文件时，从远程仓库拉取数据会报错，解决方式：</li>
+</ol>
+<p>添加：–allow-unrelated-histories 参数</p>
+</blockquote>
+<h5 id="2-6-移除远程仓库"><a href="#2-6-移除远程仓库" class="headerlink" title="2.6 移除远程仓库"></a>2.6 移除远程仓库</h5><p>日常工作中：可能会因为一些原因想要移除一个远程仓库 </p>
+<p>注意：移除远程仓库只是从本地移除远程仓库的记录，并不会真正影响到远程仓库</p>
+<p>可以使用 <code>git remote rm &lt;remote-name&gt;</code> 命令移除远程仓库</p>
+<p><img src="/images/1649560505552.png" alt="1649560505552"></p>
+<h5 id="2-7-推送到远程仓库"><a href="#2-7-推送到远程仓库" class="headerlink" title="2.7 推送到远程仓库"></a>2.7 推送到远程仓库</h5><p>前面我们将本地仓库 repo2 关联到远程仓库后，本地仓库中的文件并没有推送到远程仓库中</p>
+<p>推送本地仓库的文件到远程仓库之前要先拉取远程仓库的代码，这里我们的本地仓库有文件，所以需要先强制拉取文件：</p>
+<blockquote>
+<p>强制拉取命令：<code>git pull origin master --allow-unrelated-histories</code></p>
+</blockquote>
+<p><img src="/images/1649521201322.png" alt="1649521201322"></p>
+<p>通过<code>git push &lt;remmote-name&gt; &lt;branch-name&gt;</code> 命令将本地仓库的文件推送到远程仓库：</p>
+<blockquote>
+<p>第一次推送的时候需要输入码云的用户名和密码</p>
+</blockquote>
+<p><img src="/images/1649521317620.png" alt="1649521317620"></p>
+<p>推送成功，本地仓库的文件和目录已经同步到了远程仓库中：</p>
+<p><img src="/images/1649521453411.png" alt="1649521453411"></p>
+<p>小结：</p>
+<blockquote>
+<p>修改本地文件后，可以通过<code>git push &lt;remmote-name&gt; &lt;branch-name&gt;</code> 命令来同步到远程仓库</p>
+</blockquote>
+<h4 id="3、Git-分支"><a href="#3、Git-分支" class="headerlink" title="3、Git 分支"></a>3、Git 分支</h4><p>几乎所有的版本控制系统都以某种形式支持分支。 使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。Git 的master分支并不是一个特殊分支。 它跟其它分支没有区别。 之所以几乎每一个仓库都有 master 分支，是因为git init 命令默认创建它，并且大多数人都懒得去改动它。</p>
+<h5 id="3-1-查看分支"><a href="#3-1-查看分支" class="headerlink" title="3.1 查看分支"></a>3.1 查看分支</h5><p>分支有两种，一种是本地仓库分支，另一种是远程仓库的分支</p>
+<p>接下来操作 repo2 仓库，来查看分支：</p>
+<p>查看分支的命令：</p>
+<blockquote>
+<p><code>git branch</code> 命令：列出所有本地分支</p>
+<p><code>git branch -r</code> 命令：列出所有远程分支</p>
+<p><code>git branch -a</code> 命令：列出所有本地分支和远程分支</p>
+</blockquote>
+<p>效果如下：</p>
+<p><img src="/images/1649583421660.png" alt="1649583421660"></p>
+<h5 id="3-2-创建分支"><a href="#3-2-创建分支" class="headerlink" title="3.2 创建分支"></a>3.2 创建分支</h5><p>创建本地仓库分支，后面可以推送到远程仓库：</p>
+<p>命令：</p>
+<blockquote>
+<p><code>git branch &lt;branch-name&gt;</code> 命令：在本地仓库创建一个分支</p>
+</blockquote>
+<p><img src="/images/1649586871532.png" alt="1649586871532"></p>
+<p>解析：</p>
+<blockquote>
+<p>上面的命令创建了两个分支：a1、a2，加上默认创建的 master 分支，查询结果有三个分支</p>
+</blockquote>
+<h5 id="3-3-切换分支"><a href="#3-3-切换分支" class="headerlink" title="3.3 切换分支"></a>3.3 切换分支</h5><p>命令：</p>
+<blockquote>
+<p><code>git checkout &lt;branch-name&gt;</code> 命令：切换到指定的分支</p>
+</blockquote>
+<p><img src="/images/1649587337293.png" alt="1649587337293"></p>
+<p>解析：</p>
+<blockquote>
+<p>上面的命令将当前的分支从 master 切换到 a1 分支</p>
+<p>查看分支：标 <code>*</code> 号的分支表示当前分支，或者通过行末括号中的名称也能分辨当前属于哪个分支</p>
+</blockquote>
+<h5 id="3-4-推送至远程仓库分支"><a href="#3-4-推送至远程仓库分支" class="headerlink" title="3.4 推送至远程仓库分支"></a>3.4 推送至远程仓库分支</h5><p>命令</p>
+<blockquote>
+<p><code>git push &lt;remote-name&gt; &lt;branch-name&gt;</code> 命令：将本地分支推送至远程仓库分支</p>
+</blockquote>
+<p><img src="/images/1649587623566.png" alt="1649587623566"></p>
+<p>练习：将 a2 分支推送到远程仓库分支</p>
+<p>解析：</p>
+<blockquote>
+<p>查看远程仓库中的 a1、a2分支，我们发现，a1、a2分支中的内容和 master 分支中的内容一样，</p>
+<p>原因： a1、a2 分支是在 master 分支的基础上创建出来的，随着我们在不同的分支上开发，修改内容，不同分支的代码会产生差异</p>
+</blockquote>
+<h5 id="3-5-合并分支"><a href="#3-5-合并分支" class="headerlink" title="3.5 合并分支"></a>3.5 合并分支</h5><p>命令：</p>
+<blockquote>
+<p><code>git merge &lt;branch-name&gt;</code> 命令：将指定分支的内容合并到当前分支</p>
+</blockquote>
+<p>例如我们当前在 a1 分支下新增了一个文件 user.txt</p>
+<p><img src="/images/1649588473691.png" alt="1649588473691"></p>
+<p>当我们切换到 master 分支后发现，master 分支下并没有 User.txt</p>
+<p><img src="/images/1649588616063.png" alt="1649588616063"></p>
+<p>在当前 master 分支下，执行 <code>git merge a1</code> 命令即可将 a1 分支的文件合并到当前 master 分支下：</p>
+<p><img src="/images/1649588719058.png" alt="1649588719058"></p>
+<p>注意：</p>
+<p>有时候合并操作不会如此顺利。 如果你在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 在合并的时候就会提示会提示文件冲突，合并失败；</p>
+<p>此时需要我们打开冲突的文件并修复冲突内容，最后执行git add命令来标识冲突已解决</p>
+<p>示例：</p>
+<p>在 master 分支下修改 User.txt 文件 → 添加缓存区  → 提交到本地仓库：</p>
+<p><img src="/images/1649589429978.png" alt="1649589429978"></p>
+<p>切换到 a1 分支，修改 User.txt 文件 → 添加缓存区  → 提交到本地仓库：</p>
+<p><img src="/images/1649589674852.png" alt="1649589674852"></p>
+<p>切换回 master 分支，将 a1 分支合并到 master 分支：</p>
+<p><img src="/images/1649589780846.png" alt="1649589780846"></p>
+<p>解析：</p>
+<blockquote>
+<p>CONFLICT (content): Merge conflict in User.txt 		【表示合并内容发生冲突】<br>Automatic merge failed; fix conflicts and then commit the result.		【自动合并失败】</p>
+<p>行末的分支  (master|MERGING)  表示 master 分支在合并时发生错误</p>
+</blockquote>
+<p>打开 User.txt 查看内容发现，在合并时这里面多了很多多余的内容</p>
+<p><img src="/images/1649589987151.png" alt="1649589987151"></p>
+<p>需要我们手动解决冲突内容（删除不需要的内容，保留需要内容），然后添加暂存区，提交到本地仓库即可：</p>
+<p><img src="/images/1649590207547.png" alt="1649590207547"></p>
+<h5 id="3-6-推送到远程"><a href="#3-6-推送到远程" class="headerlink" title="3.6 推送到远程"></a>3.6 推送到远程</h5><p>将我们在本地仓库分支修改或者添加的文件推送到远程分支中：</p>
+<p>命令：</p>
+<blockquote>
+<p><code>git push &lt;remote-name&gt; &lt;branch-name&gt;</code> 命令：将本地分支的内容推送到指定远程分支</p>
+</blockquote>
+<p><img src="/images/1649590584385.png" alt="1649590584385"></p>
+<p>查看远程仓库的分支，验证推送成功</p>
+<h5 id="3-7-删除分支"><a href="#3-7-删除分支" class="headerlink" title="3.7 删除分支"></a>3.7 删除分支</h5><p>删除本地分支命令：</p>
+<blockquote>
+<p><code>git branch -d &lt;branch-name&gt;</code> 命令：删除指定的分支</p>
+</blockquote>
+<p><img src="/images/1649590877895.png" alt="1649590877895"></p>
+<p>如果要删除的分支中进行了一些开发动作（比如修改了文件没有推送到远程仓库中），此时执行上面的删除命令并不会删除分支，如果坚持要删除此分支，可以将命令中的-d参数改为-D</p>
+<p>示例：</p>
+<p><img src="/images/1649591745934.png" alt="1649591745934"></p>
+<p>此时：本地仓库 a1 分支修改的内容没有推送到远程仓库，不能直接通过 <code>git branch -d &lt;branch-name&gt;</code> 命令直接删除 a1 分支，可以将命令中的-d参数改为-D 强制删除；</p>
+<p>切换到 master 分支删除 a1：</p>
+<p><img src="/images/1649591989148.png" alt="1649591989148"></p>
+<p>如果要删除远程仓库中的分支，可以使用命令</p>
+<blockquote>
+<p><code>git push &lt;remote-name&gt; –d &lt;branch-name&gt;</code> 命令：可以删除指定的远程仓库：</p>
+</blockquote>
+<p><img src="/images/1649592231339.png" alt="1649592231339"></p>
+<p>执行命令后查看远程仓库分支，验证删除成功</p>
+<h4 id="4、Git-标签"><a href="#4、Git-标签" class="headerlink" title="4、Git 标签"></a>4、Git 标签</h4><p>像其他版本控制系统（vcs）一样，GIt可以给历史中某一个提交打上标签，以示重要；比较有代表的就是使用这个功能来标记发布节点（v1.0，v2.0 等）；</p>
+<p>标签指的是某个分支某个特定时间点的状态，通过标签，可以很方便的切换到标记时的状态</p>
+<h5 id="4-1-列出已有标签"><a href="#4-1-列出已有标签" class="headerlink" title="4.1 列出已有标签"></a>4.1 列出已有标签</h5><p>命令：</p>
+<blockquote>
+<p><code>git tag</code> 命令：列出当前标签</p>
+</blockquote>
+<p>示例（当前本地仓库还没有标签）：</p>
+<p><img src="/images/1649640598243.png" alt="1649640598243"></p>
+<h5 id="4-2-创建标签"><a href="#4-2-创建标签" class="headerlink" title="4.2 创建标签"></a>4.2 创建标签</h5><p>命令：</p>
+<blockquote>
+<p><code>git tag &lt;tag-name&gt;</code> 命令：用来创建一个标签</p>
+</blockquote>
+<p>示例：创建两个标签</p>
+<blockquote>
+<p>标签的作用是用来记录状态（版本）的，所以通常使用 v 开头来标签</p>
+</blockquote>
+<p><img src="/images/1649640802359.png" alt="1649640802359"></p>
+<p> 也可以通过</p>
+<blockquote>
+<p><code>git show &lt;tag-name&gt;</code> 命令：来显示标签的详细信息</p>
+</blockquote>
+<p><img src="/images/1649641056865.png" alt="1649641056865"></p>
+<p>解析：</p>
+<blockquote>
+<p>详细信息中列出了：提交的标识字符串、作者（用户）信息、提交的日期信息等等</p>
+</blockquote>
+<h5 id="4-3-推送到远程仓库"><a href="#4-3-推送到远程仓库" class="headerlink" title="4.3 推送到远程仓库"></a>4.3 推送到远程仓库</h5><p>和前面的推送分支命令类似：</p>
+<blockquote>
+<p><code>git push &lt;remote-name&gt; &lt;tag-name&gt;</code> 命令：将指定本地标签推送到远程仓库</p>
+</blockquote>
+<p><img src="/images/1649643863540.png" alt="1649643863540"></p>
+<p>注意：</p>
+<blockquote>
+<p>当前 v1.0 和 v1.1 两个标签标记的内容是一样的</p>
+</blockquote>
+<h5 id="4-4-检出标签"><a href="#4-4-检出标签" class="headerlink" title="4.4 检出标签"></a>4.4 检出标签</h5><p>通常情况下会新建一个分支，指向某个标签：</p>
+<blockquote>
+<p><code>git checkout -b &lt;branch-name&gt; &lt;tag-name&gt;</code> 命令：用于创建一个新的分支，并检出指定标签到这个分支</p>
+</blockquote>
+<p><img src="/images/1649642135087.png" alt="1649642135087"></p>
+<p>执行完命令后会切换到创建的 a3 分支，这个分支的内容就是前面 v1.0 版本的内容，在这个版本中我们可以继续开发，例如：添加 login.txt 文件：</p>
+<p><img src="/images/1649642404798.png" alt="1649642404798"></p>
+<p>开发完成后，可以再创建一个标签，标记为 v2.0 版本，提交到远程仓库</p>
+<p><img src="/images/1649642893202.png" alt="1649642893202"></p>
+<p>小结：</p>
+<blockquote>
+<p>标签通常再一些重要的节点使用，例如发布的时候，下次更新或者升级完成后发布的时候…</p>
+</blockquote>
+<h5 id="4-5-删除标签"><a href="#4-5-删除标签" class="headerlink" title="4.5 删除标签"></a>4.5 删除标签</h5><p>删除标签分为删除本地标签和远程标签：</p>
+<blockquote>
+<p><code>git tag -d &lt;tag-name&gt;</code> 命令：用于删除指定的本地标签；</p>
+<p><code>git push &lt;remote-name&gt; :refs/tags/&lt;tag-name&gt;</code> 命令：用户伤处指定的远程标签，                              </p>
+<p>注意：语法中 <code>:refs/tags/</code> 是固定写法</p>
+</blockquote>
+<p> <img src="/images/1649644045736.png" alt="1649644045736"></p>
+<h3 id="第四章-TortoiseGit管理文件版本"><a href="#第四章-TortoiseGit管理文件版本" class="headerlink" title="第四章 TortoiseGit管理文件版本"></a>第四章 TortoiseGit管理文件版本</h3><h4 id="1、本地仓库操作"><a href="#1、本地仓库操作" class="headerlink" title="1、本地仓库操作"></a>1、本地仓库操作</h4><h5 id="1-1-初始化本地仓库-1"><a href="#1-1-初始化本地仓库-1" class="headerlink" title="1.1 初始化本地仓库"></a>1.1 初始化本地仓库</h5><p>新建仓库3：repo3，在目录中右键选择：”Git create repository here…” (在这里创建版本库)</p>
+<p><img src="/images/1649560621578.png" alt="1649560621578"></p>
+<p>默认不勾选：”Make it Bare(No working directories)” （表示：制作纯版本库）</p>
+<p><img src="/images/1649560653814.png" alt="1649560653814"></p>
+<p>初始化本地仓库成功：</p>
+<p><img src="/images/1649560682183.png" alt="1649560682183"></p>
+<h5 id="1-2-添加文件"><a href="#1-2-添加文件" class="headerlink" title="1.2 添加文件"></a>1.2 添加文件</h5><p>当前工作目录中新增一个 aaa.txt 文件</p>
+<p><img src="/images/1649560743420.png" alt="1649560743420"></p>
+<p>选中文件，右键 → TortoiseGit  → Add</p>
+<p><img src="/images/1649560815265.png" alt="1649560815265"></p>
+<p>添加成功：</p>
+<p><img src="/images/1649560850713.png" alt="1649560850713"></p>
+<p>添加（到缓存区）成功后，文件会有一个蓝色 <code>+</code> 号：</p>
+<p><img src="/images/1649560875703.png" alt="1649560875703"></p>
+<h5 id="1-3-提交文件"><a href="#1-3-提交文件" class="headerlink" title="1.3 提交文件"></a>1.3 提交文件</h5><p>选中已追踪（添加到缓存区）的文件，右键选择 <code>Git commit → &quot;master&quot;...</code> 将文件提交到版本库中：</p>
+<p><img src="/images/1649560940499.png" alt="1649560940499"></p>
+<p>填写提交日志信息，点击 commit 按钮提交：</p>
+<p><img src="/images/1649561033598.png" alt="1649561033598"></p>
+<p>提交成功后，文件的状态为绿色<code>√</code>号</p>
+<h5 id="1-4-修改文件"><a href="#1-4-修改文件" class="headerlink" title="1.4 修改文件"></a>1.4 修改文件</h5><p>被版本库管理的文件不可避免的发生修改，此时只需要直接对文件修改即可，修改完毕后需要将修改的文件提交到版本库。</p>
+<p>修改文件（修改后文件会变为红色感叹号）：</p>
+<p><img src="/images/1649561134245.png" alt="1649561134245"></p>
+<p>选中修改后的文件，右键提交：</p>
+<p><img src="/images/1649561184008.png" alt="1649561184008"></p>
+<p>添加提交日志信息，提交：</p>
+<p><img src="/images/1649561259687.png" alt="1649561259687"></p>
+<p>提交成功成功后，文件状态由红色 <code>!</code> 号变为绿色 <code>√</code> 号。</p>
+<h5 id="1-5-查看修改历史"><a href="#1-5-查看修改历史" class="headerlink" title="1.5 查看修改历史"></a>1.5 查看修改历史</h5><p>在开发过程中可能会经常查看代码的修改历史，或者叫做修改日志。来查看某个版本是谁修改的，什么时间修改的，修改了哪些内容。</p>
+<p>可以选中文件，右键选择 “show log（显示日志）” ：</p>
+<p><img src="/images/1649561398835.png" alt="1649561398835"></p>
+<p>查看修改历史：</p>
+<p><img src="/images/1649561454247.png" alt="1649561454247"></p>
+<h5 id="1-6-差异比较"><a href="#1-6-差异比较" class="headerlink" title="1.6 差异比较"></a>1.6 差异比较</h5><p>当文件内容修改后，需要和修改之前对比一下修改了哪些内容，此时可以使用“比较差异功能”</p>
+<p>修改文件内容：</p>
+<p><img src="/images/1649561488039.png" alt="1649561488039"></p>
+<p>选择” Diff（比较差异）”</p>
+<p><img src="/images/1649561605090.png" alt="1649561605090"></p>
+<p>对比修改后的内容：</p>
+<p><img src="/images/1649561661311.png" alt="1649561661311"></p>
+<h5 id="1-7-还原修改"><a href="#1-7-还原修改" class="headerlink" title="1.7 还原修改"></a>1.7 还原修改</h5><p>当文件修改后不想把修改的内容提交，还想还原到未修改之前的状态。</p>
+<p>此时可以使用 “Revert（还原）” 功能</p>
+<p><img src="/images/1649561746403.png" alt="1649561746403"></p>
+<p>点击 “Ok” 还原</p>
+<p><img src="/images/1649561787822.png" alt="1649561787822"></p>
+<p>还原成功！</p>
+<p>注意：</p>
+<blockquote>
+<p>此操作会撤销所有未提交的修改，所以做还原操作是需要慎重慎重！！！</p>
+</blockquote>
+<h5 id="1-8-删除文件"><a href="#1-8-删除文件" class="headerlink" title="1.8 删除文件"></a>1.8 删除文件</h5><p>需要删除无用的文件时可以使用git提供的删除功能直接将文件从版本库中删除。</p>
+<p><img src="/images/1649561938559.png" alt="1649561938559"></p>
+<h5 id="1-9-综合练习：将java工程提交到版本库"><a href="#1-9-综合练习：将java工程提交到版本库" class="headerlink" title="1.9 综合练习：将java工程提交到版本库"></a>1.9 综合练习：将java工程提交到版本库</h5><p>将 springbootShiro  工程复制到工作区中，提交到版本库中，并且忽略 target 目录</p>
+<h6 id="1-9-1-忽略文件或目录"><a href="#1-9-1-忽略文件或目录" class="headerlink" title="1.9.1 忽略文件或目录"></a>1.9.1 忽略文件或目录</h6><p>选中要忽略的文件&#x2F;目录，右键 → TortoiseGit →  add to ignore list （添加到忽略列表）</p>
+<p><img src="/images/1649570558378.png" alt="1649570558378"></p>
+<p>选择 忽略的类型和  .gitignore 文件存放的位置（默认即可）：</p>
+<p><img src="/images/1649570759594.png" alt="1649570759594"></p>
+<p>完成后在工作空间的根目录多出一个.gitignore文件，这个文件就是文件忽略文件，当然也可以手工编辑。其中的内容就是把 springbootShiro 中的 target 目录忽略掉。</p>
+<p><img src="/images/1649570916099.png" alt="1649570916099"></p>
+<h6 id="1-9-2-添加暂存区"><a href="#1-9-2-添加暂存区" class="headerlink" title="1.9.2 添加暂存区"></a>1.9.2 添加暂存区</h6><p>将工程和忽略文件添加到暂存区：</p>
+<p><img src="/images/1649570991965.png" alt="1649570991965"></p>
+<p>勾选需要添加的文件（这里默认全选），点击ok</p>
+<p><img src="/images/1649571035879.png" alt="1649571035879"></p>
+<p>点击ok，完成暂存区添加</p>
+<h6 id="1-9-3-提交代码"><a href="#1-9-3-提交代码" class="headerlink" title="1.9.3 提交代码"></a>1.9.3 提交代码</h6><p>先将 选中项目 和 .gitignore 文件</p>
+<p>右键然后提交代码：</p>
+<p><img src="/images/1649571129483.png" alt="1649571129483"></p>
+<p>提交成功后查看工程里面的文件，发现 target 目录没有提交到版本库</p>
+<p><img src="/images/1649468369531.png" alt="1649468369531"></p>
+<p>输入提交日志，点击 commit 提交按钮</p>
+<p><img src="/images/1649571209663.png" alt="1649571209663"></p>
+<p>查看 springbootShiro 目录，验证 target 目录是否被忽略</p>
+<h4 id="2、远程仓库操作-1"><a href="#2、远程仓库操作-1" class="headerlink" title="2、远程仓库操作"></a>2、远程仓库操作</h4><h5 id="2-1-克隆远程仓库-1"><a href="#2-1-克隆远程仓库-1" class="headerlink" title="2.1 克隆远程仓库"></a>2.1 克隆远程仓库</h5><p>克隆远程仓库也就是从远程把仓库复制一份到本地，克隆后会创建一个新的本地仓库。选择一个任意部署仓库的目录，然后克隆远程仓库。</p>
+<p>在码云上创建一个远程仓库 myRepo2（readme初始化，开源仓库）：</p>
+<p><img src="/images/1649487974299.png" alt="1649487974299"></p>
+<p>在存放目录中右键 → Git clone…，复制远程仓库的地址到 URL 选项中 → Ok:</p>
+<p><img src="/images/1649488354671.png" alt="1649488354671"></p>
+<p>克隆成功：</p>
+<p><img src="/images/1649488409630.png" alt="1649488409630"></p>
+<h5 id="2-2-查看远程仓库-1"><a href="#2-2-查看远程仓库-1" class="headerlink" title="2.2 查看远程仓库"></a>2.2 查看远程仓库</h5><p>在克隆的仓库中右键 → TortoiseGit → settings</p>
+<p>然后，在设置的 Remote 中可以看到远程仓库服务器名称，点击名称，显示远程仓库地址：</p>
+<p><img src="/images/1649653049072.png" alt="1649653049072"></p>
+<h5 id="2-3-添加远程仓库-1"><a href="#2-3-添加远程仓库-1" class="headerlink" title="2.3 添加远程仓库"></a>2.3 添加远程仓库</h5><p>同样我们，也可以通过 TortoiseGit  将本地仓库添加到远程仓库：</p>
+<p>在码云新建远程仓库： repo3</p>
+<p><img src="/images/1649653508427.png" alt="1649653508427"></p>
+<p>在本地仓库 repo3 中右键 → settings</p>
+<p>然后在 Remote 中填入名称和 URL → 确定即可：</p>
+<blockquote>
+<p>名称自定义，通常使用 Origin </p>
+<p>url：远程仓库地址</p>
+<p>Push Url：远程仓库地址（暂时可以不填写）</p>
+<p>Putty Key：这里使用 https 协议传输，不需要填</p>
+</blockquote>
+<p><img src="/images/1649655534172.png" alt="1649655534172"></p>
+<p>“是否从新添加的远程服务器获取分支” ，选 “是”</p>
+<p><img src="/images/1649655655253.png" alt="1649655655253"></p>
+<p>默认ok</p>
+<p><img src="/images/1649655693609.png" alt="1649655693609"></p>
+<p>成功后 close</p>
+<p><img src="/images/1649655748848.png" alt="1649655748848"></p>
+<p>完成后可以使用 GitBash 命令查看，验证是否添加成功</p>
+<h5 id="2-4-推送到远程仓库"><a href="#2-4-推送到远程仓库" class="headerlink" title="2.4 推送到远程仓库"></a>2.4 推送到远程仓库</h5><p>将本地仓库的文件推送到远程仓库</p>
+<p>→ 在工作区间中右键 TortoiseGit → push  推送</p>
+<p><img src="/images/1649655808417.png" alt="1649655808417"></p>
+<p>→ 填写要推送到哪个分支 → ok</p>
+<p><img src="/images/1649655890675.png" alt="1649655890675"></p>
+<p>出现异常：</p>
+<p><img src="/images/1649654748885.png" alt="1649654748885"></p>
+<p>异常原因解析：</p>
+<p>在推送的之前要先拉取远程仓库的代码，以防止覆盖，我们的本地仓库有文件，所有要强制拉取，可以使用 git 命令强制拉取（快速简单）</p>
+<p><img src="/images/1649656136172.png" alt="1649656136172"></p>
+<p>然后重新推送：</p>
+<p><img src="/images/1649656503770.png" alt="1649656503770"></p>
+<p>到远程仓库查看，验证是否推送成功</p>
+<p><img src="/images/1649656585262.png" alt="1649656585262"></p>
+<h5 id="2-5-TortoiseGit拉取"><a href="#2-5-TortoiseGit拉取" class="headerlink" title="2.5 TortoiseGit拉取"></a>2.5 TortoiseGit拉取</h5><p>右键 TortoiseGit → pull → Ok</p>
+<p><img src="/images/1649655076920.png" alt="1649655076920"></p>
+<p>注意：</p>
+<blockquote>
+<p>如果本地仓库有文件，在使用 TortoiseGit 拉取文件时，同样可会报错</p>
+<p>可以使用 GitBash 的命令强制拉取后，再使用 TortoiseGit 操作（使用 git 命令的方式解决方便快速）</p>
+</blockquote>
+<h5 id="2-6-移除远程仓库-1"><a href="#2-6-移除远程仓库-1" class="headerlink" title="2.6 移除远程仓库"></a>2.6 移除远程仓库</h5><p>在本地仓库的工作空间右键 → TortoiseGit → Settings </p>
+<p>Remote → 选中远程服务器名称（origin） → remove → 确定：</p>
+<p><img src="/images/1649656651524.png" alt="1649656651524"></p>
+<p>移除之后，可以只用 GitBash 的查看命令，验证是否移除</p>
+<h4 id="3、分支操作"><a href="#3、分支操作" class="headerlink" title="3、分支操作"></a>3、分支操作</h4><p>上面如果将本地仓库repo3 的远程仓库移除了，这里需要重新添加上，演示本地仓库和远程仓库的分支操作</p>
+<h5 id="3-1-创建分支"><a href="#3-1-创建分支" class="headerlink" title="3.1 创建分支"></a>3.1 创建分支</h5><p>右键 → TortoiseGit → Create Branch… （创建分支）</p>
+<p><img src="/images/1649656992338.png" alt="1649656992338"></p>
+<p>填写分支名称，选择分支状态：Base on（默认基于 master 分支，创建出来的分支和 master 分支状态一致）</p>
+<p><img src="/images/1649657269881.png" alt="1649657269881"></p>
+<h5 id="3-2-切换分支"><a href="#3-2-切换分支" class="headerlink" title="3.2 切换分支"></a>3.2 切换分支</h5><p>右键 → TortoiseGit → Switch&#x2F;Checkout… （切换分支）</p>
+<p><img src="/images/1649657489164.png" alt="1649657489164"></p>
+<p>选择分支 → Ok 即可切换</p>
+<p><img src="/images/1649657571213.png" alt="1649657571213"></p>
+<p>切换后的操作和之前命令操作是一样的</p>
+<h5 id="3-3-合并分支"><a href="#3-3-合并分支" class="headerlink" title="3.3 合并分支"></a>3.3 合并分支</h5><p>在房前 master 分支下右键 → TortoiseGit → merge… （合并分支）</p>
+<p><img src="/images/1649657684182.png" alt="1649657684182"></p>
+<p>选择要合并的分支 → Ok 即可</p>
+<p><img src="/images/1649658115218.png" alt="1649658115218"></p>
+<h5 id="3-4-推送到远程仓库"><a href="#3-4-推送到远程仓库" class="headerlink" title="3.4 推送到远程仓库"></a>3.4 推送到远程仓库</h5><p>选择 push 选项：</p>
+<p><img src="/images/1649660431358.png" alt="1649660431358"></p>
+<p>选择要推送的分支，定义远程分支的名称（一般和本地分支名称保持一致）</p>
+<p><img src="/images/1649660520290.png" alt="1649660520290"></p>
+<p>推送成功后可以在远程仓库查看</p>
+<p><img src="/images/1649660599728.png" alt="1649660599728"></p>
+<h4 id="4、标签操作"><a href="#4、标签操作" class="headerlink" title="4、标签操作"></a>4、标签操作</h4><p>略</p>
+<h3 id="第五章-在-idea-中使用-Git"><a href="#第五章-在-idea-中使用-Git" class="headerlink" title="第五章 在 idea 中使用 Git"></a>第五章 在 idea 中使用 Git</h3><p>在实际开发中，我们都是在开发工具 idea 中开发的，在开发完成之后可以直接在 idea 中完成 git 的相关操作，比如提交代码、推送到远程仓库等等。</p>
+<h4 id="1、配置Git"><a href="#1、配置Git" class="headerlink" title="1、配置Git"></a>1、配置Git</h4><p>老版本的 IntelliJ IDEA 如果Git安装在默认路径下，那么idea会自动找到git的位置，如果更改了Git的安装位置则需要手动配置下Git的路径；</p>
+<p>最新版本会帮我们自动找到 Git 的安装路径；</p>
+<p>点击Test 按钮 测试是否正确配置，如果是正确的则会提示安装的 Git 的版本信息</p>
+<p><img src="/images/1649669677183.png" alt="1649669677183"></p>
+<h4 id="2、创建工程并添加至Git"><a href="#2、创建工程并添加至Git" class="headerlink" title="2、创建工程并添加至Git"></a>2、创建工程并添加至Git</h4><p>环境准备：</p>
+<p>创建一个新的 Module：gitTest（maven版的普通Java项目即可）：</p>
+<p><img src="/images/1649670274964.png" alt="1649670274964"></p>
+<p>添加一些开发的内容：</p>
+<p><img src="/images/1649670479029.png" alt="1649670479029"></p>
+<p>将当前项目添加到 Git 其实就是在项目的根目录下添加 git 仓库：</p>
+<p><img src="/images/1649670576802.png" alt="1649670576802"></p>
+<p>在 Idea 上方的 VSC 选项中选择： <strong>VCS Operations</strong>（VCS 操作）</p>
+<p><img src="/images/1649670830490.png" alt="1649670830490"></p>
+<p>→ <strong>Create Git Repository…</strong> </p>
+<p><img src="/images/1649670976807.png" alt="1649670976807"></p>
+<p>→ 选择当前项目的根目录（注意是在src 同级目录，即：在 gitTest 目录创建git仓库）：</p>
+<p><img src="/images/1649671140766.png" alt="1649671140766"></p>
+<p>在目录中查看，验证成功创建 git 仓库：</p>
+<blockquote>
+<p>此时，项目根目录下的文件还没有交给 git 版本控制管理</p>
+</blockquote>
+<p><img src="/images/1649671249575.png" alt="1649671249575"></p>
+<p>将项目添加至Git管理后，可以从IDEA的工具栏上看到Git操作的按钮：</p>
+<p><img src="/images/1649671373419.png" alt="1649671373419"></p>
+<h4 id="3、忽略文件和目录"><a href="#3、忽略文件和目录" class="headerlink" title="3、忽略文件和目录"></a>3、忽略文件和目录</h4><p>在当前项目的根目录下创建 <code>.gitignore</code> 文件，把需要忽略的文件和目录编辑进去：</p>
+<p><img src="/images/1649672953684.png" alt="1649672953684"></p>
+<p>我们可以使用 maven 编译一下当前项目，就会出现 target 目录，可以更好的看到后面添加和提交等效果：</p>
+<p><img src="/images/1649673100650.png" alt="1649673100650"></p>
+<h4 id="4、添加到暂存区"><a href="#4、添加到暂存区" class="headerlink" title="4、添加到暂存区"></a>4、添加到暂存区</h4><p>其实 IDEA 可以不需要添加到暂存区直接提交的（简化了步骤），</p>
+<p>如果我们需要添加到暂存区可以右键当前项目 → GIt 选项 → Add ：</p>
+<p><img src="/images/1649673248764.png" alt="1649673248764"></p>
+<p>在目录中可以看到允许被提交的文件状态变为 <code>+</code> 号了，即添加到了暂存区：</p>
+<p><img src="/images/1649673338068.png" alt="1649673338068"></p>
+<h4 id="5、提交文件"><a href="#5、提交文件" class="headerlink" title="5、提交文件"></a>5、提交文件</h4><p>提交的方式地方有很多：</p>
+<p>可以右键项目 → Git 选项 → Commit…</p>
+<p><img src="/images/1649673459998.png" alt="1649673459998"></p>
+<p>也可以使用 Git 按钮提交：</p>
+<p><img src="/images/1649673525015.png" alt="1649673525015"></p>
+<p>还可以在 VCS 中选择 Commit…</p>
+<p><img src="/images/1649673580652.png" alt="1649673580652"></p>
+<p>这些提交的效果是一样的，在弹出的对话框中添加提交日志信息 →  commit：</p>
+<p><img src="/images/1649673728254.png" alt="1649673728254"></p>
+<p>如果需要看到目录，可以在提交界面的 Group by 按钮中勾选 Model 和 Directory：</p>
+<p>现在项目中添加一个 配置文件 jdbc.properties，再次提交，勾选 Model 和 Directory 后可以看到要提交的文件在哪个目录中：</p>
+<p><img src="/images/1649674392748.png" alt="1649674392748"></p>
+<h4 id="6、推送到远程仓库"><a href="#6、推送到远程仓库" class="headerlink" title="6、推送到远程仓库"></a>6、推送到远程仓库</h4><p>在码云创建一个新的远程仓库 gitTest：</p>
+<blockquote>
+<p>这里不初始化 readme 文件，不然后面需要解决第一此推送或拉取，本地仓库有文件冲突，需要强制拉取解决冲突</p>
+</blockquote>
+<p><img src="/images/1649675427211.png" alt="1649675427211"></p>
+<p>在idea 中右键项目 → Git → Push</p>
+<p>或者 VCS 中 push</p>
+<p>或者 找到 Push 按钮：</p>
+<p><img src="/images/1649675042018.png" alt="1649675042018"></p>
+<p>选择定义 Define remote（远程仓库），添加远程仓库地址：</p>
+<p><img src="/images/1649675142337.png" alt="1649675142337"></p>
+<p>点击 push 推送本地仓库到远程仓库：</p>
+<p> <img src="/images/1649675212855.png" alt="1649675212855"></p>
+<p>推送成功后查看远程仓库：</p>
+<p><img src="/images/1649675588300.png" alt="1649675588300"></p>
+<h4 id="7、从远程仓库克隆工程到本地"><a href="#7、从远程仓库克隆工程到本地" class="headerlink" title="7、从远程仓库克隆工程到本地"></a>7、从远程仓库克隆工程到本地</h4><p>选择从VCS 克隆工程：</p>
+<p><img src="/images/1649675829173.png" alt="1649675829173"></p>
+<p><img src="/images/%E5%9B%BE%E7%89%8748.png" alt="1559620271237"></p>
+<p>填写远程仓库地址，选择保存路径：</p>
+<p><img src="/images/1649675935783.png" alt="1649675935783"></p>
+<p>Trust Project：</p>
+<p><img src="/images/1649676051404.png" alt="1649676051404"></p>
+<p>克隆成功：</p>
+<p><img src="/images/1649676197877.png" alt="1649676197877"></p>
+<h4 id="8、从远程拉取代码"><a href="#8、从远程拉取代码" class="headerlink" title="8、从远程拉取代码"></a>8、从远程拉取代码</h4><p>我们可以打开前面 gitTest 项目</p>
+<p><img src="/images/1649676519930.png" alt="1649676519930"></p>
+<p>因为这两个本地仓库都是关联的同一个远程仓库，所以可以模拟两个用户操作同一个项目：</p>
+<blockquote>
+<p>注意区分两个本地仓库，前面我们自己创建的叫 gitTest， 后面克隆下来的叫 git-test</p>
+</blockquote>
+<p><img src="/images/1649676544025.png" alt="1649676544025"></p>
+<p><strong>在 gitTest 项目中：</strong></p>
+<p>添加 UserService 接口：</p>
+<p><img src="/images/1649676896277.png" alt="1649676896277"></p>
+<p>→ 提交到本地仓库：</p>
+<p><img src="/images/1649676979945.png" alt="1649676979945"></p>
+<p>→ 推送到远程仓库：</p>
+<p><img src="/images/1649677037332.png" alt="1649677037332"></p>
+<p>查看远程仓库，推送成功：</p>
+<p><img src="/images/1649677091001.png" alt="1649677091001"></p>
+<p><strong>在 git-test 项目中：</strong></p>
+<p>点击 Update Project 选项拉取代码到本地，或者点击选择 Pull 选项也可以将远程仓库的代码拉取到本地：</p>
+<p><img src="/images/1649677522847.png" alt="1649677522847"></p>
+<p>练习：</p>
+<p>在 gitTest 项目中修改 jdbc.properties 文件的内容，并推送到远程仓库</p>
+<p>在 git-test 项目中拉取远程仓库中修该的内容</p>
+<h4 id="9、版本对比"><a href="#9、版本对比" class="headerlink" title="9、版本对比"></a>9、版本对比</h4><p>每一次提交都都会产生新的版本，我们可以使用 idea 来比较不同的版本文件的区别：</p>
+<p>例如我们想要查看  jdbc.properties 文件不同版本的区别：</p>
+<p>打开  jdbc.properties 文件，在文件中右键 → Git 选项 →  Compare with Revision…（比较版本信息）：</p>
+<p><img src="/images/1649678075452.png" alt="1649678075452"></p>
+<p>选择一个版本比较差异：</p>
+<blockquote>
+<p>为了看到效果，我提交了两次，</p>
+<p>第一次提交 jdbc.username </p>
+<p>第二次提交 jdbc.userpassword</p>
+</blockquote>
+<p><img src="/images/1649678288235.png" alt="1649678288235"></p>
+<p>左边是选择的版本内容，右边是最新的内容：</p>
+<p><img src="/images/1649678375837.png" alt="1649678375837"></p>
+<h4 id="10、创建分支"><a href="#10、创建分支" class="headerlink" title="10、创建分支"></a>10、创建分支</h4><p>可以在 VCS 中 选择  New Branch… 选项来创建分支：</p>
+<p><img src="/images/1649678570047.png" alt="1649678570047"></p>
+<p>填写要创建的分支名称：</p>
+<blockquote>
+<p>勾选 Checkout branch 表示创建 a1 分支，并且切换到 a1 分支:</p>
+</blockquote>
+<p><img src="/images/1649678622083.png" alt="1649678622083"></p>
+<p>创建并切换成功：</p>
+<p><img src="/images/1649678803287.png" alt="1649678803287"></p>
+<p>切换成功以后代码没有变化，是因为当前 a1 分支和 master 分支的状态是一样的</p>
+<h4 id="11、切换分支"><a href="#11、切换分支" class="headerlink" title="11、切换分支"></a>11、切换分支</h4><p>可以在底部 Git 选项中，右键想要切换的分支，选择 Checkout 切换分支</p>
+<p><img src="/images/1649678952530.png" alt="1649678952530"></p>
+<p>也可以在顶部 VCS 中选中 Branchs…  选项，找到想要切换的分支，然后 Checkout 即可：</p>
+<p><img src="/images/1649679153356.png" alt="1649679153356"></p>
+<h4 id="12、分支合并"><a href="#12、分支合并" class="headerlink" title="12、分支合并"></a>12、分支合并</h4><p>我们可以在 b1 分支上开发，提交并推送到远程仓库，然后在 master 分支上操作，将 b1 分支合并到 master 分支：</p>
+<p>在 b1 分支中的  User 类中添加 username 属性：</p>
+<p><img src="/images/1649679564784.png" alt="1649679564784"></p>
+<p>提交并推送到远程仓库（可以同时操作）：</p>
+<p><img src="/images/1649679723996.png" alt="1649679723996"></p>
+<p>推送到远程仓库：</p>
+<p><img src="/images/1649679752010.png" alt="1649679752010"></p>
+<p>切换到 master 分支，此时的 User 用户是没有 username 属性的：</p>
+<p><img src="/images/1649679811648.png" alt="1649679811648"></p>
+<p>在顶部 VCS 中选中 Merge…  选项:</p>
+<p><img src="/images/1649679924764.png" alt="1649679924764"></p>
+<p>选择合并本地的 a1 分支即可（origin&#x2F;a1 是远程的分支）：</p>
+<p><img src="/images/1649680027425.png" alt="1649680027425"></p>
+<p>合并成功：</p>
+<p><img src="/images/1649680058843.png" alt="1649680058843"></p>
+<h5 id="第六章-使用-SSH-协议传输数据"><a href="#第六章-使用-SSH-协议传输数据" class="headerlink" title="第六章 使用 SSH 协议传输数据"></a>第六章 使用 SSH 协议传输数据</h5><h4 id="1、Git-支持的传输协议"><a href="#1、Git-支持的传输协议" class="headerlink" title="1、Git 支持的传输协议"></a>1、Git 支持的传输协议</h4><p>由于 Git 的远程仓库不在本地，当我们在使用远程仓库时（例如克隆、拉取、推送）就会涉及到数据的网络传输，Git 支持多种数据传输协议：</p>
+<ul>
+<li>本地协议（Local）</li>
+<li>HTTPS 协议</li>
+<li>SSH（Secure Shell）协议</li>
+<li>Git 协议</li>
+</ul>
+<p>我们前面的操作都是基于 HTTPS 协议传输的，而码云支持两种传输协议：</p>
+<p><img src="/images/1649681122070.png" alt="1649681122070"></p>
+<h4 id="2、什么是-SSH-协议"><a href="#2、什么是-SSH-协议" class="headerlink" title="2、什么是 SSH 协议"></a>2、什么是 SSH 协议</h4><p>SSH 是 Sercure Shell（安全外壳协议）的缩写，由 IETE 的网络小组（Network Working Group）制定；</p>
+<p>SSH 是目前较可靠，专为远程登陆会话和其他网络服务提供安全性的协议；利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题</p>
+<p>由于本地 Git 仓库和远程仓库之间的传输是通过 SSH 加密的，所以必须要让远程仓库服务器认证你的 SSH key，在此之前，必须要先生成 SSH key；</p>
+<p>使用 SSH 协议通信时，推荐使用基于密钥的验证方式，我们需要先为自己创建一对密钥（公钥和私钥），并将公钥放在需要访问的服务器上。</p>
+<p>解析：</p>
+<p>其实前面我们使用 https 协议传输的时候，它是基于我们码云的账户和密码验证的，我们后面的操作之所以不需要每次输入用户名和密码，是因为第一次操作时验证了用户名和密码，然后将用户名和密码凭证保存在了我们的计算机上，我们可以查看到：</p>
+<p>控制面板 → 用户账户 → 管理 Windows 凭据</p>
+<p><img src="/images/1649681750062.png" alt="1649681750062"></p>
+<p>普通凭据中就可以看到，我们的 码云账户和密码永久保存在了计算机上：</p>
+<p><img src="/images/1649681800927.png" alt="1649681800927"></p>
+<h4 id="3、生成密钥"><a href="#3、生成密钥" class="headerlink" title="3、生成密钥"></a>3、生成密钥</h4><p>在使用密钥之前我们可以尝试复制一个 SSH 协议的远程仓库地址克隆远程仓库，结果肯定是不行的</p>
+<p>前面我们了解了 Https 协议是基于用户名和密码验证的，而 SSH 协议传输数据是基于一对密钥验证的，所以我们要给自己生成一对密钥</p>
+<p>可以使用 GitBash 工具生成公钥和私钥：</p>
+<p>任位置打开 GitBash，执行命令：</p>
+<blockquote>
+<p><code>ssh-keygen -t rsa</code> 命令：生成公钥和私钥</p>
+<p>一路回车，执行完成后后 windows 本地用户 .ssh 目录中生成如下名称的公钥和私钥</p>
+</blockquote>
+<p><img src="/images/1649682605439.png" alt="1649682605439"></p>
+<h4 id="4、服务器配置公钥"><a href="#4、服务器配置公钥" class="headerlink" title="4、服务器配置公钥"></a>4、服务器配置公钥</h4><p>私钥就保存在当前用户的 .ssh 目录中即可，我们需要将公钥的内容复制下来，在远程仓库中配置公钥：</p>
+<p>复制公钥内容：</p>
+<p><img src="/images/1649682865704.png" alt="1649682865704"></p>
+<p>码云配置公钥：</p>
+<p>右边账户信息下拉框，选择 设置：</p>
+<p><img src="/images/1649682947272.png" alt="1649682947272"></p>
+<p>在安全设置中，选择 SSH公钥，粘贴公钥 → 确定：</p>
+<p><img src="/images/1649683021572.png" alt="1649683021572"></p>
+<p>验证账户密码后，添加成功：</p>
+<p><img src="/images/1649683106834.png" alt="1649683106834"></p>
+<h4 id="5、使用-SSH-协议"><a href="#5、使用-SSH-协议" class="headerlink" title="5、使用 SSH 协议"></a>5、使用 SSH 协议</h4><p>当我们在服务器添加好公钥之后，就可以使用 SSH 协议传输数据了：</p>
+<p>复制远程仓库的 SSH 地址：</p>
+<p><img src="/images/1649683219998.png" alt="1649683219998"></p>
+<p>使用 SSH 协议克隆远程仓库到本地：</p>
+<p><img src="/images/1649683409077.png" alt="1649683409077"></p>
+<h3 id="第七章-常用命令查询"><a href="#第七章-常用命令查询" class="headerlink" title="第七章 常用命令查询"></a>第七章 常用命令查询</h3><h4 id="1、新建代码库-git-init"><a href="#1、新建代码库-git-init" class="headerlink" title="1、新建代码库 git init"></a>1、新建代码库 git init</h4><ul>
+<li>创建（初始化）空仓库，由git接管，文件的改动（修改、删除）都能监测到</li>
+<li>例外情况：doc等办公文档可以监测到文件大小改变，无非监测到具体内容改变<br><strong>无法监测</strong>到<strong>二进制文件</strong>内部内容信息的改变，只能监测文件大小改变<br>所以说git比较适合<strong>纯文本类</strong>文件版本控制（txt,md）</li>
+</ul>
+<p>常见的二进制文件：</p>
+<p>图片、视频、音频、办公文档（doc、xls）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>什么是本地仓库？</p>
+<ul>
+<li>在你的电脑通过git init就是初始化了一个本地仓库</li>
+</ul>
+</li>
+<li><p>什么是远程仓库？</p>
+<ul>
+<li>就是你在gitee或者github等在线开源网站里面创建一个仓库称为远程仓库</li>
+</ul>
+</li>
+<li><p>什么是工作区？</p>
+<ul>
+<li>就是你写作的文件目录，这里面我们称为工作区</li>
+</ul>
+</li>
+<li><p>什么是暂存盘？</p>
+</li>
+<li><p>什么是版本库？</p>
+</li>
+</ul>
+<h4 id="2、配置-git-config"><a href="#2、配置-git-config" class="headerlink" title="2、配置 git config"></a>2、配置 git config</h4><p>Git的设置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--global] user.name <span class="string">&quot;[name]&quot;</span></span><br><span class="line">$ git config [--global] user.email <span class="string">&quot;[email address]&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、增加-删除文件-git-add-git-rm"><a href="#3、增加-删除文件-git-add-git-rm" class="headerlink" title="3、增加&#x2F;删除文件 git add&#x2F;git rm"></a>3、增加&#x2F;删除文件 git add&#x2F;git rm</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [<span class="built_in">dir</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line">$ git add -A </span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git <span class="built_in">rm</span> [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git <span class="built_in">rm</span> --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git <span class="built_in">mv</span> [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4、代码提交-git-commit"><a href="#4、代码提交-git-commit" class="headerlink" title="4、代码提交 git commit"></a>4、代码提交 git commit</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="提交一个版本的步骤"><a href="#提交一个版本的步骤" class="headerlink" title="提交一个版本的步骤"></a>提交一个版本的步骤</h5><ul>
+<li><p>先看是否存在仓库，没有使用git init 创建仓库</p>
+</li>
+<li><p>git add 添加到暂存盘</p>
+</li>
+<li><p>git commit 提交一个版本</p>
+</li>
+</ul>
+<h5 id="git-commit-–amend-的作用"><a href="#git-commit-–amend-的作用" class="headerlink" title="git commit –amend 的作用"></a>git commit –amend 的作用</h5><p>用于<strong>修改最近一次的提交</strong>，包括：</p>
+<ul>
+<li>修改提交信息（commit message）</li>
+<li>添加遗漏的文件到上一次提交中</li>
+<li>修改提交的内容（比如你刚提交完，发现漏改了一行代码）</li>
+</ul>
+<p>⚠️ 注意：只能修改<strong>尚未推送到远程仓库</strong>的最新提交。如果已经推送，修改后需要强制推送（<code>git push --force</code>），这可能影响协作，需谨慎！</p>
+<h4 id="5、分支"><a href="#5、分支" class="headerlink" title="5、分支"></a>5、分支</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改主分支名为main</span></span><br><span class="line"> git config --global init.defaultBranch main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --set-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6、标签"><a href="#6、标签" class="headerlink" title="6、标签"></a>6、标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> git show</p>
+<p><img src="/images/image-20250916142203174.png" alt="image-20250916142203174"> </p>
+<h4 id="7、查看信息-status-log-reflog-blame-show-diff"><a href="#7、查看信息-status-log-reflog-blame-show-diff" class="headerlink" title="7、查看信息 status,log,reflog,blame,show,diff"></a>7、查看信息 status,log,reflog,blame,show,diff</h4><h5 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h5><ul>
+<li>查看状态</li>
+</ul>
+<p>可以查看</p>
+<ol>
+<li>那些文件被修改了？</li>
+<li>增加了那些文件？</li>
+<li>删除了那些文件？</li>
+<li>是否有修改？（提交了版本之后）</li>
+</ol>
+<ul>
+<li>对于二进制类型文件，只能监测文件是否被修改，或者被删除，具体改了什么不清楚</li>
+</ul>
+<p>比如doc文件、git只能知道它被修改了，不知道改了什么内容</p>
+<p>除了doc还有mp4、jpg、gif等等非文本文件。</p>
+<h5 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h5><ul>
+<li><p>git diff [file]<br>显示暂存区和工作区的差异</p>
+</li>
+<li><p>git diff –cached [file]<br>或者<br>git diff –staged [file]</p>
+</li>
+</ul>
+<p>显示暂存区和上一次提交(commit)的差异</p>
+<h5 id="git-show"><a href="#git-show" class="headerlink" title="git show"></a>git show</h5><ul>
+<li>git show命令是Git的一个强大命令，它用于显示Git仓库中的各种对象的详细信息。这些对象可以是提交、分支、标签、或者具体的文件。</li>
+</ul>
+<h5 id="git-blame"><a href="#git-blame" class="headerlink" title="git blame"></a>git blame</h5><ul>
+<li><p>git blame 是Git 命令，用于显示文件中每行代码的最后修改版本及作者信息，帮助追踪代码变更历史。</p>
+</li>
+<li><p>运行 git blame &lt;文件路径&gt; 可显示指定文件的每行代码最后一次修改的提交信息（作者、时间、代码内容）。</p>
+</li>
+<li><p>例如：git blame app.js</p>
+</li>
+</ul>
+<h5 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h5><ul>
+<li><p>git stash是git中用于临时保存工作目录和暂存区未提交的修改的命令，允许用户切换到干净的工作区处理其他的任务，后续可以恢复这些修改</p>
+</li>
+<li><p>保存修改，将所有未提交的更改存入栈，恢复工作区至最新状态。</p>
+</li>
+<li><p>查看条目 git stash list 列出所有储藏条目（如stash@{0}为最新）</p>
+</li>
+<li><p>恢复修改：git stash pop：应用并删除最新的储藏条目</p>
+</li>
+</ul>
+<p>git stash apply <stash>：应用指定条目但不删除</p>
+<ul>
+<li><p>删除条目：git stash drop <stash> 移除指定条目</p>
+</li>
+<li><p>测试步骤</p>
+<ul>
+<li><ol>
+<li>git clone 远程仓库hello9-15</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>再本地工作区随便修改一下（注意不要添加暂存和保存版本）</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>然后再远程仓库手动修改一下1.txt文件，并提交一个版本</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>然后执行git pull拉起远程仓库的数据，发现报错了，拒绝拉起</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>此时使用git stash将工作区存储起来</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>然后再使用git pull拉去，这个时候允许拉去了</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>然后想起恢复刚才的内容，使用git stash list 查看，使用git stash pop恢复</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>手动解决冲突，git add -A</li>
+</ol>
+</li>
+<li><ol start="9">
+<li>完成</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status	<span class="comment">#查看状态</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史(看历史版本到当前版本的日志)</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git <span class="built_in">log</span> -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其&quot;提交说明&quot;必须符合搜索条件</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git <span class="built_in">log</span> --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git <span class="built_in">log</span> -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git <span class="built_in">log</span> -5 --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">&quot;@&#123;0 day ago&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交(查看所有历史版本信息)</span></span><br><span class="line"><span class="comment">#注意这里查看的是一个短的版本号，例如 da213db</span></span><br><span class="line">$ git reflog</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>git blame</p>
+<p><img src="/images/image-20250916142306136.png" alt="image-20250916142306136"> </p>
+<h4 id="8、远程同步"><a href="#8、远程同步" class="headerlink" title="8、远程同步"></a>8、远程同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line"><span class="comment"># -u选项安全模式</span></span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<h5 id="git-pull-和-git-fetch-的区别："><a href="#git-pull-和-git-fetch-的区别：" class="headerlink" title="git pull 和 git fetch 的区别："></a><strong>git pull 和 git fetch 的区别：</strong></h5><p><code>git fetch</code> 和 <code>git pull</code> 都用于从远程仓库获取最新数据，但它们的行为有本质区别：</p>
+<hr>
+<h6 id="✅-git-fetch-——-仅下载，不合并"><a href="#✅-git-fetch-——-仅下载，不合并" class="headerlink" title="✅ git fetch —— 仅下载，不合并"></a>✅ <code>git fetch</code> —— <strong>仅下载，不合并</strong></h6><blockquote>
+<p><strong>作用</strong>：从远程仓库下载最新的提交、分支、标签等对象到本地仓库，<strong>但不会自动合并或修改你当前的工作区和分支</strong>。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载远程所有更新（如 <code>origin/main</code>, <code>origin/feature</code> 等），存储在本地的远程跟踪分支（如 <code>origin/main</code>）。</li>
+<li>你的本地分支（如 <code>main</code>）<strong>不会被改动</strong>。</li>
+<li>你可以先用 <code>git log</code>、<code>git diff</code> 查看远程变更，再决定是否合并。</li>
+</ul>
+<p>🔹 <strong>安全！推荐在不确定远程变更内容时使用。</strong></p>
+<p>📌 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git <span class="built_in">log</span> main..origin/main   <span class="comment"># 查看远程有而本地没有的提交</span></span><br><span class="line">git diff main origin/main   <span class="comment"># 查看具体差异</span></span><br><span class="line">git merge origin/main       <span class="comment"># 手动合并（可选）</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="✅-git-pull-——-下载-自动合并"><a href="#✅-git-pull-——-下载-自动合并" class="headerlink" title="✅ git pull —— 下载 + 自动合并"></a>✅ <code>git pull</code> —— <strong>下载 + 自动合并</strong></h6><blockquote>
+<p><strong>作用</strong>：<code>git fetch</code> + <code>git merge</code> 的组合命令。它会先从远程拉取最新数据，然后<strong>自动尝试合并到你当前所在的本地分支</strong>。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git pull origin main</span><br><span class="line"><span class="comment"># 等价于：</span></span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果远程和本地没有冲突，会自动快进（fast-forward）或创建合并提交。</li>
+<li>如果有冲突，会暂停并提示你手动解决冲突。</li>
+</ul>
+<p>⚠️ <strong>可能直接修改你的工作区！在未保存或未提交本地修改时容易出问题。</strong></p>
+<p><img src="/images/image-20250916171148825.png" alt="image-20250916171148825"></p>
+<p>刷新远程仓库——成功上传同步</p>
+<p><img src="/images/image-20250916171244976.png" alt="image-20250916171244976"> </p>
+<p><img src="/images/image-20250916171406354.png" alt="image-20250916171406354"> </p>
+<h4 id="9、撤销修改"><a href="#9、撤销修改" class="headerlink" title="9、撤销修改"></a>9、撤销修改</h4><h5 id="工作区撤销修改"><a href="#工作区撤销修改" class="headerlink" title="工作区撤销修改"></a>工作区撤销修改</h5><ul>
+<li><ol>
+<li>在工作区修改了文件</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>使用git status 查看那些文件被修改了</li>
+<li>使用git checkout – 被恢复的文件</li>
+</ol>
+<p>$ git status<br>$ git checkout – readme.txt<br>   &#x2F;&#x2F; 或者<br>   git restore readme.txt</p>
+<h5 id="暂存盘撤销修改"><a href="#暂存盘撤销修改" class="headerlink" title="暂存盘撤销修改"></a>暂存盘撤销修改</h5><ul>
+<li><ol>
+<li>在工作区修改了文件</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>将被修改了文件添加到暂存盘</li>
+<li>使用git status查看那些文件被修改了</li>
+<li>使用git reset HEAD 被恢复的文件</li>
+<li>使用git checkout – 被恢复的文件</li>
+</ol>
+<p>方法1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ git reset HEAD readme.txt</span><br><span class="line">$ git checkout -- readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>方法2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git restore --staged readme.txt</span><br><span class="line">git restore readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>注意：先修改一下文件，然后使用git add 将修改过后的文件添加到暂存盘，然后做上面的练习</p>
+<h5 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h5><ul>
+<li><p>git reset –hard HEAD^   回退上一个版本</p>
+</li>
+<li><p>git reset –hard 版本号<br>可以使用git reflog 查看版本号</p>
+</li>
+<li><p>git revert <commit_id><br>通过用一次新的commit来回滚之前的commit</p>
+<ul>
+<li>操作步骤</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>初始化一个仓库，并且新建1.txt</li>
+<li>在1.txt中输入111，提交版本1</li>
+<li>在1.txt中输入222，提交版本2</li>
+<li>执行git revert HEAD 撤销最后操作生成新的版本</li>
+<li>也可以撤销指定的版本生成新版本</li>
+</ol>
+<ul>
+<li><p>git revert 和 git reset的区别</p>
+<ul>
+<li><p>git revert是用一次新的commit来回滚之前的commit，此次提交之前的commit都会被保留；</p>
+</li>
+<li><p>git reset是回到某次提交，提交及之前的commit都会被保留，但是此commit id之后的修改都会被删除</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="删除文件撤销"><a href="#删除文件撤销" class="headerlink" title="删除文件撤销"></a>删除文件撤销</h5><p>注意只要这个文件添加过一次版本，那么你将永远无非删除它。</p>
+<ul>
+<li><ol>
+<li>在工作区永久性删除文件</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>使用git checkout – 被删除的文件<br>或者 git restore 被删错的文件</li>
+</ol>
+<p>$ rm readme.txt                           rm 删除文件的意思 (linux命令)<br>$ git checkout – readme.txt        恢复文件</p>
+<ul>
+<li>rm  linux下删除命令</li>
+<li>mkdir  linux下创建文件夹命令</li>
+<li>git rm 不但会把工作区里面的文件删除，还会把版本库里面的文件也删除，做到彻底移除掉这个文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="回退到上个版本"><a href="#回退到上个版本" class="headerlink" title="回退到上个版本"></a>回退到上个版本</h5><ul>
+<li>git reset –hard HEAD^</li>
+</ul>
+<p>–hard  一种模式，表示完整恢复数据<br>HEAD   表示当前的<br>^          回退一个版本，^^表示上一个的上个版本</p>
+<h5 id="回退到指定的版本"><a href="#回退到指定的版本" class="headerlink" title="回退到指定的版本"></a>回退到指定的版本</h5><ul>
+<li>git reset –hard 版本号</li>
+</ul>
+<p>版本号可以通过git reflog来查</p>
+<h5 id="git-stash-1"><a href="#git-stash-1" class="headerlink" title="git stash"></a><strong>git stash</strong></h5><p><img src="/images/351d9c501de3eac0ea9042b45f084d98_720.png" alt="img"> </p>
+<p>克隆码云仓库</p>
+<p>git stash</p>
+<p>git stash list</p>
+<p>git pull</p>
+<p>git stash pop</p>
+<p>保留双方修改</p>
+<p>git add -A</p>
+<p><img src="/images/image-20250916144724218.png" alt="image-20250916144724218"> </p>
+<h4 id="10、其他"><a href="#10、其他" class="headerlink" title="10、其他"></a>10、其他</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line">$ git archive</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="11、小结"><a href="#11、小结" class="headerlink" title="11、小结"></a>11、小结</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">$ git init                                                  <span class="comment"># 初始化本地git仓库（创建新仓库）</span></span><br><span class="line">$ git config --global user.name <span class="string">&quot;xxx&quot;</span>                       <span class="comment"># 配置用户名</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;xxx@xxx.com&quot;</span>              <span class="comment"># 配置邮件</span></span><br><span class="line">$ git config --global color.ui <span class="literal">true</span>                         <span class="comment"># git status等命令自动着色</span></span><br><span class="line">$ git config --global color.status auto</span><br><span class="line">$ git config --global color.diff auto</span><br><span class="line">$ git config --global color.branch auto</span><br><span class="line">$ git config --global color.interactive auto</span><br><span class="line">$ git config --global --<span class="built_in">unset</span> http.proxy                    <span class="comment"># remove  proxy configuration on git</span></span><br><span class="line">$ git <span class="built_in">clone</span> git+ssh://git@192.168.53.168/VT.git             <span class="comment"># clone远程仓库</span></span><br><span class="line">$ git status                                                <span class="comment"># 查看当前版本状态（是否修改）</span></span><br><span class="line">$ git add xyz                                               <span class="comment"># 添加xyz文件至index</span></span><br><span class="line">$ git add .                                                 <span class="comment"># 增加当前子目录下所有更改过的文件至index</span></span><br><span class="line">$ git commit -m <span class="string">&#x27;xxx&#x27;</span>                                       <span class="comment"># 提交</span></span><br><span class="line">$ git commit --amend -m <span class="string">&#x27;xxx&#x27;</span>                               <span class="comment"># 合并上一次提交（用于反复修改）</span></span><br><span class="line">$ git commit -am <span class="string">&#x27;xxx&#x27;</span>                                      <span class="comment"># 将add和commit合为一步</span></span><br><span class="line">$ git <span class="built_in">rm</span> xxx                                                <span class="comment"># 删除index中的文件</span></span><br><span class="line">$ git <span class="built_in">rm</span> -r *                                               <span class="comment"># 递归删除</span></span><br><span class="line">$ git <span class="built_in">log</span>                                                   <span class="comment"># 显示提交日志</span></span><br><span class="line">$ git <span class="built_in">log</span> -1                                                <span class="comment"># 显示1行日志 -n为n行</span></span><br><span class="line">$ git <span class="built_in">log</span> -5</span><br><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span>                                            <span class="comment"># 显示提交日志及相关变动文件</span></span><br><span class="line">$ git <span class="built_in">log</span> -p -m</span><br><span class="line">$ git show dfb02e6e4f2f7b573337763e5c0013802e392818         <span class="comment"># 显示某个提交的详细内容</span></span><br><span class="line">$ git show dfb02                                            <span class="comment"># 可只用commitid的前几位</span></span><br><span class="line">$ git show HEAD                                             <span class="comment"># 显示HEAD提交日志</span></span><br><span class="line">$ git show HEAD^                                            <span class="comment"># 显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</span></span><br><span class="line">$ git tag                                                   <span class="comment"># 显示已存在的tag</span></span><br><span class="line">$ git tag -a v2.0 -m <span class="string">&#x27;xxx&#x27;</span>                                  <span class="comment"># 增加v2.0的tag</span></span><br><span class="line">$ git show v2.0                                             <span class="comment"># 显示v2.0的日志及详细内容</span></span><br><span class="line">$ git <span class="built_in">log</span> v2.0                                              <span class="comment"># 显示v2.0的日志</span></span><br><span class="line">$ git diff                                                  <span class="comment"># 显示所有未添加至index的变更</span></span><br><span class="line">$ git diff --cached                                         <span class="comment"># 显示所有已添加index但还未commit的变更</span></span><br><span class="line">$ git diff HEAD^                                            <span class="comment"># 比较与上一个版本的差异</span></span><br><span class="line">$ git diff HEAD -- ./lib                                    <span class="comment"># 比较与HEAD版本lib目录的差异</span></span><br><span class="line">$ git diff origin/master..master                            <span class="comment"># 比较远程分支master上有本地分支master上没有的</span></span><br><span class="line">$ git diff origin/master..master --<span class="built_in">stat</span>                     <span class="comment"># 只显示差异的文件，不显示具体内容</span></span><br><span class="line">$ git remote add origin git+ssh://git@192.168.53.168/VT.git <span class="comment"># 增加远程定义（用于push/pull/fetch）</span></span><br><span class="line">$ git branch                                                <span class="comment"># 显示本地分支</span></span><br><span class="line">$ git branch --contains 50089                               <span class="comment"># 显示包含提交50089的分支</span></span><br><span class="line">$ git branch -a                                             <span class="comment"># 显示所有分支</span></span><br><span class="line">$ git branch -r                                             <span class="comment"># 显示所有原创分支</span></span><br><span class="line">$ git branch --merged                                       <span class="comment"># 显示所有已合并到当前分支的分支</span></span><br><span class="line">$ git branch --no-merged                                    <span class="comment"># 显示所有未合并到当前分支的分支</span></span><br><span class="line">$ git branch -m master master_copy                          <span class="comment"># 本地分支改名</span></span><br><span class="line">$ git checkout -b master_copy                               <span class="comment"># 从当前分支创建新分支master_copy并检出</span></span><br><span class="line">$ git checkout -b master master_copy                        <span class="comment"># 上面的完整版</span></span><br><span class="line">$ git checkout features/performance                         <span class="comment"># 检出已存在的features/performance分支</span></span><br><span class="line">$ git checkout --track hotfixes/BJVEP933                    <span class="comment"># 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支</span></span><br><span class="line">$ git checkout v2.0                                         <span class="comment"># 检出版本v2.0</span></span><br><span class="line">$ git checkout -b devel origin/develop                      <span class="comment"># 从远程分支develop创建新本地分支devel并检出</span></span><br><span class="line">$ git checkout -- README                                    <span class="comment"># 检出head版本的README文件（可用于修改错误回退）</span></span><br><span class="line">$ git merge origin/master                                   <span class="comment"># 合并远程master分支至当前分支</span></span><br><span class="line">$ git cherry-pick ff44785404a8e                             <span class="comment"># 合并提交ff44785404a8e的修改</span></span><br><span class="line">$ git push origin master                                    <span class="comment"># 将当前分支push到远程master分支</span></span><br><span class="line">$ git push origin :hotfixes/BJVEP933                        <span class="comment"># 删除远程仓库的hotfixes/BJVEP933分支</span></span><br><span class="line">$ git push --tags                                           <span class="comment"># 把所有tag推送到远程仓库</span></span><br><span class="line">$ git fetch                                                 <span class="comment"># 获取所有远程分支（不更新本地分支，另需merge）</span></span><br><span class="line">git fetch --prune                                         <span class="comment"># 获取所有原创分支并清除服务器上已删掉的分支</span></span><br><span class="line">git pull origin master                                    <span class="comment"># 获取远程分支master并merge到当前分支</span></span><br><span class="line">$ git <span class="built_in">mv</span> README README2                                     <span class="comment"># 重命名文件README为README2</span></span><br><span class="line">$ git reset --hard HEAD                                     <span class="comment"># 将当前版本重置为HEAD（通常用于merge失败回退）</span></span><br><span class="line">$ git rebase</span><br><span class="line">$ git branch -d hotfixes/BJVEP933                           <span class="comment"># 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）</span></span><br><span class="line">$ git branch -D hotfixes/BJVEP933                           <span class="comment"># 强制删除分支hotfixes/BJVEP933</span></span><br><span class="line">$ git ls-files                                              <span class="comment"># 列出git index包含的文件</span></span><br><span class="line">$ git show-branch                                           <span class="comment"># 图示当前分支历史</span></span><br><span class="line">$ git show-branch --all                                     <span class="comment"># 图示所有分支历史</span></span><br><span class="line">$ git whatchanged                                           <span class="comment"># 显示提交历史对应的文件修改</span></span><br><span class="line">$ git revert dfb02e6e4f2f7b573337763e5c0013802e392818       <span class="comment"># 撤销提交dfb02e6e4f2f7b573337763e5c0013802e392818</span></span><br><span class="line">$ git ls-tree HEAD                                          <span class="comment"># 内部命令：显示某个git对象</span></span><br><span class="line">$ git rev-parse v2.0                                        <span class="comment"># 内部命令：显示某个ref对于的SHA1 HASH</span></span><br><span class="line">$ git reflog                                                <span class="comment"># 显示所有提交，包括孤立节点</span></span><br><span class="line">$ git show HEAD@&#123;5&#125;</span><br><span class="line">$ git show master@&#123;yesterday&#125;                               <span class="comment"># 显示master分支昨天的状态</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=format:<span class="string">&#x27;%h %s&#x27;</span> --graph                   <span class="comment"># 图示提交日志</span></span><br><span class="line">$ git show HEAD~3</span><br><span class="line">$ git show -s --pretty=raw 2be7fcb476</span><br><span class="line">$ git stash                                                 <span class="comment"># 暂存当前修改，将所有至为HEAD状态</span></span><br><span class="line">$ git stash list                                            <span class="comment"># 查看所有暂存</span></span><br><span class="line">$ git stash show -p stash@&#123;0&#125;                               <span class="comment"># 参考第一次暂存</span></span><br><span class="line">$ git stash apply stash@&#123;0&#125;                                 <span class="comment"># 应用第一次暂存</span></span><br><span class="line">$ git grep <span class="string">&quot;delete from&quot;</span>                                    <span class="comment"># 文件中搜索文本“delete from”</span></span><br><span class="line">$ git grep -e <span class="string">&#x27;#define&#x27;</span> --and -e SORT_DIRENT</span><br><span class="line">$ git gc</span><br><span class="line">$ git fsck</span><br><span class="line">$ git archive												<span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>git revert 和 git reset的区别</p>
+<p><strong>git revert</strong>是用一次新的commit来回滚之前的commit，此次提交之前的commit都会被保留；<br><strong>git reset</strong>是回到某次提交，提交及之前的commit都会被保留，但是此commit id之后的修改都会被删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line">git revert HEAD</span><br></pre></td></tr></table></figure>
+
+
+
+<p>先准备3个版本</p>
+<p><img src="/images/image-20250916155640131.png" alt="image-20250916155640131"> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20250916155753802.png" alt="image-20250916155753802"> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20250916155840435.png" alt="image-20250916155840435"> </p>
+<p>git revert </p>
+<p>git add -A</p>
+<p>git revert –continue</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ningxiu2978.github.io">NINGXIU</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ningxiu2978.github.io/2025/09/18/git%E7%AC%94%E8%AE%B0/">https://ningxiu2978.github.io/2025/09/18/git%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ningxiu2978.github.io" target="_blank">NINGXIU's 学习博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git-%E6%96%87%E7%AB%A0%E6%A0%87%E7%AD%BE/">Git#文章标签</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/18/git%E7%AC%94%E8%AE%B0_0915/" title="git笔记_0915"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">git笔记_0915</div></div><div class="info-2"><div class="info-item-1">   注意：避免在 仓库 创建 仓库项目（套娃）  修改分支名： git config –global init.defaultBranch master git config –global init.defaultBranch main  删除.git文件夹后更新 仓库 gti inir 成功   第一步：配置用户名 1git config --global user.name &quot;shuning&quot;   第二步：配置邮箱 1git config --global user.email &quot;sn2978@foxmail.com&quot;  第三步：配置git打开的编辑器 git config 12# 设置编辑器为记事本，默认是linux的VIM编辑器，注意你确认您的记事本在C盘路径下git config --global core.editor &quot;C:/Windows/notepad.exe&quot;    git clonegit clone git@gitee.com:vant-contrib&#x2F;vant.git 冲突可以在后...</div></div></div></a><a class="pagination-related" href="/2025/09/18/%E4%BD%9C%E4%B8%9A_0916/" title="作业_0916"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">作业_0916</div></div><div class="info-2"><div class="info-item-1">一、主观题 git stash 练习，练习步骤    1.创建并克隆仓库：     2.本地修改1.txt文件    3.远程修改1.txt文件，并提交版本    4.执行git pull 报错 （因本地有未提交修改，与远程冲突）   5.执行git stash存储工作区修改，使用git stash list查看存储栈    6.执行git pull 拉取远程最新版本（此时本地无修改，可顺利合并）   7.使用git stash pop 恢复之前暂存的修改（自动尝试合并，若冲突需手动解决）    8.手动编辑冲突文件，解决冲突后执行 git add -A 标记为已解决   9.提交合并结果并上传远程仓库 git push   2.     git show有什么作用？git show 命令用于显示 Git 仓库中对象（如提交 commit、标签 tag、文件 blob 等）的详细信息。默认显示最近一次提交的元数据和变更内容。 是查看历史变更和对象内容的核心命令。 3.     git blame 有什么作用？git blame 用于逐行显示文件中每行代码的最后修改者、提交哈希、修...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/17/Git%E4%BD%9C%E4%B8%9A_0916/" title="Git作业_0916"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-17</div><div class="info-item-2">Git作业_0916</div></div><div class="info-2"><div class="info-item-1">一、主观题 git stash 练习，练习步骤    1.创建并克隆仓库：     2.本地修改1.txt文件    3.远程修改1.txt文件，并提交版本    4.执行git pull 报错 （因本地有未提交修改，与远程冲突）   5.执行git stash存储工作区修改，使用git stash list查看存储栈    6.执行git pull 拉取远程最新版本（此时本地无修改，可顺利合并）   7.使用git stash pop 恢复之前暂存的修改（自动尝试合并，若冲突需手动解决）    8.手动编辑冲突文件，解决冲突后执行 git add -A 标记为已解决   9.提交合并结果并上传远程仓库 git push   2.     git show有什么作用？git show 命令用于显示 Git 仓库中对象（如提交 commit、标签 tag、文件 blob 等）的详细信息。默认显示最近一次提交的元数据和变更内容。 是查看历史变更和对象内容的核心命令。 3.     git blame 有什么作用？git blame 用于逐行显示文件中每行代码的最后修改者、提交哈希、修...</div></div></div></a><a class="pagination-related" href="/2025/09/17/%E4%BD%9C%E4%B8%9A_0917_git%E8%BF%9B%E9%98%B6/" title="9月17作业 - git进阶"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-17</div><div class="info-item-2">9月17作业 - git进阶</div></div><div class="info-2"><div class="info-item-1">一、主观题 git pull 和 git fetch的区别？  git pull —— 下载 + 自动合并  作用：git fetch + git merge 的组合命令。它会先从远程拉取最新数据，然后自动尝试合并到你当前所在的本地分支。 可能直接修改你的工作区！在未保存或未提交本地修改时容易出问题。 git fetch —— 仅下载，不合并作用：从远程仓库下载最新的提交、分支、标签等对象到本地仓库，但不会自动合并或修改你当前的工作区和分支。  两个历史不相同的仓库如何git pull 并且 git push到远程仓库？  直接使用git pull 无法拉取远程仓库版本信息，因为是本地和远程仓库是不同的独立仓库，要拉取必须使用 –allow-unrelated-histories参数允许合并无关历史  如： 1git pull origin main --allow-unrelated-histories  合并后解决可能的冲突，再 git push 即可。  请解释一下git 的相关概念、工作区、暂存盘、版本库、远程仓库， 介绍它们的关系是什么？操作流程是什么？ git概念：G...</div></div></div></a><a class="pagination-related" href="/2025/09/18/%E4%BD%9C%E4%B8%9A_0916/" title="作业_0916"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">作业_0916</div></div><div class="info-2"><div class="info-item-1">一、主观题 git stash 练习，练习步骤    1.创建并克隆仓库：     2.本地修改1.txt文件    3.远程修改1.txt文件，并提交版本    4.执行git pull 报错 （因本地有未提交修改，与远程冲突）   5.执行git stash存储工作区修改，使用git stash list查看存储栈    6.执行git pull 拉取远程最新版本（此时本地无修改，可顺利合并）   7.使用git stash pop 恢复之前暂存的修改（自动尝试合并，若冲突需手动解决）    8.手动编辑冲突文件，解决冲突后执行 git add -A 标记为已解决   9.提交合并结果并上传远程仓库 git push   2.     git show有什么作用？git show 命令用于显示 Git 仓库中对象（如提交 commit、标签 tag、文件 blob 等）的详细信息。默认显示最近一次提交的元数据和变更内容。 是查看历史变更和对象内容的核心命令。 3.     git blame 有什么作用？git blame 用于逐行显示文件中每行代码的最后修改者、提交哈希、修...</div></div></div></a><a class="pagination-related" href="/2025/09/18/git%E7%AC%94%E8%AE%B0_0915/" title="git笔记_0915"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">git笔记_0915</div></div><div class="info-2"><div class="info-item-1">   注意：避免在 仓库 创建 仓库项目（套娃）  修改分支名： git config –global init.defaultBranch master git config –global init.defaultBranch main  删除.git文件夹后更新 仓库 gti inir 成功   第一步：配置用户名 1git config --global user.name &quot;shuning&quot;   第二步：配置邮箱 1git config --global user.email &quot;sn2978@foxmail.com&quot;  第三步：配置git打开的编辑器 git config 12# 设置编辑器为记事本，默认是linux的VIM编辑器，注意你确认您的记事本在C盘路径下git config --global core.editor &quot;C:/Windows/notepad.exe&quot;    git clonegit clone git@gitee.com:vant-contrib&#x2F;vant.git 冲突可以在后...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">NINGXIU</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第一章 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Git-%E5%8E%86%E5%8F%B2"><span class="toc-number">1.1.</span> <span class="toc-text">1、Git 历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Git-%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">2、Git 定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81Git-%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="toc-number">1.3.</span> <span class="toc-text">3、Git 特性和优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">Git 应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Git-%E4%B8%8E-SVN-%E6%AF%94%E8%BE%83"><span class="toc-number">1.5.</span> <span class="toc-text">4、Git 与 SVN 比较</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.5.1.</span> <span class="toc-text">集中式和分布式版本控制系统的区别？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git%E5%92%8Csvn%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.2.</span> <span class="toc-text">git和svn的区别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81Git-%E4%B8%AD%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.6.</span> <span class="toc-text">5、Git 中的三个区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81Git-%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-number">1.7.</span> <span class="toc-text">6、Git 中的三种状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81Git-%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E4%B8%AD%E5%BF%83"><span class="toc-number">1.8.</span> <span class="toc-text">7、Git 和代码托管中心</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-%E4%B8%8E-GitHub-%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">Git 与 GitHub 区别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81Git-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.10.</span> <span class="toc-text">8、Git 工作流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E6%9C%AC%E5%9C%B0%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="toc-number">1.11.</span> <span class="toc-text">9、本地库和远程库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">第二章 环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Git"><span class="toc-number">2.1.</span> <span class="toc-text">1、Git</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 软件下载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">安装方式</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 软件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">验证安装成功</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81TortoiseGit"><span class="toc-number">2.2.</span> <span class="toc-text">2、TortoiseGit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 软件介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 软件下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3 软件安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%AF%AD%E8%A8%80%E5%8C%85"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.4 安装中文语言包</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.3.</span> <span class="toc-text">3、代码托管服务</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%9F%A5%E5%90%8D%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%BD%91%E7%AB%99"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">知名远程仓库网站</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E5%88%9B%E5%BB%BA-GitHub%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.3.2.</span> <span class="toc-text">3.2 创建 GitHub账号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-%E5%88%9B%E5%BB%BAgitee%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.3.3.</span> <span class="toc-text">3.3 创建gitee账号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-%E5%88%9B%E5%BB%BAGit%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">2.3.4.</span> <span class="toc-text">3.4 创建Git远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-5-%E8%AE%BE%E7%BD%AE%E5%85%B6%E4%BB%96%E4%BB%93%E5%BA%93%E6%88%90%E5%91%98"><span class="toc-number">2.3.5.</span> <span class="toc-text">3.5 设置其他仓库成员</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-GitBash%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">第三章 GitBash管理文件版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.</span> <span class="toc-text">1、 本地仓库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-number">3.1.1.</span> <span class="toc-text">1.1 初始化本地仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-1-%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">1.1.1 获取方式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-2-%E5%91%BD%E4%BB%A4"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">1.1.2 命令</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-3-%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.1.1.3.</span> <span class="toc-text">1.1.3 步骤</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.2.</span> <span class="toc-text">1.2 配置用户信息</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-1-%E7%AD%BE%E5%90%8D%E5%BD%A2%E5%BC%8F"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">1.2.1 签名形式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-2-%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">1.2.2 查看配置项</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-3-%E5%91%BD%E4%BB%A4"><span class="toc-number">3.1.2.3.</span> <span class="toc-text">1.2.3 命令</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-4-%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">3.1.2.4.</span> <span class="toc-text">1.2.4 签名的优先级</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-5-%E5%B0%8F%E7%BB%93"><span class="toc-number">3.1.2.5.</span> <span class="toc-text">1.2.5 小结</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%EF%BC%88status%EF%BC%89"><span class="toc-number">3.1.3.</span> <span class="toc-text">1.3 查看状态（status）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-3-1-%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">1.3.1 准备测试文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-3-2-%E5%91%BD%E4%BB%A4"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">1.3.2 命令</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-%E8%B7%9F%E8%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.4.</span> <span class="toc-text">1.4 跟踪文件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-4-1-%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA%EF%BC%88add%EF%BC%89"><span class="toc-number">3.1.4.1.</span> <span class="toc-text">1.4.1 添加到暂存区（add）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-4-1-%E5%8F%96%E6%B6%88%E8%B7%9F%E8%B8%AA%EF%BC%88rm%EF%BC%89"><span class="toc-number">3.1.4.2.</span> <span class="toc-text">1.4.1 取消跟踪（rm）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%96%B0%EF%BC%88commit%EF%BC%89"><span class="toc-number">3.1.5.</span> <span class="toc-text">1.5 提交更新（commit）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-5-1-%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.1.5.1.</span> <span class="toc-text">1.5.1 第一种方式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-5-2-%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.1.5.2.</span> <span class="toc-text">1.5.2 第二种方式</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-6-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0%EF%BC%9A%E5%B0%86java%E5%B7%A5%E7%A8%8B%E6%8F%90%E4%BA%A4%E5%88%B0%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-number">3.1.6.</span> <span class="toc-text">1.6 综合练习：将java工程提交到版本库</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-6-0-%E9%9C%80%E6%B1%82"><span class="toc-number">3.1.6.1.</span> <span class="toc-text">1.6.0 需求</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-6-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-number">3.1.6.2.</span> <span class="toc-text">1.6.1 初始化本地仓库</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-6-2-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-number">3.1.6.3.</span> <span class="toc-text">1.6.2 忽略文件或目录</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-6-3-%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">3.1.6.4.</span> <span class="toc-text">1.6.3 添加到暂存区</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-6-4-%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-number">3.1.6.5.</span> <span class="toc-text">1.6.4 提交到本地仓库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">2、远程仓库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.1 克隆远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.2.2.</span> <span class="toc-text">2.2 查看远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.2.3.</span> <span class="toc-text">2.3 添加远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%BB%A3%E7%A0%81%EF%BC%9Agit-pull"><span class="toc-number">3.2.4.</span> <span class="toc-text">2.4 拉取远程仓库代码：git pull</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%BB%A3%E7%A0%81%EF%BC%9Agit-fetch"><span class="toc-number">3.2.5.</span> <span class="toc-text">2.5 拉取远程仓库代码：git fetch</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-%E7%A7%BB%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.2.6.</span> <span class="toc-text">2.6 移除远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.2.7.</span> <span class="toc-text">2.7 推送到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81Git-%E5%88%86%E6%94%AF"><span class="toc-number">3.3.</span> <span class="toc-text">3、Git 分支</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.1 查看分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.2 创建分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">3.3.3.</span> <span class="toc-text">3.3 切换分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-%E6%8E%A8%E9%80%81%E8%87%B3%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF"><span class="toc-number">3.3.4.</span> <span class="toc-text">3.4 推送至远程仓库分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-5-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.3.5.</span> <span class="toc-text">3.5 合并分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-6-%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B"><span class="toc-number">3.3.6.</span> <span class="toc-text">3.6 推送到远程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-7-%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-number">3.3.7.</span> <span class="toc-text">3.7 删除分支</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Git-%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.</span> <span class="toc-text">4、Git 标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-%E5%88%97%E5%87%BA%E5%B7%B2%E6%9C%89%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.1.</span> <span class="toc-text">4.1 列出已有标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.2.</span> <span class="toc-text">4.2 创建标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.4.3.</span> <span class="toc-text">4.3 推送到远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-%E6%A3%80%E5%87%BA%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.4.</span> <span class="toc-text">4.4 检出标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-5-%E5%88%A0%E9%99%A4%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.5.</span> <span class="toc-text">4.5 删除标签</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-TortoiseGit%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">第四章 TortoiseGit管理文件版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">4.1.</span> <span class="toc-text">1、本地仓库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.1 初始化本地仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.2.</span> <span class="toc-text">1.2 添加文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.3.</span> <span class="toc-text">1.3 提交文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.4.</span> <span class="toc-text">1.4 修改文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2"><span class="toc-number">4.1.5.</span> <span class="toc-text">1.5 查看修改历史</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-6-%E5%B7%AE%E5%BC%82%E6%AF%94%E8%BE%83"><span class="toc-number">4.1.6.</span> <span class="toc-text">1.6 差异比较</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-7-%E8%BF%98%E5%8E%9F%E4%BF%AE%E6%94%B9"><span class="toc-number">4.1.7.</span> <span class="toc-text">1.7 还原修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-8-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.8.</span> <span class="toc-text">1.8 删除文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-9-%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0%EF%BC%9A%E5%B0%86java%E5%B7%A5%E7%A8%8B%E6%8F%90%E4%BA%A4%E5%88%B0%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-number">4.1.9.</span> <span class="toc-text">1.9 综合练习：将java工程提交到版本库</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-9-1-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-number">4.1.9.1.</span> <span class="toc-text">1.9.1 忽略文件或目录</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-9-2-%E6%B7%BB%E5%8A%A0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">4.1.9.2.</span> <span class="toc-text">1.9.2 添加暂存区</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-9-3-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.9.3.</span> <span class="toc-text">1.9.3 提交代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C-1"><span class="toc-number">4.2.</span> <span class="toc-text">2、远程仓库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">2.1 克隆远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">2.2 查看远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93-1"><span class="toc-number">4.2.3.</span> <span class="toc-text">2.3 添加远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">4.2.4.</span> <span class="toc-text">2.4 推送到远程仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-TortoiseGit%E6%8B%89%E5%8F%96"><span class="toc-number">4.2.5.</span> <span class="toc-text">2.5 TortoiseGit拉取</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-%E7%A7%BB%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93-1"><span class="toc-number">4.2.6.</span> <span class="toc-text">2.6 移除远程仓库</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.</span> <span class="toc-text">3、分支操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">4.3.1.</span> <span class="toc-text">3.1 创建分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">4.3.2.</span> <span class="toc-text">3.2 切换分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">4.3.3.</span> <span class="toc-text">3.3 合并分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">4.3.4.</span> <span class="toc-text">3.4 推送到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%A0%87%E7%AD%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">4.4.</span> <span class="toc-text">4、标签操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%9C%A8-idea-%E4%B8%AD%E4%BD%BF%E7%94%A8-Git"><span class="toc-number">5.</span> <span class="toc-text">第五章 在 idea 中使用 Git</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%85%8D%E7%BD%AEGit"><span class="toc-number">5.1.</span> <span class="toc-text">1、配置Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E5%B9%B6%E6%B7%BB%E5%8A%A0%E8%87%B3Git"><span class="toc-number">5.2.</span> <span class="toc-text">2、创建工程并添加至Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-number">5.3.</span> <span class="toc-text">3、忽略文件和目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">5.4.</span> <span class="toc-text">4、添加到暂存区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6"><span class="toc-number">5.5.</span> <span class="toc-text">5、提交文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">5.6.</span> <span class="toc-text">6、推送到远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E4%BB%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%85%8B%E9%9A%86%E5%B7%A5%E7%A8%8B%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">5.7.</span> <span class="toc-text">7、从远程仓库克隆工程到本地</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E4%BB%8E%E8%BF%9C%E7%A8%8B%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81"><span class="toc-number">5.8.</span> <span class="toc-text">8、从远程拉取代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E7%89%88%E6%9C%AC%E5%AF%B9%E6%AF%94"><span class="toc-number">5.9.</span> <span class="toc-text">9、版本对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">5.10.</span> <span class="toc-text">10、创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">5.11.</span> <span class="toc-text">11、切换分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%E3%80%81%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6"><span class="toc-number">5.12.</span> <span class="toc-text">12、分支合并</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BD%BF%E7%94%A8-SSH-%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE"><span class="toc-number">5.12.1.</span> <span class="toc-text">第六章 使用 SSH 协议传输数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Git-%E6%94%AF%E6%8C%81%E7%9A%84%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.13.</span> <span class="toc-text">1、Git 支持的传输协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-SSH-%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.14.</span> <span class="toc-text">2、什么是 SSH 协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="toc-number">5.15.</span> <span class="toc-text">3、生成密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5"><span class="toc-number">5.16.</span> <span class="toc-text">4、服务器配置公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E4%BD%BF%E7%94%A8-SSH-%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.17.</span> <span class="toc-text">5、使用 SSH 协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2"><span class="toc-number">6.</span> <span class="toc-text">第七章 常用命令查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%96%B0%E5%BB%BA%E4%BB%A3%E7%A0%81%E5%BA%93-git-init"><span class="toc-number">6.1.</span> <span class="toc-text">1、新建代码库 git init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-git-config"><span class="toc-number">6.2.</span> <span class="toc-text">2、配置 git config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%A2%9E%E5%8A%A0-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6-git-add-git-rm"><span class="toc-number">6.3.</span> <span class="toc-text">3、增加&#x2F;删除文件 git add&#x2F;git rm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4-git-commit"><span class="toc-number">6.4.</span> <span class="toc-text">4、代码提交 git commit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%B8%80%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">6.4.1.</span> <span class="toc-text">提交一个版本的步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-commit-%E2%80%93amend-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">6.4.2.</span> <span class="toc-text">git commit –amend 的作用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%88%86%E6%94%AF"><span class="toc-number">6.5.</span> <span class="toc-text">5、分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E6%A0%87%E7%AD%BE"><span class="toc-number">6.6.</span> <span class="toc-text">6、标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E6%9F%A5%E7%9C%8B%E4%BF%A1%E6%81%AF-status-log-reflog-blame-show-diff"><span class="toc-number">6.7.</span> <span class="toc-text">7、查看信息 status,log,reflog,blame,show,diff</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#git-status"><span class="toc-number">6.7.1.</span> <span class="toc-text">git status</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-diff"><span class="toc-number">6.7.2.</span> <span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-show"><span class="toc-number">6.7.3.</span> <span class="toc-text">git show</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-blame"><span class="toc-number">6.7.4.</span> <span class="toc-text">git blame</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-stash"><span class="toc-number">6.7.5.</span> <span class="toc-text">git stash</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E8%BF%9C%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">6.8.</span> <span class="toc-text">8、远程同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#git-pull-%E5%92%8C-git-fetch-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">6.8.1.</span> <span class="toc-text">git pull 和 git fetch 的区别：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E2%9C%85-git-fetch-%E2%80%94%E2%80%94-%E4%BB%85%E4%B8%8B%E8%BD%BD%EF%BC%8C%E4%B8%8D%E5%90%88%E5%B9%B6"><span class="toc-number">6.8.1.1.</span> <span class="toc-text">✅ git fetch —— 仅下载，不合并</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E2%9C%85-git-pull-%E2%80%94%E2%80%94-%E4%B8%8B%E8%BD%BD-%E8%87%AA%E5%8A%A8%E5%90%88%E5%B9%B6"><span class="toc-number">6.8.1.2.</span> <span class="toc-text">✅ git pull —— 下载 + 自动合并</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-number">6.9.</span> <span class="toc-text">9、撤销修改</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-number">6.9.1.</span> <span class="toc-text">工作区撤销修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9A%82%E5%AD%98%E7%9B%98%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-number">6.9.2.</span> <span class="toc-text">暂存盘撤销修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="toc-number">6.9.3.</span> <span class="toc-text">版本回退</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E6%92%A4%E9%94%80"><span class="toc-number">6.9.4.</span> <span class="toc-text">删除文件撤销</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%9E%E9%80%80%E5%88%B0%E4%B8%8A%E4%B8%AA%E7%89%88%E6%9C%AC"><span class="toc-number">6.9.5.</span> <span class="toc-text">回退到上个版本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%9E%E9%80%80%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">6.9.6.</span> <span class="toc-text">回退到指定的版本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-stash-1"><span class="toc-number">6.9.7.</span> <span class="toc-text">git stash</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%E3%80%81%E5%85%B6%E4%BB%96"><span class="toc-number">6.10.</span> <span class="toc-text">10、其他</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">6.11.</span> <span class="toc-text">11、小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/git%E7%AC%94%E8%AE%B0_0915/" title="git笔记_0915">git笔记_0915</a><time datetime="2025-09-18T00:51:04.345Z" title="发表于 2025-09-18 08:51:04">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/git%E7%AC%94%E8%AE%B0/" title="git笔记">git笔记</a><time datetime="2025-09-18T00:51:04.342Z" title="发表于 2025-09-18 08:51:04">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E4%BD%9C%E4%B8%9A_0916/" title="作业_0916">作业_0916</a><time datetime="2025-09-18T00:51:03.549Z" title="发表于 2025-09-18 08:51:03">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/README/" title="无标题">无标题</a><time datetime="2025-09-18T00:51:03.547Z" title="发表于 2025-09-18 08:51:03">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/17/%E4%BD%9C%E4%B8%9A_0917_git%E8%BF%9B%E9%98%B6/" title="9月17作业 - git进阶">9月17作业 - git进阶</a><time datetime="2025-09-17T12:46:56.397Z" title="发表于 2025-09-17 20:46:56">2025-09-17</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By NINGXIU</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
