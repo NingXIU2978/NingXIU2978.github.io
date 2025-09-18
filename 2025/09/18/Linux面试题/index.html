@@ -1,0 +1,1430 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux面试题 | NINGXIU's 学习博客</title><meta name="author" content="NINGXIU"><meta name="copyright" content="NINGXIU"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="理论基础1、面Linux系统比Windows系统好在哪里？其它问法： 你为什么选择学习Linux？你觉得企业为什么选择Linux系统？而不选择Windows系统？ 1234567891011Linux开源，并且大多数的发行版本免费，其中甚至包括了部分企业级的服务器版本。同时由于开源的特性，其安全问题会更透明，社区能够快速的发现并修复漏洞，整体安全性较高，在服务器场景中往往有更好的表现。另一方面，其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux面试题">
+<meta property="og:url" content="https://ningxiu2978.github.io/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="NINGXIU&#39;s 学习博客">
+<meta property="og:description" content="理论基础1、面Linux系统比Windows系统好在哪里？其它问法： 你为什么选择学习Linux？你觉得企业为什么选择Linux系统？而不选择Windows系统？ 1234567891011Linux开源，并且大多数的发行版本免费，其中甚至包括了部分企业级的服务器版本。同时由于开源的特性，其安全问题会更透明，社区能够快速的发现并修复漏洞，整体安全性较高，在服务器场景中往往有更好的表现。另一方面，其">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ningxiu2978.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-09-18T13:19:49.181Z">
+<meta property="article:modified_time" content="2025-09-18T13:20:47.578Z">
+<meta property="article:author" content="NINGXIU">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ningxiu2978.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Linux面试题",
+  "url": "https://ningxiu2978.github.io/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/",
+  "image": "https://ningxiu2978.github.io/img/avatar.jpg",
+  "datePublished": "2025-09-18T13:19:49.181Z",
+  "dateModified": "2025-09-18T13:20:47.578Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "NINGXIU",
+      "url": "https://ningxiu2978.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://ningxiu2978.github.io/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":-1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux面试题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://pic1.imgdb.cn/item/65578a9fc458853aef80544a.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-images"></i><span> 相册</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">NINGXIU's 学习博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Linux面试题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-images"></i><span> 相册</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Linux面试题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-18T13:19:49.181Z" title="发表于 2025-09-18 21:19:49">2025-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-18T13:20:47.578Z" title="更新于 2025-09-18 21:20:47">2025-09-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">17.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>56分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h4 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h4><h5 id="1、面Linux系统比Windows系统好在哪里？"><a href="#1、面Linux系统比Windows系统好在哪里？" class="headerlink" title="1、面Linux系统比Windows系统好在哪里？"></a>1、面Linux系统比Windows系统好在哪里？</h5><p>其它问法： 你为什么选择学习Linux？<br>你觉得企业为什么选择Linux系统？而不选择Windows系统？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Linux开源，并且大多数的发行版本免费，其中甚至包括了部分企业级的服务器版本。</span><br><span class="line"></span><br><span class="line">同时由于开源的特性，其安全问题会更透明，社区能够快速的发现并修复漏洞，整体安全性较高，在服务器场景中往往有更好的表现。</span><br><span class="line"></span><br><span class="line">另一方面，其开源特性使得有更丰富的版本选择，可以根据不同的需求进行剪裁和定制。</span><br><span class="line"></span><br><span class="line">在多用户多任务方面，Linux支持多用户同时登录并执行各自的任务，同时权限管理严格，资源分配合理。</span><br><span class="line"></span><br><span class="line">而且因为可以选择舍弃图形化界面，使得其资源占用更低。</span><br><span class="line"></span><br><span class="line">当然，Windows也不是没有优势的，其在图形化界面、办公软件的兼容性、游戏的支持上就比Linux好得多。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>我们常说的开源免费并不是同一个概念：<br>开源：软件产品的源代码对公众开放，任何人都可以查看、使用、修改以及分发其源代码。<br>免费：可以自由的运行程序、自由的学习并修改程序、自由的复制并向他人分发软件副本、自由的发行修改版。<br>但是这并不意味着开源软件必须免费，如：Red Hat Enterprise Linux（RHEL，红帽企业版）；同时也不意味着免费必须开源，如：Adobe Acrobat Reader DC。</p>
+<p>这个知识点背诵时，首先记住Linux系统对比Windows最大的优势就是开源，因此可以从这一条开始扩展。</p>
+<p>首先说出价格的问题，你可以认为一个开源的产品，总有其免费版本，大不了别人就拿源代码编译一下就是了；然后说出开源会带来的社区优势，即有更多的人去维护它，安全性会更好，同时也意味着你可以修改它做定制化。</p>
+<p>到这里就说出一半了，然后再从Linux系统的多用户和可以舍弃图形化界面这点上说下，就答完了。</p>
+</blockquote>
+<h5 id="2、IP地址-和-域名的关系是什么？"><a href="#2、IP地址-和-域名的关系是什么？" class="headerlink" title="2、IP地址 和 域名的关系是什么？"></a>2、IP地址 和 域名的关系是什么？</h5><p>其它问法： 域名是什么？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IP 地址是计算机在网络上的唯一标识符，类似于门牌号。</span><br><span class="line"></span><br><span class="line">域名则是互联网上主机或者网络服务的一种易于记忆、具有层次结构的名称标识。</span><br><span class="line"></span><br><span class="line">IP 地址与域名互相映射，1个域名对应1个IP 地址，1个 IP 地址对应多个域名。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>IP地址分两种，一种是IPv4，占用4字节，格式是由点（.）隔开的4组十进制数，每组范围0至255；一种是IPv6，占用16字节，格式是由冒号（:）隔开的8组十六进制数组成，同时为了简洁可以省略全是0的组的书写和将多个全是0的组缩写成一对冒号（::）。<br>域名的真正看法则是应该由右至左看，首先看到的是可以被省略的点(.)，这个被称之为根域名；然后是我们常见的顶级域名，如：com、org 等；再然后是二级域名，这个级别的域名才是我们可以正常获取的级别，如：baidu、aliyun 等；之后的按照顺序，有三级域名、四级域名，这些域名都是由上级域名再分配而得到的。</p>
+<p>这个知识点背诵时，首先要记住的有两点：</p>
+<p>1、 IP地址相当于我们计算机在网络上的“门牌号”。</p>
+<p>2、 域名其实可以理解成 IP 地址的一个别名或者代称，它与 IP 地址一一对应，而一个 IP 地址是可能有多个别名或者代称的。</p>
+</blockquote>
+<h5 id="3、DNS-服务器是什么？"><a href="#3、DNS-服务器是什么？" class="headerlink" title="3、DNS 服务器是什么？"></a>3、DNS 服务器是什么？</h5><p>其它问法： DNS 是什么？<br>域名如何和 IP 地址 转换的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DNS 服务器是在网络上提供将域名转换为对应 IP 地址的一种服务设备。</span><br><span class="line"></span><br><span class="line">其核心作用就是提供域名解析服务，而域名解析就是将域名转换为对应 IP 地址。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>当我们访问一个域名时，会首先查询本机的 hosts 文件中有没有对应的转换关系，如果没有则会尝试请求对应的DNS服务器。<br>而当DNS服务器解析不出来时，将会尝试请求更上一级域名的DNS服务器，并将结果记录。<br>如果都查询不到，则网页就会出现域名解析错误的提示页面。</p>
+<p>这个知识点背诵时，要记住的有1点，DNS是指域名解析服务，将域名转换为 IP 地址的一种服务。</p>
+</blockquote>
+<h5 id="4、为什么IP地址到现在还没有分配完？"><a href="#4、为什么IP地址到现在还没有分配完？" class="headerlink" title="4、为什么IP地址到现在还没有分配完？"></a>4、为什么IP地址到现在还没有分配完？</h5><p>其它问法：IP 地址的分配方案是什么？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在IPv4 地址紧张的当下，私有IP地址范围（如10.0.0.0/8、172.16.0.0/12和192.168.0.0/16等）被广泛使用于内部网络。当内部网络设备需要与公网通信时，会利用NAT技术将私有IP地址映射到公共IP地址上。</span><br><span class="line"></span><br><span class="line">通过这种方式极大地增加了单个公共IPv4地址可以支持的内部设备数量。</span><br><span class="line"></span><br><span class="line">而运营商则使用大规模的NAT系统，允许大量用户共享一个或几个公网IPv4地址，这样也同样减缓了IP短缺的问题。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>扩展： </p>
+<blockquote>
+<p>除此之外，云计算和数据中心采用了虚拟化技术，多个虚拟机可以在单个物理服务器上运行并共享该服务器的单个或少量公网IPv4地址，从而节省了地址资源。</p>
+<p>这个知识点背诵时，要记住的核心概念是 NAT，通过它将我们内网IP地址转换为公网IP地址。这就好像从原本的点对点的传递物品，变成了现在的先传送到中转站A，然后由中转站A送到目标地址的中转站B，最后从中转站B再送到目标地点一样。这样每个地址所要记录的就只有自己下面的地址和其它中转站了，而其它中转站下面的我们并不需要记录。</p>
+</blockquote>
+<h5 id="5、你知道OSI七层网络模型吗？"><a href="#5、你知道OSI七层网络模型吗？" class="headerlink" title="5、你知道OSI七层网络模型吗？"></a>5、你知道OSI七层网络模型吗？</h5><p>其它问法：请说下OSI七层网络模型。<br>请说下交换机是属于哪一层的设备。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">OSI七层网络模型其层次从下至上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</span><br><span class="line"></span><br><span class="line">其中物理层是最底层，是用于规范数据在物理媒介上传输的规范的一层。</span><br><span class="line"></span><br><span class="line">其次是数据链路层，其负责将电信号转换为我们的数据并校验，同时负责了物理层面的选择转发的设备（地址管理和访问控制）。</span><br><span class="line"></span><br><span class="line">然后是网络层，负责选择将数据发送到哪台设备上。</span><br><span class="line"></span><br><span class="line">传输层则是数据到了我们系统中，开始确认接收信息的服务端口，TCP和UDP就是这一层的。</span><br><span class="line"></span><br><span class="line">会话层则是我们服务对通信的管理。</span><br><span class="line"></span><br><span class="line">表示层则将我们的数据转换为对应的格式。</span><br><span class="line"></span><br><span class="line">最后则是应用层，开始处理我们的业务。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>OSI七层网络模型的具体实现如下：<br>物理层：双绞线电缆、光纤电缆、RJ45（网线接口和水晶头）等<br>数据链路层：以太网协议、Wi-Fi协议、MAC地址等，物理设备有二层交换机等<br>网络层：IPv4协议、IPv6协议、ICMP协议等，物理设备有三层交换机、路由器等<br>传输层：TCP协议、UDP协议等<br>会话层：数据库连接池、Session等<br>表示层：HTTP头信息中的Content-Encoding、MIME类型等<br>应用层：HTTP协议、FTP协议、SSH协议等</p>
+<p>这个知识点背诵时，需要理解网络信息的传输流程。</p>
+<p>在传输时，肯定是光电信号的，这里有关的是物理层，然后将光电信号转成数据的是数据链路层，再由网络层将数据发送到你电脑上，由传输层决定是哪个服务，然后开启服务会话，这里处于会话层，由表示层将二进制数据转换为对应的具体格式数据，并由应用层最后处理。</p>
+</blockquote>
+<h5 id="6、请说下TCP协议和UDP协议的区别。"><a href="#6、请说下TCP协议和UDP协议的区别。" class="headerlink" title="6、请说下TCP协议和UDP协议的区别。"></a>6、请说下TCP协议和UDP协议的区别。</h5><p>其它问法：你知道TCP协议和UDP协议吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TCP协议是传输控制协议，UDP协议是用户数据报协议。</span><br><span class="line"></span><br><span class="line">TCP协议通过三次握手四次挥手和其它方案确保了数据的可靠性和完整性，而UDP协议则没有这一点。</span><br><span class="line"></span><br><span class="line">TCP协议同时还有完善的流量控制和拥塞控制机制，而UDP协议也没有。</span><br><span class="line"></span><br><span class="line">但是TCP协议的这些机制带来了更高的开销和延迟以及更低的吞吐量，而UDP协议则是有更低的延迟和更高的吞吐量。</span><br><span class="line"></span><br><span class="line">基于以上特点，TCP协议更适合需要高可靠性的服务，比如：网页、电子邮件、文件传输；而UDP协议则更适合实时性要求高但可以接受数据丢失的一些服务，比如：语音通话、实时流媒体等。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>TCP协议还会对每个数据段赋予序列号，并按序传输和重组，以确保数据的正确顺序。<br>同时，还会根据接收端处理能力动态调整发送速率，避免接收方无法处理而丢包的情况。而UDP协议没有复杂的确认机制，会产生一定程度的丢包或乱序的情况。<br>不过同时，UDP协议还支持多播和广播，以实现支持向多个目的地一次性发送数据报文的功能。</p>
+<p>这个知识点背诵时，首先要明确一个名词，即：TCP的“三次握手，四次挥手”。这个功能实现了TCP协议关于传输的可靠性和完整性。</p>
+<p>在这个点上进行反向扩展就可以得到UDP协议没有这一点，同时也不保证可靠性和完整性这一点。</p>
+<p>然后再是根据这多出的步骤得到TCP协议的开销会比UDP大。</p>
+<p>最终得到它们分别的适用场景。</p>
+</blockquote>
+<p>请说下TCP连接的流程。</p>
+<p>其它问法：你知道三次握手四次挥手吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TCP的连接需要经历三次握手、传输数据和结束的四次挥手。</span><br><span class="line"></span><br><span class="line">首先，当需要建立TCP连接时，会向目标发送一个请求报文，目标接收后，会回复一个带有同意标志的请求报文，然后我们则回复一个同意报文过去，三次握手就结束了。</span><br><span class="line"></span><br><span class="line">当需要结束连接时，会首先发送一个结束报文到对方那边去，对方接收后，会先回复一个确认报文，等对方连接的剩余工作完成后，再发送一个结束报文，而这边接收到结束报文后就会回复一个确认报文，至此，TCP连接就结束了。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>下面是TCP连接的“三次握手，四次挥手”的完整版：<br>1、 第一次握手：SYN<br>客户端（Client）想要与服务器（Server）建立连接时，它会发送一个带有SYN标志的TCP报文段给服务器。在这个报文中，客户端会随机生成一个序列号seq（X），这个序列号将作为本次连接中所有从客户端发出的数据的起始序号。<br>2、 第二次握手：SYN + ACK<br>服务器接收到客户端的SYN报文后，如果同意建立连接，则回复一个带有SYN和ACK标志的TCP报文段。服务器同样也会生成一个自己的序列号seq（Y），并且确认号ACK设置为客户端的序列号加1（即seq(X)+1），表示期望接收客户端的下一个数据报文从该序列号开始。<br>3、 第三次握手：ACK<br>客户端收到服务器的SYN + ACK报文后，会再向服务器发送一个ACK确认报文。此时，客户端的确认号ACK设置为服务器的序列号加1（即seq(Y)+1），表示已收到并确认了服务器的SYN报文。同时，客户端也会继续发送自己的数据，或者等待服务器的数据传输开始。<br>至此，TCP连接已经建立完成，双方可以开始进行双向的数据传输。三次握手确保了双方都已准备好，并且双方对彼此的初始序列号进行了同步，这有助于后续数据包的可靠传输和顺序控制。<br>1、 第一次挥手：FIN<br>当某一方（假设是客户端）完成数据传输或决定断开连接时，它会发送一个带有FIN标志的TCP报文段给另一方（服务器），表示“我已无数据要发送”。此时，客户端进入FIN-WAIT-1状态。<br>2、 第二次挥手：ACK<br>服务器收到客户端发来的FIN报文后，确认并回复一个带有ACK标志的报文，确认号ACK设置为接收到的序列号加1。这表示服务器已经收到了客户端的关闭请求，并且自身可能还有数据需要发送完。服务器这时进入CLOSE-WAIT状态，而客户端则进入FIN-WAIT-2状态，等待服务器的FIN报文。<br>3、 第三次挥手：FIN<br>服务器发送完所有剩余的数据后，也会发出一个FIN报文，通知客户端它也已经没有数据要发送了。这时服务器进入LAST-ACK状态。<br>4、 第四次挥手：ACK<br>客户端收到服务器的FIN报文后，同样会回应一个ACK确认报文，确认号ACK设置为服务器FIN报文中的序列号加1。然后客户端进入TIME-WAIT状态，等待一段时间确保服务器接收到了这个确认报文。这段时间过后，客户端才会真正关闭连接。<br>服务器在收到客户端的最后一个ACK报文后，立即进入CLOSED状态，结束连接。<br>客户端在TIME-WAIT状态保持一段时间是为了防止最后的ACK报文丢失，若该ACK未到达服务器，服务器会重新发送FIN报文，客户端可以在TIME-WAIT期间再次确认。经过这个时间后，客户端确认连接已经完全关闭，最终也进入CLOSED状态。</p>
+<p>这个知识点背诵时，需要记住的一点是，不是直接开始传也不是直接断的，不是你说开始就代表你同意接收数据了。</p>
+<p>因此问得互相问一次，各回答一次，然后其中“三次握手”中的目标的回答和询问一起发送了，因此是“三次握手”。</p>
+<p>而“四次挥手”也是一样的，因此结束和同意也要互相确认，同时，结束时，同意结束和我发送结束因为有可能不是同时的，所以要分两次。因此是“四次挥手。”</p>
+</blockquote>
+<h5 id="7、你知道哪些常用的端口号？"><a href="#7、你知道哪些常用的端口号？" class="headerlink" title="7、你知道哪些常用的端口号？"></a>7、你知道哪些常用的端口号？</h5><p>其它问法： HTTP 和HTTPS 的端口号分别是多少？<br>SSH 的端口号是多少？<br>MySQL 的端口号是多少？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP 协议使用的默认端口号为80；</span><br><span class="line"></span><br><span class="line">HTTPS 协议默认使用的端口号为443；</span><br><span class="line"></span><br><span class="line">SSH 协议默认使用的端口号为22；</span><br><span class="line"></span><br><span class="line">FTP 协议默认使用的端口号为21；</span><br><span class="line"></span><br><span class="line">MySQL 默认使用的端口号为3306。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>其它的如：<br>Redis 默认使用的端口号是：6379；<br>SMTP 默认使用的端口号是：25</p>
+<p>这个知识点就没什么好说的了，就是单纯的背。</p>
+</blockquote>
+<h5 id="8、HTTPS-中的-S-是什么意思？"><a href="#8、HTTPS-中的-S-是什么意思？" class="headerlink" title="8、HTTPS 中的 S 是什么意思？"></a>8、HTTPS 中的 S 是什么意思？</h5><p>其它问法： 你知道 SSL 吗？<br>你知道 TLS 吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTPS中的“S”代表“Secure”（安全），它表明该连接使用了安全套接字层（SSL）或其后继者传输层安全（TLS）协议来加密和保护通信数据。</span><br><span class="line"></span><br><span class="line">SSL（Secure Sockets Layer）是一种早期的网络安全协议，用于在互联网上实现客户端与服务器之间的信息加密、身份验证以及消息完整性校验。</span><br><span class="line"></span><br><span class="line">随着技术发展，SSL逐渐被TLS（Transport Layer Security）协议取代，但为了保持兼容性和普遍认知，许多场合仍沿用SSL的说法。</span><br><span class="line"></span><br><span class="line">总之，SSL/TLS都是用于保障信息安全的方案。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>其中，SSL&#x2F;TLS的加密流程基本上是如下的：<br>1、 客户端向服务端发送请求连接，同时携带上客户端支持的TLS版本、加密套件列表和一个随机数。<br>2、 服务端接收后响应一个最高兼容的 TLS 版本、一个选定的加密套件和另一个随机数。同时发送服务器的数字证书给客户端，数字证书包含了服务器的身份信息和由受信任的证书颁发机构（CA）签名的公钥。<br>3、客户端接收后验证证书是否有效，没有过期、签发者可信和域名匹配，然后使用CA的公钥验证服务器证书的签名。<br>4、然后根据双方协商的秘钥交换算法，客户端可能需要产生一个随机数并通过服务器证书中的公钥加密后发往服务器；或者双方直接通过非对称加密算法交换随机数据以计算共享密钥。<br>5、客户端和服务器各自利用接收到的信息以及之前自己生成的随机数，通过密钥导出函数生成一个对话密钥，此密钥将用于后续的对称加密通信。<br>6、双方交换Finished消息，这些消息使用刚才生成的对话密钥进行加密，以验证握手过程中没有被篡改或监听。当对方成功解密并校验Finished消息后，握手阶段结束。<br>7、一旦握手完成，客户端和服务器开始使用协商好的对称加密算法、哈希算法以及消息认证码（MAC）来加密和解密应用层数据（比如HTTP请求和响应）。所有后续通信都将受到保护，确保数据隐私性和完整性。</p>
+<p>这个知识点背诵时，要记住的核心概念是HTTPS中的S意为安全。然后从安全这个意思进行扩展，得到SSL&#x2F;TLS这个概念是解决安全性的问题的。</p>
+</blockquote>
+<h4 id="日常使用"><a href="#日常使用" class="headerlink" title="日常使用"></a>日常使用</h4><h5 id="1、你用的是什么发行版本？"><a href="#1、你用的是什么发行版本？" class="headerlink" title="1、你用的是什么发行版本？"></a>1、你用的是什么发行版本？</h5><p>其它问法： 你了解发行版本吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我使用的是CentOS7 这个发行版本。</span><br><span class="line"></span><br><span class="line">其它发行版本我还知道Ubuntu、Debian。国产的depin，红旗等</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>我们最常用的Linux两大系分别是：Red Hat系和 Debian 系。<br>其中Red Hat系主要客户群体是企业，因此更注重稳定性和一致性。<br>而Debian 系的主要客户群体是需要图形化界面的桌面用户、开发者和需要高度可定制化系统的组织，因此更注重新功能、广泛的软件包库和灵活的定制性。<br>同时，这两大系的包管理系统、更新策略、系统配置和系统管理是不一样的。</p>
+<p>这题其实就是问你用的 Linux 是哪个版本的，不过 Linux 不同于 Windows 只有一家公司<br>的，Linux 有好几家公司的，所以这里说的是发行版本。</p>
+</blockquote>
+<h5 id="2、你用的是图形化界面的还是命令行界面的？"><a href="#2、你用的是图形化界面的还是命令行界面的？" class="headerlink" title="2、你用的是图形化界面的还是命令行界面的？"></a>2、你用的是图形化界面的还是命令行界面的？</h5><p>其它问法： 你用的是带桌面的？还是不带桌面的？<br>你是在哪里操作Linux系统的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我是使用的命令行界面的CentOS7。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>在系统中运行的图形化界面会占用较多的资源。<br>在现代Windows10或11中，纯净安装且仅启动基本图形界面服务时，空载状态下的内存占用通常从几百MB到1GB左右不等，实际情况下只会是远大于这个大小。<br>而在Linux系统中，轻量级桌面环境在无额外加载项的情况下，可能需要占用几十MB至几百MB的内存，而功能更全面的桌面环境在纯净启动时，内存占用可能会达到几百MB至上GB，实际情况也是只会大于这个大小。<br>同时这也意味着舍弃了图形化界面之后至少可以节省下来数百MB的内存空间。而对于Redis而言，在键平均占用8字节（8个英文字符），值平均占用32字节（32个英文字符）的情况下每百MB可以额外多存储近3百万个键值对。</p>
+<p>这题其实就是问你平时使用 Linux 的操作风格。</p>
+<p>但是首先，我们要知道桌面UI会消耗大量的系统资源，而服务器是不需要桌面UI的，因此，正统服务器一般选择的都是命令行界面的。</p>
+<p>另一方面，在使用上，桌面UI大幅度的简化了一些我们的命令行操作。这也意味着，桌面UI版的技术门槛是比命令行界面版的低一些的。同时，你会命令行版本的，在使用桌面UI版时再不济也可以使用终端操作，可是反过来却不一定行。</p>
+<p>结合这两点，企业选择时，会命令行的会优于只会桌面UI的。</p>
+</blockquote>
+<h5 id="3、你有用虚拟机吗？用的是哪种"><a href="#3、你有用虚拟机吗？用的是哪种" class="headerlink" title="3、你有用虚拟机吗？用的是哪种?"></a>3、你有用虚拟机吗？用的是哪种?</h5><p>其它问法：你Linux系统是安装在实体机上还是虚拟机上？<br>你有用过VM吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我有使用虚拟机，当时学习Linux的时候就是安装在VMware Workstation虚拟机上跑的。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>常见的虚拟机除了上述的VMware Workstation Pro外，还有：<br>Oracle VirtualBox</p>
+<p>这题其实就是问你平时有没有使用过虚拟机，他们是有使用虚拟机的场景的。</p>
+</blockquote>
+<h5 id="4、你是通过什么方式连接的Linux系统的？"><a href="#4、你是通过什么方式连接的Linux系统的？" class="headerlink" title="4、你是通过什么方式连接的Linux系统的？"></a>4、你是通过什么方式连接的Linux系统的？</h5><p>其它问法： 你知道SSH吗？<br>如何从Windows上连接Linux？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我平时是使用第三方的软件Xshell进行连接的，它走的是SSH协议，同时在没有这款软件或者不能使用的情况下，我会使用CMD中的ssh命令进行连接。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>SSH（Secure Shell）是一种网络协议，主要用于提供安全的远程登录和命令行管理服务。它允许用户通过加密通道在不安全的网络上进行安全的数据传输，并且可以执行远程服务器上的命令、传输文件以及与其他网络服务交互。</p>
+<p>这题的核心问题其实是你有没有办法从远程连接到你的Linux系统，答案就是SSH协议。这里你要确保你回答到了SSH协议才能得分。</p>
+<p>因为我们是使用虚拟机去练习的Linux系统，因此我们可以直接对Linux系统进行操作，但现实场景却更多的是Linux服务器压根不在你身边，你必须使用你手头上的设备去连接它，操作它。</p>
+<p>而平时最常用的Xshell只是具体的解决方案中的一种，它还是基于SSH协议的，而如果你只回答了Xshell，那么就会被认为你只是会用这个工具，而非知道其连接的底层协议。</p>
+</blockquote>
+<h4 id="用户和权限"><a href="#用户和权限" class="headerlink" title="用户和权限"></a>用户和权限</h4><h5 id="为什么我们不使用root账户？"><a href="#为什么我们不使用root账户？" class="headerlink" title="为什么我们不使用root账户？"></a>为什么我们不使用root账户？</h5><p>其它问法：你觉得直接使用 root 账户好吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在 Linux 系统中，root 账户是系统最高权限的管理员，拥有着对系统的完全访问权限。</span><br><span class="line"></span><br><span class="line">如果我们直接使用 root 账户，从安全角度来说有着巨大的安全风险。另外，因为权限过大，因此也有着误操作的风险。</span><br></pre></td></tr></table></figure>
+
+<p>扩展： </p>
+<blockquote>
+<p>如果了解安全审计，也可以加上：从安全审计的角度出发，可以更好的跟踪用户的操作，同时也符合最小权限原则。</p>
+<p>这个知识点背诵时，首先记住 root 是在 Linux 系统中什么都能做的管理员，在这个基础上进行扩展。</p>
+<p>比如：安全角度，误操作角度 等。</p>
+</blockquote>
+<h4 id="知识点小结"><a href="#知识点小结" class="headerlink" title="知识点小结"></a>知识点小结</h4><h5 id="1、mkdir-命令（创建目录）"><a href="#1、mkdir-命令（创建目录）" class="headerlink" title="1、mkdir 命令（创建目录）"></a>1、mkdir 命令（创建目录）</h5><ol>
+<li><p>基础操作：如何一次性创建多级目录（如 <code>a/b/c</code>）？ </p>
+<ul>
+<li><code>mkdir -p a/b/c</code>（<code>-p</code> 递归创建父目录）。</li>
+</ul>
+</li>
+<li><p>权限控制：<code>mkdir -m 750 dir</code> 的作用是什么？ </p>
+<ul>
+<li>创建目录 <code>dir</code>，权限为 所有者读&#x2F;写&#x2F;执行，组用户读&#x2F;执行，其他用户无权限（数字权限 <code>750</code>）。</li>
+</ul>
+</li>
+<li><p>防报错创建：创建已存在的目录会报错，如何避免？ </p>
+<ul>
+<li><code>mkdir -p existing_dir</code>（<code>-p</code> 若目录存在则跳过，不报错）。</li>
+</ul>
+</li>
+<li><p>批量创建：如何同时创建 <code>dir1</code>、<code>dir2</code>、<code>dir3</code> 三个目录？ </p>
+<ul>
+<li><code>mkdir dir1 dir2 dir3</code>（空格分隔多个目录名）。</li>
+</ul>
+</li>
+<li><p>对比 rmdir：<code>rmdir</code> 能删除非空目录吗？为什么？ </p>
+<ul>
+<li>不能！<code>rmdir</code> 仅删除空目录；非空目录需用 <code>rm -r</code> 递归删除。</li>
+</ul>
+</li>
+</ol>
+<h5 id="2、touch-命令（创建空文件-改时间）"><a href="#2、touch-命令（创建空文件-改时间）" class="headerlink" title="2、touch 命令（创建空文件&#x2F;改时间）"></a>2、touch 命令（创建空文件&#x2F;改时间）</h5><ol>
+<li><p>空文件创建：如何快速创建空文件 <code>test.txt</code>？ </p>
+<ul>
+<li><code>touch test.txt</code>。</li>
+</ul>
+</li>
+<li><p>批量创建：如何同时创建 <code>file1.log</code> 和 <code>file2.conf</code>？ </p>
+<ul>
+<li><code>touch file1.log file2.conf</code>（空格分隔）。</li>
+</ul>
+</li>
+<li><p>修改时间：已有文件 <code>data.csv</code>，如何更新其“修改时间”为当前时间？ </p>
+<ul>
+<li><code>touch data.csv</code>（更新访问时间和修改时间）。</li>
+</ul>
+</li>
+<li><p>父目录问题：尝试用 <code>touch dir/file.txt</code> 创建文件（父目录 <code>dir</code> 不存在），会怎样？ </p>
+<ul>
+<li>报错 <code>No such file or directory</code>；需先建父目录（<code>mkdir -p dir</code>）或用 <code>touch -p</code>？不，<code>touch</code> 无 <code>-p</code>，必须先建目录。</li>
+</ul>
+</li>
+<li><p>对比 echo：<code>touch</code> 和 <code>echo &quot;&quot; &gt; file</code> 哪种创建的文件更小？ </p>
+<ul>
+<li><code>touch</code> 创建的文件大小为0（纯空文件）；<code>echo</code> 会写入空行，文件大小至少1字节（含换行符）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="3、cat-命令（查看-合并文件）"><a href="#3、cat-命令（查看-合并文件）" class="headerlink" title="3、cat 命令（查看&#x2F;合并文件）"></a>3、cat 命令（查看&#x2F;合并文件）</h5><ol>
+<li><p>显示行号：查看 <code>test.log</code> 并显示行号，命令是什么？ </p>
+<ul>
+<li><code>cat -n test.log</code>（<code>-n</code> 显示行号）。</li>
+</ul>
+</li>
+<li><p>合并文件：如何将 <code>fileA.txt</code> 和 <code>fileB.txt</code> 合并到 <code>fileC.txt</code>？</p>
+<ul>
+<li><code>cat fileA.txt fileB.txt &gt; fileC.txt</code>（重定向输出）。</li>
+</ul>
+</li>
+<li><p>交互创建：用 <code>cat</code> 交互创建 <code>hello.txt</code>，输入 <code>Hello Linux!</code> 后如何结束？ </p>
+<ul>
+<li>按 Ctrl + D 终止输入。</li>
+</ul>
+</li>
+<li><p>对比 more：查看大文件时，为什么更推荐 <code>more</code> 而非 <code>cat</code>？ </p>
+<ul>
+<li><code>cat</code> 会一次性输出所有内容，大文件会刷屏；<code>more</code> 支持分页查看，更友好。</li>
+</ul>
+</li>
+<li><p>管道应用：<code>cat /etc/passwd | grep &quot;root&quot;</code> 有什么作用？ </p>
+<ul>
+<li>查看 <code>/etc/passwd</code> 中包含 <code>root</code> 的行（筛选用户信息）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="4、more-命令（分页查看）"><a href="#4、more-命令（分页查看）" class="headerlink" title="4、more 命令（分页查看）"></a>4、more 命令（分页查看）</h5><ol>
+<li><p>翻页操作：用 <code>more</code> 查看大文件时，如何翻页、回退、退出？ </p>
+<ul>
+<li>空格（翻页）、<code>b</code>（回退一页）、<code>q</code>（退出）。</li>
+</ul>
+</li>
+<li><p>指定起始行：从第20行开始查看 <code>file.txt</code>，命令是什么？ </p>
+<ul>
+<li><code>more +20 file.txt</code>。</li>
+</ul>
+</li>
+<li><p>对比 less：<code>less</code> 比 <code>more</code> 强在哪里？ </p>
+<ul>
+<li><code>less</code> 支持 前后翻页（如 <code>↑↓</code> 键），还能搜索内容；<code>more</code> 只能向后翻页。</li>
+</ul>
+</li>
+<li><p>管道结合：<code>ls -lR / | more</code> 有什么效果？ </p>
+<ul>
+<li>分页查看根目录下所有文件的详细信息（递归显示，避免刷屏）。</li>
+</ul>
+</li>
+<li><p>错误提示：用 <code>more</code> 查看不存在的文件，会出现什么提示？ </p>
+<ul>
+<li>报错 <code>more: cannot open [文件名] for reading: No such file or directory</code>。</li>
+</ul>
+</li>
+</ol>
+<h5 id="5、cp-命令（复制文件-目录）"><a href="#5、cp-命令（复制文件-目录）" class="headerlink" title="5、cp 命令（复制文件&#x2F;目录）"></a>5、cp 命令（复制文件&#x2F;目录）</h5><ol>
+<li><p>递归复制：如何复制目录 <code>src</code> 及其子文件到 <code>dest</code>？ </p>
+<ul>
+<li><code>cp -r src dest</code>（<code>-r</code> 递归处理子目录）。</li>
+</ul>
+</li>
+<li><p>保留属性：复制文件时，如何保留原文件的权限、时间戳？ </p>
+<ul>
+<li><code>cp -p source.txt target.txt</code>（<code>-p</code> 保留属性）。</li>
+</ul>
+</li>
+<li><p>交互复制：复制 <code>file.txt</code> 到 <code>file_backup.txt</code> 时，若目标文件已存在，如何让系统提示是否覆盖？ </p>
+<ul>
+<li><code>cp -i file.txt file_backup.txt</code>（<code>-i</code> 交互模式）。</li>
+</ul>
+</li>
+<li><p>对比 mv：<code>cp</code> 和 <code>mv</code> 的核心区别是什么？ </p>
+<ul>
+<li><code>cp</code> 是复制（文件&#x2F;目录保留两份）；<code>mv</code> 是移动&#x2F;重命名（原文件消失）。</li>
+</ul>
+</li>
+<li><p>复制软链接：如何复制符号链接文件本身（而非指向的源文件）？ </p>
+<ul>
+<li><code>cp -d link.txt new_link.txt</code>（<code>-d</code> 保留软链接属性）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="6、mv-命令（移动-重命名）"><a href="#6、mv-命令（移动-重命名）" class="headerlink" title="6、mv 命令（移动&#x2F;重命名）"></a>6、mv 命令（移动&#x2F;重命名）</h5><ol>
+<li><p>重命名文件：如何将 <code>a.txt</code> 重命名为 <code>b.txt</code>？ </p>
+<ul>
+<li><code>mv a.txt b.txt</code>。</li>
+</ul>
+</li>
+<li><p>批量移动：如何将 <code>file1</code>、<code>file2</code> 同时移动到 <code>target_dir</code>？ </p>
+<ul>
+<li><code>mv file1 file2 target_dir/</code>（空格分隔文件，目标目录结尾加 <code>/</code>）。</li>
+</ul>
+</li>
+<li><p>防覆盖保护：移动文件时，若目标目录已有同名文件，如何避免直接覆盖？ </p>
+<ul>
+<li><code>mv -i source.txt target_dir/</code>（<code>-i</code> 交互模式，提示确认）。</li>
+</ul>
+</li>
+<li><p>对比 cp+rm：为什么 <code>mv</code> 比“<code>cp</code> 后 <code>rm</code>”更高效？ </p>
+<ul>
+<li><code>mv</code> 是移动文件指针（仅改路径），无需复制数据；<code>cp+rm</code> 需复制+删除，耗时更长。</li>
+</ul>
+</li>
+<li><p>通配符移动：如何将当前目录所有 <code>.log</code> 文件移动到 <code>log_dir</code>？ </p>
+<ul>
+<li><code>mv .log log_dir/</code>（通配符匹配，批量移动）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="7、rm-命令（删除文件-目录）"><a href="#7、rm-命令（删除文件-目录）" class="headerlink" title="7、rm 命令（删除文件&#x2F;目录）"></a>7、rm 命令（删除文件&#x2F;目录）</h5><ol>
+<li><p>递归删目录：如何删除目录 <code>dir</code> 及其所有子内容（包括非空目录）？ </p>
+<ul>
+<li><code>rm -r dir</code>（<code>-r</code> 递归删除）。</li>
+</ul>
+</li>
+<li><p>强制删除：如何不提示，直接删除只读文件 <code>readme.txt</code>？ </p>
+<ul>
+<li><code>rm -f readme.txt</code>（<code>-f</code> 强制删除，忽略权限和存在性检查）。</li>
+</ul>
+</li>
+<li><p>致命风险：为什么说 <code>rm -rf /</code> 极其危险？如何避免？ </p>
+<ul>
+<li>会递归强制删除根目录下所有文件（系统崩溃）！生产环境需：① 加交互（<code>-i</code>）；② 用别名覆盖 <code>rm</code>（如 <code>alias rm=&#39;rm -i&#39;</code>）。</li>
+</ul>
+</li>
+<li><p>对比 rmdir：<code>rmdir</code> 能删除非空目录吗？怎么解决？ </p>
+<ul>
+<li>不能！非空目录需用 <code>rm -r</code>；若要删空目录，<code>rmdir</code> 更安全（避免误删内容）。</li>
+</ul>
+</li>
+<li><p>交互删除：删除文件时，如何每次都提示确认？ </p>
+<ul>
+<li><code>rm -i file.txt</code>（<code>-i</code> 交互模式，强制提示）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="8、which-命令（查找命令路径）"><a href="#8、which-命令（查找命令路径）" class="headerlink" title="8、which 命令（查找命令路径）"></a>8、which 命令（查找命令路径）</h5><ol>
+<li><p>查找命令路径：如何查看 <code>ls</code> 命令的绝对路径？ </p>
+<ul>
+<li><code>which ls</code>（输出如 <code>/bin/ls</code>）。</li>
+</ul>
+</li>
+<li><p>内置命令问题：执行 <code>which cd</code> 为什么找不到结果？ </p>
+<ul>
+<li><code>cd</code> 是 Shell 内置命令（非外部可执行文件），<code>which</code> 只查外部命令；可通过 <code>type cd</code> 查看内置属性。</li>
+</ul>
+</li>
+<li><p>对比 whereis：<code>which</code> 和 <code>whereis</code> 查找范围有何不同？ </p>
+<ul>
+<li><code>which</code> 只查 可执行文件路径；<code>whereis</code> 还查 手册页、源文件（如 <code>whereis ls</code> 会显示二进制、手册、源文件位置）。</li>
+</ul>
+</li>
+<li><p>验证安装：如何快速判断系统是否安装了 <code>gcc</code> 编译器？ </p>
+<ul>
+<li><code>which gcc</code>：若输出路径，说明已安装；否则未安装。</li>
+</ul>
+</li>
+<li><p>隐藏文件查找：<code>which</code> 能查找隐藏文件吗？为什么？ </p>
+<ul>
+<li>不能！<code>which</code> 只查 <code>PATH</code> 环境变量指定的目录 中的文件，隐藏文件不在 <code>PATH</code> 里（或需全路径调用）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="9、find-命令（强大查找）"><a href="#9、find-命令（强大查找）" class="headerlink" title="9、find 命令（强大查找）"></a>9、find 命令（强大查找）</h5><ol>
+<li><p>按名查找：如何在当前目录及子目录中，查找名为 <code>test.txt</code> 的文件？ </p>
+<ul>
+<li><code>find . -name &quot;test.txt&quot;</code>（<code>.</code> 表示当前目录，<code>-name</code> 匹配名称）。</li>
+</ul>
+</li>
+<li><p>按大小查找：如何查找系统中大于100MB的日志文件（<code>.log</code> 结尾）？ </p>
+<ul>
+<li><code>find / -type f -name &quot;.log&quot; -size +100M</code>（<code>-type f</code> 指文件，<code>+100M</code> 大于100MB）。</li>
+</ul>
+</li>
+<li><p>按时间查找：如何查找 <code>/home</code> 下7天内修改过的文件？ </p>
+<ul>
+<li><code>find /home -type f -mtime -7</code>（<code>-mtime -7</code> 表示7天内修改，<code>+7</code> 是7天前）。</li>
+</ul>
+</li>
+<li><p>对比 grep：<code>find</code> 和 <code>grep</code> 的核心区别是什么？ </p>
+<ul>
+<li><code>find</code> 找 文件本身（按名称、类型、属性等）<code>grep</code> 找 文件内容（按文本匹配）。</li>
+</ul>
+</li>
+<li><p>查找并删除：如何查找 <code>.tmp</code> 结尾的文件并直接删除？ </p>
+<ul>
+<li><code>find . -name &quot;.tmp&quot; -exec rm -f &#123;&#125; \;</code>（<code>-exec</code> 执行删除，<code>&#123;&#125;</code> 代指找到的文件）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="10、grep-命令"><a href="#10、grep-命令" class="headerlink" title="10、grep 命令"></a>10、grep 命令</h5><ol>
+<li><p>正则与选项：  </p>
+<ul>
+<li>如何忽略大小写查找 <code>error</code>？（<code>grep -i &quot;error&quot; file</code>）  </li>
+<li>如何反向过滤空行和注释行？（<code>grep -v -E &quot;^#|^$&quot; file</code>，解释 <code>-v</code> 和正则）  </li>
+<li>区别 <code>-E</code> 和 <code>-G</code>：哪个支持扩展正则（如 <code>|</code>）？（<code>-E</code> 支持扩展正则，无需转义 <code>|</code>；<code>-G</code> 是基本正则，需转义）</li>
+</ul>
+</li>
+<li><p>场景延伸：  </p>
+<ul>
+<li>从 <code>ifconfig</code> 输出中提取所有 IPv4 地址，命令是什么？（<code>ifconfig | grep -E -o &quot;\b([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;\b&quot;</code>）  </li>
+<li><code>grep</code> 和 <code>find</code> 的核心区别？（<code>grep</code> 查文件内容，<code>find</code> 查文件属性&#x2F;名称）</li>
+</ul>
+</li>
+</ol>
+<h5 id="11、wc-命令"><a href="#11、wc-命令" class="headerlink" title="11、wc 命令"></a>11、wc 命令</h5><ol>
+<li><p>统计类型：  </p>
+<ul>
+<li><code>wc -l</code>、<code>-w</code>、<code>-c</code> 分别统计什么？（行、单词、字节）  </li>
+<li>如何统计当前目录下 <code>.log</code> 文件的个数？（<code>ls | grep &quot;\.log$&quot; | wc -l</code>）</li>
+</ul>
+</li>
+<li><p>管道结合：  </p>
+<ul>
+<li>结合 <code>grep</code>，统计 <code>app.log</code> 中含 <code>error</code> 的行数？（<code>grep &quot;error&quot; app.log | wc -l</code>）</li>
+</ul>
+</li>
+</ol>
+<h5 id="12、tail-命令"><a href="#12、tail-命令" class="headerlink" title="12、tail 命令"></a>12、tail 命令</h5><ol>
+<li><p>实时跟踪：  </p>
+<ul>
+<li>实时监控日志文件 <code>app.log</code> 的命令？（<code>tail -f app.log</code>）  </li>
+<li>跟踪时如何退出？（<code>Ctrl + C</code>）</li>
+</ul>
+</li>
+<li><p>选项辨析：  </p>
+<ul>
+<li>显示文件最后10行的命令？（<code>tail -n 10 file</code> 或 <code>tail -10 file</code>，<code>-n</code> 可省略）  </li>
+<li><code>tail</code> 和 <code>head</code> 的应用场景？（<code>tail</code> 看最新日志，<code>head</code> 看配置文件开头）</li>
+</ul>
+</li>
+</ol>
+<h5 id="13、head-命令"><a href="#13、head-命令" class="headerlink" title="13、head 命令"></a>13、head 命令</h5><ol>
+<li><p>基础操作：  </p>
+<ul>
+<li>显示文件前5行的命令？（<code>head -n 5 file</code> 或 <code>head -5 file</code>）  </li>
+<li>如何跳过首行，显示后续内容？（<code>head -n +2 file</code>，或结合 <code>tail</code>：<code>tail -n +2 file</code>）</li>
+</ul>
+</li>
+<li><p>对比思考：  </p>
+<ul>
+<li><code>head -n -1 file</code> 有什么作用？（删除文件最后一行，<code>-1</code> 表示“倒数第1行”）</li>
+</ul>
+</li>
+</ol>
+<h5 id="14、管道符"><a href="#14、管道符" class="headerlink" title="14、管道符 |"></a>14、管道符 <code>|</code></h5><ol>
+<li><p>核心原理：  </p>
+<ul>
+<li>管道的作用是什么？（连接命令，前命令 <code>stdout</code> 传后命令 <code>stdin</code>）  </li>
+<li>为什么 <code>ls | rm</code> 无效？（<code>rm</code> 不读 <code>stdin</code>，读命令行参数）</li>
+</ul>
+</li>
+<li><p>进阶用法：  </p>
+<ul>
+<li>如何让错误信息也进入管道？（<code>cmd 2&gt;&amp;1 | grep &quot;error&quot;</code>，解释 <code>2&gt;&amp;1</code>）  </li>
+<li>对比 <code>|</code> 和 <code>xargs</code>：何时用 <code>xargs</code>？（处理不支持 <code>stdin</code> 的命令，如 <code>find . -name &quot;.txt&quot; | xargs rm</code>）</li>
+</ul>
+</li>
+</ol>
+<h5 id="15、echo-命令"><a href="#15、echo-命令" class="headerlink" title="15、echo 命令"></a>15、echo 命令</h5><ol>
+<li><p>转义与输出：  </p>
+<ul>
+<li>输出带换行的内容，命令是什么？（<code>echo -e &quot;Line1\nLine2&quot;</code>，解释 <code>-e</code> 启用转义）  </li>
+<li>如何输出环境变量 <code>HOME</code> 的值？（<code>echo $HOME</code>）</li>
+</ul>
+</li>
+<li><p>对比辨析：  </p>
+<ul>
+<li><code>echo</code> 和 <code>printf</code> 的区别？（<code>printf</code> 格式更灵活，支持对齐；<code>echo</code> 更简单，依赖系统实现）</li>
+</ul>
+</li>
+</ol>
+<h5 id="16、反引号-（命令替换）"><a href="#16、反引号-（命令替换）" class="headerlink" title="16、反引号 `（命令替换）"></a>16、反引号 <code>`</code>（命令替换）</h5><ol>
+<li><p>基础用法：  </p>
+<ul>
+<li>反引号的作用？（将命令结果作为参数&#x2F;变量值，如 <code>dir=</code>date +%F&#96;&#96;）  </li>
+<li>推荐用 <code>$()</code> 而非反引号的原因？（<code>$()</code> 支持嵌套，如 <code>echo &quot;当前目录: $(pwd)&quot;</code>；反引号嵌套需转义，易出错）</li>
+</ul>
+</li>
+<li><p>实践场景：  </p>
+<ul>
+<li>如何用反引号批量删除 <code>.tmp</code> 文件？（<code>rm -f </code>ls .tmp&#96;&#96;，但需注意文件名含空格的风险）</li>
+</ul>
+</li>
+</ol>
+<h5 id="17、重定向符（-、-、2-、-）"><a href="#17、重定向符（-、-、2-、-）" class="headerlink" title="17、重定向符（&gt;、&gt;&gt;、2&gt;、&amp;&gt;）"></a>17、重定向符（<code>&gt;</code>、<code>&gt;&gt;</code>、<code>2&gt;</code>、<code>&amp;&gt;</code>）</h5><ol>
+<li><p>符号辨析：  </p>
+<ul>
+<li><code>&gt;</code> 和 <code>&gt;&gt;</code> 的区别？（覆盖写入 vs 追加写入）  </li>
+<li>如何将错误信息单独写入文件？（<code>cmd 2&gt; error.log</code>，解释 <code>2</code> 代表 <code>stderr</code>）  </li>
+<li><code>&amp;&gt;</code> 的作用？（同时重定向 <code>stdout</code> 和 <code>stderr</code> 到同一文件）</li>
+</ul>
+</li>
+<li><p>安全实践：  </p>
+<ul>
+<li>如何“静默”执行命令（丢弃所有输出）？（<code>cmd &amp;&gt; /dev/null</code>，<code>/dev/null</code> 是“黑洞设备”）</li>
+</ul>
+</li>
+</ol>
+<h5 id="18、vi-vim-编辑器"><a href="#18、vi-vim-编辑器" class="headerlink" title="18、vi&#x2F;vim 编辑器"></a>18、vi&#x2F;vim 编辑器</h5><ol>
+<li><p>模式切换：  </p>
+<ul>
+<li>vi&#x2F;vim 的三种模式是什么？如何切换？（命令模式 <code>ESC</code>、插入模式 <code>i/I/a/A</code>、末行模式 <code>:</code>）  </li>
+<li>保存并退出的命令？（末行模式 <code>:wq</code>；强制退出 <code>:q!</code> 不保存）</li>
+</ul>
+</li>
+<li><p>核心操作：  </p>
+<ul>
+<li>全局替换所有 <code>old</code> 为 <code>new</code> 的命令？（末行模式 <code>:%s/old/new/g</code>，<code>%</code> 代表全文，<code>g</code> 代表全局）  </li>
+<li>如何快速跳转到第50行？（命令模式 <code>50G</code> 或末行模式 <code>:50</code>）  </li>
+<li>异常退出后，如何恢复文件？（<code>vim -r file</code> 恢复交换文件）</li>
+</ul>
+</li>
+</ol>
+<h5 id="19、awk-命令"><a href="#19、awk-命令" class="headerlink" title="19、awk 命令"></a>19、awk 命令</h5><ol>
+<li><p>字段处理：  </p>
+<ul>
+<li>提取 <code>/etc/passwd</code> 的用户名和 Shell（第1、7列），命令是什么？（<code>awk -F: &#39;&#123;print $1, $7&#125;&#39; /etc/passwd</code>，<code>-F:</code> 指定分隔符）  </li>
+<li><code>NR</code>、<code>NF</code> 分别代表什么？（<code>NR</code> 是当前行号，<code>NF</code> 是当前行字段数）</li>
+</ul>
+</li>
+<li><p>计算与逻辑：  </p>
+<ul>
+<li>计算 <code>nums.txt</code>（每行一个数字）的总和？（<code>awk &#39;&#123;sum+=$1&#125; END&#123;print sum&#125;&#39; nums.txt</code>）  </li>
+<li>筛选 <code>score.txt</code> 中分数&gt;90的行？（<code>awk &#39;$3 &gt; 90 &#123;print $0&#125;&#39; score.txt</code>）</li>
+</ul>
+</li>
+<li><p>对比延伸：  </p>
+<ul>
+<li><code>awk</code> 和 <code>grep</code> 的区别？（<code>grep</code> 按行匹配，<code>awk</code> 按字段处理，支持计算和逻辑）</li>
+</ul>
+</li>
+</ol>
+<h5 id="20、yum-源"><a href="#20、yum-源" class="headerlink" title="20、yum 源"></a>20、yum 源</h5><ol>
+<li><p>本地 yum 源搭建步骤：  </p>
+<ul>
+<li>① 挂载镜像（<code>mount /dev/cdrom /media/cdrom</code>）；</li>
+<li>② 编辑 repo 文件（<code>/etc/yum.repos.d/local.repo</code>，配置<code>baseurl=file:///media/cdrom</code>）；</li>
+<li>③ 清理缓存（<code>yum clean all</code>）；</li>
+<li>④ 生成缓存（<code>yum makecache</code>）。</li>
+</ul>
+</li>
+<li><p>yum 与 apt 的核心区别：  </p>
+<ul>
+<li>yum 用于 RPM 包管理（CentOS&#x2F;RHEL），apt 用于 deb 包管理（Ubuntu&#x2F;Debian）；命令语法和仓库格式不同。</li>
+</ul>
+</li>
+<li><p>如何临时禁用某个 yum 仓库？  </p>
+<ul>
+<li><code>yum-config-manager --disable 仓库名</code>（需安装 <code>yum-utils</code>），或直接编辑 repo 文件将 <code>enabled=1</code> 改为 <code>0</code>。</li>
+</ul>
+</li>
+<li><p>yum 缓存的作用及清理命令：  </p>
+<ul>
+<li>缓存已下载的包，加速重复安装；清理命令 <code>yum clean all</code>，重建缓存 <code>yum makecache</code>。</li>
+</ul>
+</li>
+<li><p>解决 yum 依赖冲突的思路：  </p>
+<ul>
+<li><p>① 用 <code>yum deplist 包名</code> 查看依赖；</p>
+</li>
+<li><p>② 尝试 <code>yum update 冲突包</code> 升级；</p>
+</li>
+<li><p>③ 手动下载依赖包离线安装，或强制降级（<code>yum downgrade 包名</code>）。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="21、软件安装和卸载"><a href="#21、软件安装和卸载" class="headerlink" title="21、软件安装和卸载"></a>21、软件安装和卸载</h5><ol>
+<li><p>yum 安装 vs 编译安装： </p>
+<ul>
+<li>yum 自动处理依赖，快捷但版本固定；编译安装可自定义参数（如 <code>./configure --prefix</code>），但需手动解决依赖。</li>
+</ul>
+</li>
+<li><p>彻底卸载软件（含配置文件）的方法：  </p>
+<ul>
+<li><code>yum remove 包名</code> 保留配置文件，<code>yum erase 包名</code> 彻底删除；或手动清理 <code>/etc/</code> 下的配置目录。</li>
+</ul>
+</li>
+<li><p>离线安装 RPM 包的命令及注意事项：  </p>
+<ul>
+<li><code>yum localinstall 包.rpm</code>（自动处理依赖）；需确保依赖包已下载，或提前用 <code>yum downloader --resolve 包名</code> 下载依赖。</li>
+</ul>
+</li>
+<li><p>查看软件安装路径的命令：  </p>
+<ul>
+<li><code>rpm -ql 包名</code>（列出包内所有文件路径），或 <code>which 命令</code>（查可执行文件路径）。</li>
+</ul>
+</li>
+<li><p>解决“依赖未满足”报错的方法：  </p>
+<ul>
+<li><p>① 启用对应 yum 仓库（如 EPEL）；</p>
+</li>
+<li><p>② 手动下载缺失的依赖包；</p>
+</li>
+<li><p>③ 检查系统版本与包的兼容性。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="22、日期和时区"><a href="#22、日期和时区" class="headerlink" title="22、日期和时区"></a>22、日期和时区</h5><ol>
+<li>修改系统时区为上海的命令： <ul>
+<li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>，</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>或 <code>timedatectl set-timezone Asia/Shanghai</code>（systemd 环境）。</li>
+</ul>
+<ol start="2">
+<li>NTP 与 Chrony 的区别：  <ul>
+<li>Chrony 更适合 网络不稳定环境（更快同步、低资源消耗），NTP 传统但兼容性好；CentOS 8+ 默认用 Chrony。</li>
+</ul>
+</li>
+<li>date 命令设时间后不生效的原因： <ul>
+<li>可能被 NTP&#x2F;Chrony 服务覆盖（需先停服务 <code>systemctl stop chronyd</code>），或时区配置错误。</li>
+</ul>
+</li>
+<li>解决虚拟机时间漂移的方法：  <ul>
+<li>① 开启 VMware 时间同步（虚拟机设置→选项→时间同步）；</li>
+<li>② 配置 Chrony 自动校准。</li>
+</ul>
+</li>
+<li>查看时间同步状态的命令：  <ul>
+<li>Chrony 用 <code>chronyc sources -v</code>，NTP 用 <code>ntpq -p</code>。</li>
+</ul>
+</li>
+</ol>
+<h5 id="23、systemctl-命令"><a href="#23、systemctl-命令" class="headerlink" title="23、systemctl 命令"></a>23、systemctl 命令</h5><ol>
+<li>systemctl 与 service 命令的区别：  <ul>
+<li>systemctl 是 systemd 工具（支持单元管理、依赖、状态查询），service 是兼容脚本（仅封装 systemctl，功能更弱）。</li>
+</ul>
+</li>
+<li>设置服务开机自启的命令及扩展：  <ul>
+<li><code>systemctl enable 服务</code>；若需禁止自启，用 <code>systemctl mask 服务</code>（更彻底，阻止手动启动）。</li>
+</ul>
+</li>
+<li>查看服务依赖关系的命令： <ul>
+<li><code>systemctl list-dependencies 服务</code>（递归显示依赖的单元）。</li>
+</ul>
+</li>
+<li>服务启动失败的排查步骤：  <ul>
+<li>① <code>systemctl status 服务</code> 看日志；</li>
+<li>② 检查配置文件语法（如 <code>nginx -t</code>）；</li>
+<li>③ 验证依赖服务是否正常。</li>
+</ul>
+</li>
+<li>systemd target 的作用： <ul>
+<li>替代传统运行级别（如 <code>multi-user.target</code> 对应 runlevel 3，<code>graphical.target</code> 对应 runlevel 5），管理系统启动的单元集合。  </li>
+<li></li>
+</ul>
+</li>
+</ol>
+<h5 id="24、网络传输（nmap-netstat-ping-wget-curl）"><a href="#24、网络传输（nmap-netstat-ping-wget-curl）" class="headerlink" title="24、网络传输（nmap&#x2F;netstat&#x2F;ping&#x2F;wget&#x2F;curl）"></a>24、网络传输（nmap&#x2F;netstat&#x2F;ping&#x2F;wget&#x2F;curl）</h5><ol>
+<li>nmap 与 netstat 查端口的区别<ul>
+<li>nmap 是 主动扫描工具（查目标机开放端口），netstat 查 本机监听&#x2F;连接的端口（<code>netstat -tulnp</code>）。</li>
+</ul>
+</li>
+<li>ping 通但服务不可达”的原因： <ul>
+<li>① 防火墙封禁端口（如 <code>firewalld</code> 阻止 80 端口）；</li>
+<li>② 服务未启动，或监听地址为 127.0.0.1（仅本机可访问）。</li>
+</ul>
+</li>
+<li>wget 和 curl 下载大文件的优势：  <ul>
+<li>wget 内置 断点续传（<code>-c</code>），适合后台下载；curl 支持 复杂请求（如带 Cookie、POST 上传），更灵活。</li>
+</ul>
+</li>
+<li>用 curl 测试 POST 接口的命令：  <ul>
+<li><code>curl -X POST -d &quot;username=test&amp;password=123&quot; http://api.example.com/login</code>（表单提交），</li>
+<li>或传 JSON：<code>curl -H &quot;Content-Type: application/json&quot; -d &#39;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#39; URL</code>。</li>
+</ul>
+</li>
+<li>查看端口占用进程的命令：  <ul>
+<li><code>netstat -tulnp | grep 端口</code>，或 <code>ss -tulnp | grep 端口</code>；结合 <code>pidof 进程名</code> 验证。</li>
+</ul>
+</li>
+</ol>
+<h5 id="25、进程管理（ps-kill）"><a href="#25、进程管理（ps-kill）" class="headerlink" title="25、进程管理（ps&#x2F;kill）"></a>25、进程管理（ps&#x2F;kill）</h5><ol>
+<li>ps -ef 与 ps aux 的输出差异：  <ul>
+<li><code>ps -ef</code> 是 System V 格式（列名如 UID、PID、PPID），</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><code>ps aux</code> 是 BSD 格式（列名如 USER、PID、%CPU），<ul>
+<li>核心数据一致。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>kill -9 与 kill -15 的区别： <ul>
+<li>-15（SIGTERM）优雅终止（允许进程清理资源），-9（SIGKILL）强制终止（无视进程状态，可能丢数据）。</li>
+</ul>
+</li>
+<li>批量杀死进程的方法：  <ul>
+<li>① <code>pgrep 进程名 | xargs kill</code>；</li>
+<li>② <code>pkill 进程名</code>（更简洁，直接按名称杀进程）。</li>
+</ul>
+</li>
+<li>进程僵死（Zombie）的原因及解决：  <ul>
+<li>子进程退出，父进程未调用 <code>wait()</code> 回收；解决：kill 父进程（或重启服务），让 init 进程接管回收。</li>
+</ul>
+</li>
+<li>查看进程资源占用的命令：  <ul>
+<li><code>top</code>（实时监控）、<code>htop</code>（更友好），或 <code>ps -eo %cpu,%mem,comm | sort -nr</code>（按 CPU&#x2F;内存排序）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="26、软链接（ln-s）"><a href="#26、软链接（ln-s）" class="headerlink" title="26、软链接（ln -s）"></a>26、软链接（ln -s）</h5><ol>
+<li>软链接与硬链接的核心区别： <ul>
+<li>软链接是特殊文件（存目标路径，Inode 不同），可跨分区、连目录；硬链接共享 Inode，不能连目录、跨分区。</li>
+</ul>
+</li>
+<li>删除软链接的正确操作：<ul>
+<li><code>rm -f 软链接名</code>（不加 <code>/</code>，否则会删除目标目录！如 <code>rm -f /link</code> 删链接，<code>rm -f /link/</code> 会删目标目录）。</li>
+</ul>
+</li>
+<li>软链接指向的文件移动后，链接是否可用？  <ul>
+<li>不可用！软链接存的是原路径，目标移动后路径失效，需重新创建链接。</li>
+</ul>
+</li>
+<li>创建目录软链接的命令：  <ul>
+<li><code>ln -s 源目录 软链接名</code>（硬链接无法创建目录链接，会报错）。</li>
+</ul>
+</li>
+<li>软链接的权限是否影响访问？  <ul>
+<li>不影响！访问软链接时，实际权限由目标文件决定，软链接自身权限可忽略。</li>
+</ul>
+</li>
+</ol>
+<h5 id="27、IP-和主机名"><a href="#27、IP-和主机名" class="headerlink" title="27、IP 和主机名"></a>27、IP 和主机名</h5><ol>
+<li>临时 vs 永久设置 IP 的区别： <ul>
+<li>临时用 <code>ip addr add</code>&#x2F;<code>ifconfig</code>（重启网卡失效）；</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>永久需编辑 网卡配置文件（<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>），重启网络服务生效。</li>
+</ul>
+<ol start="2">
+<li>主机名的三种类型（systemd 环境）：  <ul>
+<li>① 静态（<code>/etc/hostname</code>，永久）；</li>
+<li>② 瞬态（<code>hostname 临时名</code>，重启失效）；</li>
+<li>③ 美观名（<code>hostnamectl set-hostname &quot;Web Server&quot;</code>，含空格，存 <code>/etc/machine-info</code>）。</li>
+</ul>
+</li>
+<li>域名解析的优先级顺序：  <ul>
+<li>先查 <code>/etc/hosts</code>，再查 <code>/etc/resolv.conf</code> 配置的 DNS 服务器（可通过 <code>nsswitch.conf</code> 调整顺序）。</li>
+</ul>
+</li>
+<li>VMware 桥接模式 vs NAT 模式的区别：  <ul>
+<li>桥接模式：虚拟机获 独立公网 IP（与主机同网段）；NAT 模式：虚拟机共享 主机 IP（通过主机转发上网，更安全）。</li>
+</ul>
+</li>
+<li>解决 DNS 解析慢的方法：  <ul>
+<li>① 换高速 DNS（如 <code>8.8.8.8</code>、<code>223.5.5.5</code>）；</li>
+<li>② 清理 DNS 缓存（<code>systemd-resolve --flush-caches</code>）；</li>
+<li>③ 优化 <code>/etc/nsswitch.conf</code>，优先用 <code>dns</code> 而非 <code>files</code>。</li>
+</ul>
+</li>
+</ol>
+<h5 id="28、主机状态（top、df、iostat、sar）"><a href="#28、主机状态（top、df、iostat、sar）" class="headerlink" title="28、主机状态（top、df、iostat、sar）"></a>28、主机状态（top、df、iostat、sar）</h5><ol>
+<li><p>简述<code>top</code>中<code>load average</code>的含义及“1&#x2F;5&#x2F;15分钟”数值的参考意义。</p>
+<ul>
+<li><code>load average</code> 表示系统平均负载（等待CPU&#x2F;IO的进程数）。1分钟反映近期负载，15分钟反映长期趋势；若数值超过CPU核心数，可能系统过载。</li>
+</ul>
+</li>
+<li><p>说明<code>df -i</code>的作用及适用场景。</p>
+<ul>
+<li><code>df -i</code> 显示磁盘分区的inode使用情况。当磁盘空间未满但无法创建文件时，需用它排查“inode用尽”问题。</li>
+</ul>
+</li>
+<li><p><code>iostat</code> 中<code>tps</code>指标代表什么？</p>
+<ul>
+<li><code>tps</code>（Transactions Per Second）表示每秒IO事务数，反映磁盘IO操作频率。</li>
+</ul>
+</li>
+<li><p>如何实时监控<code>eth0</code>的网络吞吐量（每秒采集1次，共5次）？</p>
+<ul>
+<li>执行 <code>sar -n DEV -p 1 5 | grep eth0</code>（<code>-p</code>显示接口别名，<code>1</code>间隔1秒，<code>5</code>采集5次，<code>grep</code>过滤<code>eth0</code>）。</li>
+</ul>
+</li>
+<li><p>系统负载高时，如何结合<code>top</code>、<code>iostat</code>判断是CPU还是磁盘IO瓶颈？</p>
+<ul>
+<li>① 用<code>top</code>看<code>%iowait</code>（高则可能IO瓶颈）和CPU使用率；</li>
+<li>② 用<code>iostat</code>看<code>%util</code>（磁盘利用率）、<code>await</code>（IO等待时间）。若<code>%iowait</code>和磁盘<code>%util</code>高，是IO瓶颈；若CPU使用率高，是CPU瓶颈。</li>
+</ul>
+</li>
+</ol>
+<h5 id="29、环境变量（概念、env、PATH、-、自定义）"><a href="#29、环境变量（概念、env、PATH、-、自定义）" class="headerlink" title="29、环境变量（概念、env、PATH、$、自定义）"></a>29、环境变量（概念、env、PATH、$、自定义）</h5><ol>
+<li><p>解释“环境变量”和“局部变量”的区别，并举例创建方式。</p>
+<ul>
+<li>环境变量可被子进程继承，用<code>export VAR=value</code>创建（如<code>export PATH=/new/path:$PATH</code>）；局部变量仅当前Shell有效，子进程不继承，直接<code>VAR=value</code>创建（如<code>local_var=test</code>）。</li>
+</ul>
+</li>
+<li><p>命令提示“command not found”的可能原因及排查步骤？</p>
+<ul>
+<li>原因：命令路径不在<code>PATH</code>中，或命令不存在。步骤：① <code>echo $PATH</code> 查看路径；② <code>which 命令</code> 确认命令是否存在；③ 若存在，将路径加入<code>PATH</code>（<code>export PATH=$PATH:/command/path</code>）。</li>
+</ul>
+</li>
+<li><p>简述<code>$</code>符号在Shell中的两种常见用法。</p>
+<ul>
+<li>① 引用环境变量（如<code>echo $HOME</code>）；② 命令替换（如<code>current_dir=$(pwd)</code>）。</li>
+</ul>
+</li>
+<li><p>如何临时设置<code>DEBUG=1</code>并让子进程继承该变量？</p>
+<ul>
+<li>执行 <code>export DEBUG=1</code>，子进程会继承该环境变量。</li>
+</ul>
+</li>
+<li><p>让<code>MY_CONFIG=/etc/myapp.conf</code>对所有用户永久生效，写出配置步骤。</p>
+<ul>
+<li>① 编辑<code>/etc/profile</code>；</li>
+<li>② 加入<code>export MY_CONFIG=/etc/myapp.conf</code>；</li>
+<li>③ 执行<code>source /etc/profile</code>让当前Shell生效（新登录用户自动加载）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="30、压缩打包（gzip、zip、bzip2、tar）"><a href="#30、压缩打包（gzip、zip、bzip2、tar）" class="headerlink" title="30、压缩打包（gzip、zip、bzip2、tar）"></a>30、压缩打包（gzip、zip、bzip2、tar）</h5><ol>
+<li><p>简述 <code>tar -czf</code>、<code>tar -xzf</code>、<code>tar -tvf</code> 的作用。</p>
+<ul>
+<li><code>tar -czf</code> 用于打包并通过gzip压缩；<code>tar -xzf</code> 用于解压gzip格式的tar包；<code>tar -tvf</code> 用于查看tar包内的文件列表（不解压）。</li>
+</ul>
+</li>
+<li><p><code>gzip</code> 压缩文件后，原文件会发生什么变化？如何保留原文件？</p>
+<ul>
+<li><code>gzip</code> 会删除原文件，生成 <code>.gz</code> 压缩文件；若要保留原文件，需加 <code>-k</code> 选项（如 <code>gzip -k file</code>）。</li>
+</ul>
+</li>
+<li><p>对比 <code>zip</code> 和 <code>tar + gzip</code> 两种方式的优缺点。</p>
+<ul>
+<li><code>zip</code> 跨平台性好（Windows&#x2F;Linux通用），但单文件压缩；<code>tar + gzip</code> 适合打包目录，Linux生态更友好，但Windows需工具（如7-Zip）支持。</li>
+</ul>
+</li>
+<li><p>如何用 <code>bzip2</code> 压缩文件并显示压缩进度？</p>
+<ul>
+<li>使用 <code>bzip2 -v file</code>（<code>-v</code> 表示 verbose，显示详细过程，含压缩比、进度等）。</li>
+</ul>
+</li>
+<li><p>命令 <code>tar -cjf archive.tar.bz2 /data</code> 的作用是什么？</p>
+<ul>
+<li>将 <code>/data</code> 目录打包并通过bzip2压缩，生成 <code>archive.tar.bz2</code> 文件。</li>
+</ul>
+</li>
+</ol>
+<h5 id="31、用户管理（useradd、passwd、usermod、userdel）"><a href="#31、用户管理（useradd、passwd、usermod、userdel）" class="headerlink" title="31、用户管理（useradd、passwd、usermod、userdel）"></a>31、用户管理（useradd、passwd、usermod、userdel）</h5><ol>
+<li>简述 <code>useradd</code> 和 <code>adduser</code> 的关系。<ul>
+<li>在多数Linux发行版中，<code>adduser</code> 是 <code>useradd</code> 的符号链接（软链接），功能一致；<code>adduser</code> 通常提供交互界面，<code>useradd</code> 更适合脚本自动化。</li>
+</ul>
+</li>
+<li>普通用户修改自己密码时，对密码复杂度有要求吗？由什么决定？<ul>
+<li>有要求，由 PAM（可插拔认证模块） 配置（如 <code>/etc/security/pwquality.conf</code>）和系统密码策略决定（长度、字符类型等）。</li>
+</ul>
+</li>
+<li>如何强制新用户首次登录必须修改密码？<ul>
+<li>使用 <code>chage -d 0 username</code>（设置密码过期时间为0，用户登录时会被强制改密码）。</li>
+</ul>
+</li>
+<li><code>usermod -g group1 user1</code> 和 <code>usermod -G group2 user1</code> 的区别是什么？<ul>
+<li><code>-g</code> 修改用户的主组；<code>-G</code> 将用户添加到附加组（原附加组会被覆盖，若要追加需加 <code>-a</code>，即 <code>-aG</code>）。</li>
+</ul>
+</li>
+<li>执行 <code>userdel -r testuser</code> 会产生哪些操作？<ul>
+<li>会删除用户 <code>testuser</code>，同时删除其家目录（<code>/home/testuser</code>）和邮件目录（<code>/var/spool/mail/testuser</code>）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="32、用户组管理（groupadd、groupmod、groupdel、查看用户组）"><a href="#32、用户组管理（groupadd、groupmod、groupdel、查看用户组）" class="headerlink" title="32、用户组管理（groupadd、groupmod、groupdel、查看用户组）"></a>32、用户组管理（groupadd、groupmod、groupdel、查看用户组）</h5><ol>
+<li>简述 <code>/etc/group</code> 文件的每行格式及含义。<ul>
+<li>格式为 <code>组名:密码占位符:GID:组成员</code>。例如 <code>dev:x:1001:user1,user2</code> 表示组名 <code>dev</code>，GID 1001，成员为 <code>user1</code> 和 <code>user2</code>；“密码占位符”通常为 <code>x</code>（实际密码存 <code>/etc/gshadow</code>）。</li>
+</ul>
+</li>
+<li>为什么删除用户组 <code>testgrp</code> 时提示“组非空”？如何解决？<ul>
+<li>因为组内还有用户，需先移除组内所有成员（用 <code>gpasswd -d user testgrp</code> 逐个删除，或 <code>usermod -G &quot;&quot; user</code> 清空用户附加组），再执行 <code>groupdel testgrp</code>。</li>
+</ul>
+</li>
+<li>如何查看系统中GID为1000的用户组？<ul>
+<li>执行 <code>grep &quot;:1000:&quot; /etc/group</code>（匹配GID为1000的行）。</li>
+</ul>
+</li>
+<li><code>groupmod -o -g 1000 devgrp</code> 中 <code>-o</code> 的作用是什么？<ul>
+<li><code>-o</code> 表示允许GID重复（默认GID唯一，加 <code>-o</code> 可创建与其他组相同GID的组）。</li>
+</ul>
+</li>
+<li>新建用户时，如何指定其主组为已存在的 <code>devgrp</code>？<ul>
+<li>使用 <code>useradd -g devgrp newuser</code>（<code>-g</code> 指定主组）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="33、管理用户组成员（gpasswd）"><a href="#33、管理用户组成员（gpasswd）" class="headerlink" title="33、管理用户组成员（gpasswd）"></a>33、管理用户组成员（gpasswd）</h5><ol>
+<li>简述 <code>gpasswd</code> 中 <code>-a</code>、<code>-d</code>、<code>-M</code>、<code>-A</code> 选项的作用。<ul>
+<li><code>-a</code>：添加单个用户到组；<code>-d</code>：从组中删除单个用户；<code>-M</code>：批量添加多个用户到组（用逗号或空格分隔）；<code>-A</code>：设置组的管理员（允许该用户管理组成员）。</li>
+</ul>
+</li>
+<li>普通用户作为组管理员，能执行哪些 <code>gpasswd</code> 操作？<ul>
+<li>只能添加&#x2F;删除组内的普通成员，无法修改组名、GID，也不能删除组本身。</li>
+</ul>
+</li>
+<li>如何查看组 <code>testgrp</code> 的所有成员？<ul>
+<li>① 查看 <code>/etc/group</code> 中 <code>testgrp</code> 对应的行（如 <code>grep &quot;testgrp&quot; /etc/group</code>）；</li>
+<li>② 执行 <code>getent group testgrp</code>。</li>
+</ul>
+</li>
+<li>对比 <code>usermod -aG group user</code> 和 <code>gpasswd -a user group</code> 的异同。<ul>
+<li>异：<code>usermod</code> 是修改用户属性（将用户添加到附加组），<code>gpasswd</code> 是修改组的成员列表；</li>
+<li>同：最终效果都是用户加入组。</li>
+</ul>
+</li>
+<li>执行 <code>gpasswd -r testgrp</code> 的作用是什么？<ul>
+<li>移除组 <code>testgrp</code> 的密码（若组有密码，普通用户需密码才能加入；移除后，无需密码即可加入）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="34、用户和用户组配置文件"><a href="#34、用户和用户组配置文件" class="headerlink" title="34、用户和用户组配置文件"></a>34、用户和用户组配置文件</h5><ol>
+<li><p>简述 Linux 中 <code>/etc/passwd</code> 和 <code>/etc/shadow</code> 的作用。</p>
+<ul>
+<li><code>/etc/passwd</code> 存储用户基本信息（用户名、UID、GID、家目录、默认 Shell 等）；<code>/etc/shadow</code> 存储密码哈希及密码策略（过期时间等），权限更严格（仅 root 可读写），提升安全性。</li>
+</ul>
+</li>
+<li><p>说明 <code>/etc/group</code> 文件的每行格式包含哪些字段。</p>
+<ul>
+<li>每行格式为 <code>组名:组密码占位符:GID:组成员列表</code>。组密码通常用 <code>x</code> 占位（实际存于 <code>/etc/gshadow</code>）；GID 是组 ID；成员列表为该组的用户（多用户用逗号分隔）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="35、免密登录"><a href="#35、免密登录" class="headerlink" title="35、免密登录"></a>35、免密登录</h5><ol>
+<li><p>简述 SSH 免密登录的原理。</p>
+<ul>
+<li>基于<strong>非对称加密</strong>（公钥-私钥对）。客户端生成密钥对后，公钥部署到服务端 <code>~/.ssh/authorized_keys</code>，私钥由客户端保管。登录时，服务端用公钥加密“挑战信息”，客户端用私钥解密并响应，验证通过则免密登录。</li>
+</ul>
+</li>
+<li><p>生成 SSH 密钥对后，如何将公钥部署到远程服务端？</p>
+<ul>
+<li>方法 1：用 <code>ssh-copy-id -i 公钥文件 用户名@服务端IP</code>，自动追加公钥到 <code>~/.ssh/authorized_keys</code>；方法 2：手动复制公钥内容，登录服务端后，将内容追加到 <code>~/.ssh/authorized_keys</code>（无文件则创建）。</li>
+</ul>
+</li>
+<li><p>为什么 <code>~/.ssh</code> 目录和 <code>authorized_keys</code> 文件需要严格的权限设置？</p>
+<ul>
+<li>为保障安全。<code>~/.ssh</code> 设为 <code>700</code>（仅所有者可读写执行），<code>authorized_keys</code> 设为 <code>600</code>（仅所有者可读写），防止其他用户篡改公钥列表或非法读取私钥相关文件，避免未授权登录。</li>
+</ul>
+</li>
+</ol>
+<h5 id="36、文件属性和权限"><a href="#36、文件属性和权限" class="headerlink" title="36、文件属性和权限"></a>36、文件属性和权限</h5><ol>
+<li><p>简述 Linux 文件和目录的权限属性，以及 <code>r</code>、<code>w</code>、<code>x</code> 分别对文件和目录的意义。</p>
+<ul>
+<li>权限分为所有者（user）、所属组（group）、其他用户（other）三类，每类包含读（<code>r</code>）、写（<code>w</code>）、执行（<code>x</code>）权限。</li>
+<li>对文件：<code>r</code> 允许读取内容；<code>w</code> 允许修改内容；<code>x</code> 允许执行文件（如运行程序）。</li>
+<li>对目录：<code>r</code> 允许列出目录内文件；<code>w</code> 允许在目录内创建&#x2F;删除&#x2F;重命名文件；<code>x</code> 允许进入目录（如 <code>cd</code> 到该目录）。</li>
+</ul>
+</li>
+<li><p>说明 <code>chown</code> 和 <code>chgrp</code> 命令的作用及基本用法。</p>
+<ul>
+<li><code>chown</code>：修改文件&#x2F;目录的属主，也可同时改属组，格式如 <code>chown user:group 目标</code>（例：<code>chown alice:dev team.txt</code>）。</li>
+<li><code>chgrp</code>：仅修改文件&#x2F;目录的属组，格式如 <code>chgrp group 目标</code>（例：<code>chgrp ops project/</code>）。</li>
+</ul>
+</li>
+<li><p>解释 Linux 权限的数字表示法（如 <code>755</code>、<code>644</code>）的含义，并举例说明如何用 <code>chmod</code> 命令修改权限。</p>
+<ul>
+<li>数字规则：<code>r=4</code>、<code>w=2</code>、<code>x=1</code>，三类用户（所有者、所属组、其他）的权限分别相加，形成三位数。</li>
+<li>示例：<code>chmod 755 script.sh</code> → 所有者 <code>rwx</code>（<code>4+2+1=7</code>），所属组和其他用户 <code>rx</code>（<code>4+1=5</code>）；<code>chmod 644 doc.txt</code> → 所有者 <code>rw</code>（<code>4+2=6</code>），所属组和其他用户 <code>r</code>（<code>4</code>）。</li>
+</ul>
+</li>
+<li><p>系统安全加固中，“限制历史命令记录与退出清痕”的目的是什么？如何实现？</p>
+<ul>
+<li>目的：防止历史命令中可能包含的敏感信息（如密码、系统路径）被窃取，降低安全风险。</li>
+<li>实现：<ul>
+<li>限制历史条数：修改 <code>/etc/profile</code>，设置 <code>HISTSIZE=50</code>（仅保留最近 50 条命令）。</li>
+<li>退出清痕：编辑用户的 <code>~/.bash_logout</code>，添加 <code>history -c</code>（清空当前会话历史缓存）和 <code>clear</code>（清屏隐藏终端记录）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>简述强化密码策略的主要手段及对应的配置方式。</p>
+<ul>
+<li>手段：控制密码有效期、最小长度、修改间隔、到期提示等。</li>
+<li>配置：<ul>
+<li>修改 <code>/etc/login.defs</code>：设置 <code>PASS_MAX_DAYS</code>（密码最长有效期）、<code>PASS_MIN_DAYS</code>（密码修改间隔）、<code>PASS_MIN_LEN</code>（密码最小长度）、<code>PASS_WARN_AGE</code>（到期前提示天数）。</li>
+<li>对已有用户：用 <code>chage</code> 命令单独配置（如 <code>chage -M 90 -m 1 -W 7 user</code>，设置 90 天有效期、1 天修改间隔、到期前 7 天提示）。</li>
+<li>（可选）修改 PAM 配置（<code>/etc/security/pwquality.conf</code>）：强化密码复杂度（如长度、字符类型），该配置对 <code>root</code> 也有效。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="37、小结"><a href="#37、小结" class="headerlink" title="37、小结"></a>37、小结</h5><ol>
+<li><p>简述 <code>touch</code> 命令的作用及使用场景。</p>
+<ul>
+<li><code>touch</code> 命令主要用于创建新的空文件，或修改已有文件的访问时间和修改时间。场景包括：快速创建测试文件、更新文件时间戳以触发某些依赖时间的操作等。</li>
+</ul>
+</li>
+<li><p>说明 <code>cat</code>、<code>more</code> 命令在查看文件时的主要区别。</p>
+<ul>
+<li><code>cat</code> 会一次性将文件内容全部输出到终端，适合小文件；<code>more</code> 支持分页显示文件内容，通过空格翻页、<code>q</code> 退出，适合大文件，避免内容“刷屏”。</li>
+</ul>
+</li>
+<li><p>解释Linux文件权限中 <code>r</code>、<code>w</code>、<code>x</code> 对文件和目录的不同含义。</p>
+<ul>
+<li>对文件：<code>r</code> 可读取内容，<code>w</code> 可修改内容，<code>x</code> 可执行文件；对目录：<code>r</code> 可列出目录内文件，<code>w</code> 可在目录内创建&#x2F;删除&#x2F;重命名文件，<code>x</code> 可进入目录（如 <code>cd</code>）。</li>
+</ul>
+</li>
+<li><p>如何使用 <code>chmod</code> 命令将文件 <code>test.sh</code> 的权限设置为“所有者可执行，所属组可读，其他用户无权限”？</p>
+<ul>
+<li>命令为 <code>chmod 540 test.sh</code>。数字权限中，所有者 <code>5</code>（<code>r+x</code>，即 <code>4+1</code>）、所属组 <code>4</code>（<code>r</code>）、其他用户 <code>0</code>（无权限）。</li>
+</ul>
+</li>
+<li><p>简述 <code>ps</code> 命令和 <code>top</code> 命令在查看进程时的区别。</p>
+<ul>
+<li><code>ps</code> 是“快照式”查看，显示命令执行时刻的进程状态；<code>top</code> 是“动态监控”，实时刷新显示进程的资源占用等变化情况。</li>
+</ul>
+</li>
+<li><p>说明 <code>kill</code> 命令中 <code>-9</code> 参数的作用。</p>
+<ul>
+<li><code>-9</code> 是强制终止信号（SIGKILL），会立即强制终止进程，不给予进程清理资源的机会，常用于无法通过普通 <code>kill</code> 终止的“顽固”进程。</li>
+</ul>
+</li>
+<li><p><code>top</code> 命令可以查看哪些系统关键指标？</p>
+<ul>
+<li>可查看 CPU 使用率、内存使用情况、进程的资源占用（如各进程的 CPU&#x2F;内存占比）、系统负载等指标。</li>
+</ul>
+</li>
+<li><p>解释环境变量 <code>PATH</code> 的作用。</p>
+<ul>
+<li><code>PATH</code> 环境变量存储了系统查找可执行命令的路径列表。当输入一个命令时，系统会按 <code>PATH</code> 中路径的顺序，依次查找该命令的可执行文件。</li>
+</ul>
+</li>
+<li><p>如何查看当前系统的所有环境变量？</p>
+<ul>
+<li>执行 <code>env</code> 命令，会列出所有环境变量及其对应的值。</li>
+</ul>
+</li>
+<li><p>管道符 <code>|</code> 的作用是什么？举一个使用管道符的示例。</p>
+<ul>
+<li>管道符用于将前一个命令的输出作为后一个命令的输入。示例：<code>ls -l | grep &quot;.txt&quot;</code>，将 <code>ls -l</code> 的结果筛选出包含 <code>.txt</code> 的行。</li>
+</ul>
+</li>
+<li><p>说明输出重定向 <code>&gt;</code> 和 <code>&gt;&gt;</code> 的区别。</p>
+<ul>
+<li><code>&gt;</code> 会覆盖目标文件的原有内容；<code>&gt;&gt;</code> 会将内容追加到目标文件的末尾，不覆盖原有内容。</li>
+</ul>
+</li>
+<li><p>什么是命令替换？如何使用反引号实现命令替换？</p>
+<ul>
+<li>命令替换是将命令的执行结果嵌入到另一个命令中。用反引号示例：<code>echo &quot;当前日期：</code>date<code>&quot;</code>，会将 <code>date</code> 命令的结果替换到字符串中。</li>
+</ul>
+</li>
+<li><p><code>which</code> 命令的作用是什么？</p>
+<ul>
+<li><code>which</code> 命令用于查看系统中可执行命令的绝对路径，帮助确定当前使用的是哪个版本的命令。</li>
+</ul>
+</li>
+<li><p>简述 <code>find</code> 命令的基本用法（如何按文件名搜索）。</p>
+<ul>
+<li>格式为 <code>find 搜索路径 -name &quot;文件名&quot;</code>，例如 <code>find /home -name &quot;test.txt&quot;</code>，在 <code>/home</code> 目录下搜索名为 <code>test.txt</code> 的文件。</li>
+</ul>
+</li>
+<li><p><code>grep</code> 命令的作用是什么？如何在文件中筛选包含指定关键字的行？</p>
+<ul>
+<li><code>grep</code> 用于在文本中筛选匹配指定关键字的内容。命令格式：<code>grep &quot;关键字&quot; 文件名</code>，例如 <code>grep &quot;error&quot; log.txt</code> 筛选 <code>log.txt</code> 中含“error”的行。</li>
+</ul>
+</li>
+<li><p>说明 <code>wc</code> 命令的主要功能。</p>
+<ul>
+<li><code>wc</code> 用于统计文件的行数（<code>-l</code>）、单词数（<code>-w</code>）、字节数（<code>-c</code>），默认同时输出这三项统计结果。</li>
+</ul>
+</li>
+<li><p><code>head</code> 和 <code>tail</code> 命令的作用分别是什么？<code>tail -f</code> 有什么特殊用途？</p>
+<ul>
+<li><code>head</code> 显示文件开头部分内容（默认前10行）；<code>tail</code> 显示文件末尾部分内容（默认后10行）。<code>tail -f</code> 可动态跟踪文件末尾的内容更新（如实时查看日志新增内容）。</li>
+</ul>
+</li>
+<li><p>简述 <code>sed</code> 命令的工作原理。</p>
+<ul>
+<li><code>sed</code> 是流编辑器，工作原理是逐行读取待处理文本，将每行放入“模式空间”进行指定的编辑操作（如打印、删除、替换等），处理后将结果输出，直到所有行处理完毕。</li>
+</ul>
+</li>
+<li><p>如何使用 <code>sed</code> 命令直接修改源文件中的内容（替换操作）？</p>
+<ul>
+<li>使用 <code>-i</code> 选项结合替换脚本，格式为 <code>sed -i &#39;s/原内容/新内容/g&#39; 文件名</code>。例如 <code>sed -i &#39;s/old/new/g&#39; test.txt</code>，会将 <code>test.txt</code> 中所有“old”替换为“new”并直接修改源文件。</li>
+</ul>
+</li>
+<li><p>列举至少3种Linux系统安全加固的措施，并说明其作用。</p>
+<ul>
+<li>① 移除不必要用户：减少系统中潜在的“弱口令”或“冗余权限”用户，降低被攻击风险；</li>
+<li>② 设置用户无操作自动退出（<code>TMOUT</code>）：防止用户离开后终端被他人冒用；</li>
+<li>③ 限制历史命令记录：避免敏感命令（如密码、路径）通过历史记录泄露。</li>
+</ul>
+</li>
+</ol>
+<h5 id="38、磁盘管理"><a href="#38、磁盘管理" class="headerlink" title="38、磁盘管理"></a>38、磁盘管理</h5><ol>
+<li><p>简述 MBR 和 GPT 分区表的核心区别。</p>
+<ul>
+<li>MBR 最多支持 4 个主分区，单分区最大 2TB，用 32 位地址；GPT 支持超 2TB 磁盘，最多 128 个分区，用 64 位地址，有冗余分区表，更可靠，且支持 UEFI 启动。</li>
+</ul>
+</li>
+<li><p>Linux 硬件设备（如硬盘、分区）的命名规则是什么？举例说明。</p>
+<ul>
+<li>SCSI&#x2F;SATA 硬盘命名为 <code>/dev/sdX</code>（X 为字母，如 <code>/dev/sda</code> 是第一块硬盘）；分区为 <code>/dev/sdXN</code>（N 为数字，如 <code>/dev/sda1</code> 是第一块硬盘的第一个分区）；NVMe 硬盘可能命名为 <code>/dev/nvme0n1</code>。</li>
+</ul>
+</li>
+<li><p>什么是 inode？它在文件系统中的作用是什么？</p>
+<ul>
+<li>inode 是“索引节点”，存储文件的元数据（权限、所有者、大小、数据块指针等），系统通过 inode 定位文件的数据块（实际内容存在 data block 中）。</li>
+</ul>
+</li>
+<li><p>从新硬盘添加到 Linux 系统，到分区、格式化、挂载并开机自动挂载的完整流程是什么？</p>
+<ul>
+<li>① 物理添加硬盘；</li>
+<li>② 用 <code>fdisk</code>&#x2F;<code>parted</code> 创建分区（MBR&#x2F;GPT）；</li>
+<li>③ 用 <code>mkfs</code> 格式化（如 <code>mkfs.ext4 /dev/sdb1</code>）；</li>
+<li>④ 临时挂载：<code>mount /dev/sdb1 /mnt/data</code>；</li>
+<li>⑤ 配置自动挂载：编辑 <code>/etc/fstab</code>，添加 <code>(/dev/sdb1 /mnt/data ext4 defaults 0 0)</code>；</li>
+<li>⑥ 验证：<code>mount -a</code> 检查。</li>
+</ul>
+</li>
+<li><p>交换分区的作用是什么？如何创建并启用交换分区？</p>
+<ul>
+<li>作用：物理内存不足时，临时将内存数据移到交换分区，释放物理内存。创建：用 <code>fdisk</code> 建 swap 类型分区，或 <code>dd</code> 建交换文件；格式化：<code>mkswap /dev/sdb2</code>（分区）或 <code>mkswap /swapfile</code>（文件）；启用：<code>swapon /dev/sdb2</code> 或 <code>swapon /swapfile</code>。</li>
+</ul>
+</li>
+<li><p>超级块（superblock）的作用是什么？若超级块损坏会有什么影响？</p>
+<ul>
+<li>超级块存储文件系统的整体信息（如 inode 数量、块大小、文件系统类型）。若损坏，系统可能无法识别&#x2F;挂载该文件系统，导致数据无法访问，需用备份超级块或 <code>fsck</code> 修复。</li>
+</ul>
+</li>
+<li><p>Ext4 相比 Ext3 有哪些主要改进？</p>
+<ul>
+<li>支持更大文件&#x2F;分区（最大 1EB 文件、1EB 分区）；引入延迟分配、多块分配提升性能；日志模式更高效；支持在线碎片整理。</li>
+</ul>
+</li>
+<li><p>什么是“挂载（mount）”？Linux 为什么需要挂载分区？</p>
+<ul>
+<li>挂载是将文件系统（分区、光盘、网络存储等）关联到 Linux 目录树的某个目录，使内容可通过该目录访问。Linux 以统一目录树组织存储，因此需挂载才能访问不同设备的文件系统。</li>
+</ul>
+</li>
+<li><p>如何查看分区的文件系统类型？</p>
+<ul>
+<li>用 <code>blkid /dev/sdb1</code>（显示块设备的 UUID、文件系统类型）；或 <code>df -T</code>（显示已挂载分区的文件系统类型）；或 <code>lsblk -f</code>。</li>
+</ul>
+</li>
+<li><p>解释 MBR 分区表中“逻辑分区”的概念，以及与主分区、扩展分区的关系。</p>
+<ul>
+<li>MBR 最多 4 个主分区，若需更多分区，需创建扩展分区，再在扩展分区内创建逻辑分区。逻辑分区是扩展分区的细分，编号从 5 开始（如 <code>/dev/sda5</code>）；主分区和扩展分区编号为 1 - 4。</li>
+</ul>
+</li>
+<li><p>简述 MBR 和 GPT 分区表的主要区别，以及各自的适用场景。</p>
+<ul>
+<li><p>MBR（主引导记录）：</p>
+<ul>
+<li>最多支持 4个主分区（或3个主分区+1个扩展分区，扩展分区内可分多个逻辑分区）；</li>
+<li>单分区最大容量 2TB；</li>
+<li>采用32位地址，兼容性好（支持旧版BIOS启动）。</li>
+<li>适用：小容量磁盘（≤2TB）、需兼容老旧BIOS系统的场景。</li>
+</ul>
+</li>
+<li><p>GPT（全局唯一标识符分区表）：</p>
+<ul>
+<li>最多支持 128个分区；</li>
+<li>单分区最大容量 超2TB（理论支持至8ZB）；</li>
+<li>采用64位地址，有冗余分区表（提高可靠性），支持UEFI启动。</li>
+<li>适用：大容量磁盘（＞2TB）、需多分区或UEFI启动的现代系统。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解释 Linux 文件系统中 inode、data block、superblock 的作用，以及它们之间的关系。</p>
+<ul>
+<li>inode（索引节点）：存储文件的元数据（权限、所有者、大小、数据块指针等），每个文件对应一个 inode。</li>
+<li>data block（数据块）：存储文件的实际内容，inode 通过指针指向这些块。默认大小4K</li>
+<li>superblock（超级块）：存储文件系统的全局信息（如 inode 总数、块大小、文件系统类型等），是文件系统的“总控中心”。</li>
+</ul>
+<p>关系：系统通过 superblock 识别文件系统整体信息 → 通过 inode 找到文件元数据和数据块指针 → 最终从 data block 读取文件内容。</p>
+</li>
+<li><p>描述从新硬盘添加到 Linux 系统，到最终能存储数据的完整操作流程（包括分区、格式化、挂载等步骤）。</p>
+<p>流程如下：</p>
+<ul>
+<li><p>物理&#x2F;虚拟添加硬盘：将新硬盘接入服务器（或在虚拟机中添加虚拟磁盘）。</p>
+</li>
+<li><p>查看新硬盘：用 <code>fdisk -l</code> 或 <code>lsblk</code> 确认新硬盘（如 <code>/dev/sdb</code>）。</p>
+</li>
+<li><p>创建分区：</p>
+<ul>
+<li>MBR 分区：<code>fdisk /dev/sdb</code> → 交互创建主分区&#x2F;扩展分区。</li>
+<li>GPT 分区：<code>parted /dev/sdb mklabel gpt</code> → 交互或非交互创建分区。</li>
+</ul>
+</li>
+<li><p>格式化分区：用 <code>mkfs</code> 格式化（如 <code>mkfs.ext4 /dev/sdb1</code>，将分区格式化为 Ext4）。</p>
+</li>
+<li><p>临时挂载：<code>mount /dev/sdb1 /mnt/data</code>（将分区挂载到 <code>/mnt/data</code> 目录）。</p>
+</li>
+<li><p>验证存储：在 <code>/mnt/data</code> 下创建文件（如 <code>touch /mnt/data/test.txt</code>），测试读写。</p>
+</li>
+<li><p>配置自动挂载：编辑 <code>/etc/fstab</code>，添加行 <code>(/dev/sdb1 /mnt/data ext4 defaults 0 0)</code> → 执行 <code>mount -a</code> 验证自动挂载。</p>
+</li>
+</ul>
+</li>
+<li><p>什么是交换分区（swap）？它的主要作用是什么？如何创建并启用一个交换分区？</p>
+<ul>
+<li>交换分区（swap）：Linux 中用于“虚拟内存”的分区&#x2F;文件，当物理内存不足时，将部分内存数据临时换出到 swap，释放物理内存供活跃进程使用。</li>
+<li>作用：缓解物理内存不足，防止系统因内存耗尽崩溃。</li>
+<li>创建与启用步骤：<ul>
+<li>（可选）用 <code>fdisk</code> 创建 swap 类型的分区（如 <code>/dev/sdb2</code>）。</li>
+<li>格式化 swap：<code>mkswap /dev/sdb2</code>（若用文件，先 <code>dd if=/dev/zero of=/swapfile bs=1M count=2048</code> 创建 2GB 文件，再 <code>mkswap /swapfile</code>）。</li>
+<li>启用 swap：<code>swapon /dev/sdb2</code>（或 <code>swapon /swapfile</code>）。</li>
+<li>（可选）配置开机自动启用：在 <code>/etc/fstab</code> 添加 <code>(/dev/sdb2 none swap defaults 0 0)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Linux 中如何实现分区的开机自动挂载？请说明配置文件和关键步骤。</p>
+<p>通过配置 <code>/etc/fstab</code> 文件实现，步骤如下：</p>
+<ul>
+<li><p>确认分区信息：用 <code>blkid /dev/sdb1</code> 查看分区的 UUID、文件系统类型（如 <code>ext4</code>）。</p>
+</li>
+<li><p>编辑 <code>/etc/fstab</code>：添加一行，格式为 <code>UUID=xxx /挂载点  文件系统类型  选项  0  0</code>（或用设备名 <code>/dev/sdb1</code> 替代 UUID，如 <code>/dev/sdb1 /mnt/data ext4 defaults 0 0</code>）。</p>
+</li>
+<li><p>字段含义：<code>UUID/设备名</code>、<code>挂载点</code>、<code>文件系统类型</code>、<code>挂载选项</code>（<code>defaults</code> 包含 <code>rw, suid, dev, exec, auto, nouser, async</code>）、<code>dump</code>（备份标记）、<code>fsck</code>（检查顺序）。</p>
+</li>
+<li><p>验证配置：执行 <code>mount -a</code>（无报错则配置正确），重启系统后分区会自动挂载。</p>
+</li>
+</ul>
+</li>
+<li><p>简述硬链接与软链接的核心区别。</p>
+<ul>
+<li>硬链接与源文件共享 inode，是同一文件的不同入口，仅能在同一文件系统创建，源文件删除后硬链接仍可访问；</li>
+<li>软链接是独立文件，有自己的 inode，通过路径指向源文件，可跨文件系统，源文件删除后软链接失效。</li>
+</ul>
+</li>
+<li><p>RAID 0、RAID 1、RAID 5、RAID 10 的特点及适用场景分别是什么？</p>
+<ul>
+<li>RAID 0：条带化，无冗余，性能最优，适合对性能要求高但不要求冗余的场景（如临时缓存）。</li>
+<li>RAID 1：镜像，100% 冗余，读性能好、写性能一般，适合对数据安全性要求高的场景（如系统盘）。</li>
+<li>RAID 5：分布式校验，至少 3 块盘，兼顾性能与冗余，允许单块盘损坏，适合一般业务数据存储。</li>
+<li>RAID 10：先镜像（RAID 1）再条带（RAID 0），至少 4 块盘，性能与冗余俱佳，适合高 IO、高可靠性场景（如数据库）。</li>
+</ul>
+</li>
+<li><p>LVM 的主要优势是什么？</p>
+<ul>
+<li>LVM 可动态管理存储，将多个物理设备抽象为卷组（VG），再灵活划分为逻辑卷（LV）；支持在线扩容&#x2F;缩容逻辑卷，还能创建快照、简化存储扩展与管理。</li>
+</ul>
+</li>
+<li><p>正则表达式中元字符 <code>.</code>、&#96;&#96;、<code>+</code>、<code>?</code> 的作用分别是什么？</p>
+<ul>
+<li><code>.</code>：匹配任意单个字符（除换行符）。</li>
+<li>&#96;&#96;：匹配前面的元素0 次或多次。</li>
+<li><code>+</code>：匹配前面的元素1 次或多次。</li>
+<li><code>?</code>：匹配前面的元素0 次或 1 次（可选）。</li>
+</ul>
+</li>
+<li><p>简述创建并挂载 10G 逻辑卷到 <code>/data</code> 的步骤。</p>
+<p>步骤如下：</p>
+<ol>
+<li>创建物理卷：<code>pvcreate /dev/sdb1</code>（假设用 <code>/dev/sdb1</code> 分区）。</li>
+<li>创建卷组：<code>vgcreate vg_data /dev/sdb1</code>。</li>
+<li>创建逻辑卷：<code>lvcreate -L 10G -n lv_data vg_data</code>。</li>
+<li>格式化：<code>mkfs.ext4 /dev/vg_data/lv_data</code>。</li>
+<li>挂载：<code>mount /dev/vg_data/lv_data /data</code>；若需开机自动挂载，添加到 <code>/etc/fstab</code>。</li>
+</ol>
+</li>
+<li><p>正则表达式 <code>^[0-9]&#123;3&#125;-[0-9]&#123;3&#125;-[0-9]&#123;4&#125;$</code> 匹配什么格式？</p>
+<ul>
+<li>匹配类似 <code>123-456-7890</code> 的格式，即北美电话号码（3位区号 + 3位前缀 + 4位号码）。</li>
+</ul>
+</li>
+<li><p>RAID 5 单块硬盘故障后，应如何处理？</p>
+<ul>
+<li>需立即更换故障硬盘，随后让 RAID 阵列自动&#x2F;手动重建，将数据恢复到新硬盘；重建过程中应减少阵列读写压力，确保数据完整恢复。</li>
+</ul>
+</li>
+<li><p>软链接的典型应用场景有哪些？</p>
+<ul>
+<li>常用于跨文件系统链接文件、简化长路径访问（如将深目录链接到易访问位置）、版本管理（如链接不同版本的库文件）。</li>
+</ul>
+</li>
+<li><p>LVM 缩容逻辑卷时的注意事项是什么？</p>
+<ul>
+<li>缩容前需卸载逻辑卷，用 <code>e2fsck</code> 检查文件系统完整性；缩容后需调整文件系统大小（如 <code>resize2fs</code>）；过程存在数据丢失风险，需提前备份。</li>
+</ul>
+</li>
+<li><p>写出一个匹配简单 IPv4 地址的正则表达式（不严格校验范围）。</p>
+<ul>
+<li>基础匹配形式为 <code>^[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;$</code>（更严谨的正则需校验每段为 0 - 255，此为简化版）。</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ningxiu2978.github.io">NINGXIU</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ningxiu2978.github.io/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/">https://ningxiu2978.github.io/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ningxiu2978.github.io" target="_blank">NINGXIU's 学习博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%A2%98/" title="MySQL面试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">MySQL面试题</div></div><div class="info-2"><div class="info-item-1">07281.数据库的分类有哪些？（谈谈你知道的数据库？）分为关系型数据库(RDBMS)、非关系型数据库(NoSQL) 关系型数据库(RDBMS)，是建立在关系模型基础上，由多张相互连接的二维表组成的数据库。 关系型数据库数据之间的关系性强，查询同类信息快，存储的数据结构可以很复杂。  常见的关系型数据库：mysql、oracle、db2、sql server  非关系型数据库(NoSQL)：Not-Only SQL ，泛指非关系型数据库，是对关系型数据库的补充。 非关系型数据库数据之间可以没有关系，结构简单更容易扩展，在大量数据的情况下，读写性能优秀  常见的非关系型数据库：Redis、MongoDB  2.sql的分类？（分别是做什么的、关键字？）sql是操作数据库的一种语言 DDL数据定义语言、DML数据操作语言、DQL数据查询语言、DCL数据控制语言 DDL，操作数据库、表、列等，常用语句：CREATE、 ALTER、DROP DML，操作数据库中表里的数据；常用语句：INSERT、 UPDATE、 DELETE DQL，查询数据 常用语句：SELECT DCL，操作访问权...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E6%80%BB)/" title="Linux学习笔记(总)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">Linux学习笔记(总)</div></div><div class="info-2"><div class="info-item-1">一. Linux命令基础到进阶第一章 命令入门1、Linux的目录结构  /，根目录是最顶级的目录了 Linux只有一个顶级目录：/ 路径描述的层次关系同样适用/来表示 &#x2F;home&#x2F;itpan&#x2F;a.txt，表示根目录下的home目录内有itpan目录，内有a.txt  演示home家目录  12345678su shucd /lscd /homelscd shullls  常用的目录功能：   HOME目录每一个用户在Linux系统中都有自己的专属工作目录，称之为HOME目录。  普通用户的HOME目录，默认在：/home/用户名  root用户的HOME目录，在：/root   FinalShell登陆终端后，默认的工作目录就是用户的HOME目录 2、linux 命令基础格式无论是什么命令，在linux 中，命令有通用的格式 1command  [-选项] [参数]  ## []表示可选   command： 表示命令，例如 ls、cd… -选项： 可选的，命令的一些选项，可以通过选项控制命令的行为细节 参数：可选，命令的参数，多数用于命令指向的目...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">NINGXIU</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/NingXIU2978"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/NingXIU2978" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/georgelester10611@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这是我的博客,欢迎各位大佬莅临！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">理论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%9D%A2Linux%E7%B3%BB%E7%BB%9F%E6%AF%94Windows%E7%B3%BB%E7%BB%9F%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1、面Linux系统比Windows系统好在哪里？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81IP%E5%9C%B0%E5%9D%80-%E5%92%8C-%E5%9F%9F%E5%90%8D%E7%9A%84%E5%85%B3%E7%B3%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">2、IP地址 和 域名的关系是什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">3、DNS 服务器是什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88IP%E5%9C%B0%E5%9D%80%E5%88%B0%E7%8E%B0%E5%9C%A8%E8%BF%98%E6%B2%A1%E6%9C%89%E5%88%86%E9%85%8D%E5%AE%8C%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">4、为什么IP地址到现在还没有分配完？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E4%BD%A0%E7%9F%A5%E9%81%93OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">5、你知道OSI七层网络模型吗？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E8%AF%B7%E8%AF%B4%E4%B8%8BTCP%E5%8D%8F%E8%AE%AE%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-number">1.6.</span> <span class="toc-text">6、请说下TCP协议和UDP协议的区别。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">7、你知道哪些常用的端口号？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81HTTPS-%E4%B8%AD%E7%9A%84-S-%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-number">1.8.</span> <span class="toc-text">8、HTTPS 中的 S 是什么意思？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">日常使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E4%BD%A0%E7%94%A8%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E5%8F%91%E8%A1%8C%E7%89%88%E6%9C%AC%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">1、你用的是什么发行版本？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E4%BD%A0%E7%94%A8%E7%9A%84%E6%98%AF%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%9A%84%E8%BF%98%E6%98%AF%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2%E7%9A%84%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">2、你用的是图形化界面的还是命令行界面的？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E4%BD%A0%E6%9C%89%E7%94%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%97%EF%BC%9F%E7%94%A8%E7%9A%84%E6%98%AF%E5%93%AA%E7%A7%8D"><span class="toc-number">2.3.</span> <span class="toc-text">3、你有用虚拟机吗？用的是哪种?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E4%BD%A0%E6%98%AF%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%96%B9%E5%BC%8F%E8%BF%9E%E6%8E%A5%E7%9A%84Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%EF%BC%9F"><span class="toc-number">2.4.</span> <span class="toc-text">4、你是通过什么方式连接的Linux系统的？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90"><span class="toc-number">3.</span> <span class="toc-text">用户和权限</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E4%B8%8D%E4%BD%BF%E7%94%A8root%E8%B4%A6%E6%88%B7%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">为什么我们不使用root账户？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">知识点小结</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81mkdir-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1、mkdir 命令（创建目录）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81touch-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%88%9B%E5%BB%BA%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%94%B9%E6%97%B6%E9%97%B4%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">2、touch 命令（创建空文件&#x2F;改时间）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81cat-%E5%91%BD%E4%BB%A4%EF%BC%88%E6%9F%A5%E7%9C%8B-%E5%90%88%E5%B9%B6%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">3、cat 命令（查看&#x2F;合并文件）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81more-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%88%86%E9%A1%B5%E6%9F%A5%E7%9C%8B%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">4、more 命令（分页查看）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81cp-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">5、cp 命令（复制文件&#x2F;目录）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81mv-%E5%91%BD%E4%BB%A4%EF%BC%88%E7%A7%BB%E5%8A%A8-%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">6、mv 命令（移动&#x2F;重命名）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81rm-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="toc-number">4.7.</span> <span class="toc-text">7、rm 命令（删除文件&#x2F;目录）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81which-%E5%91%BD%E4%BB%A4%EF%BC%88%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4%E8%B7%AF%E5%BE%84%EF%BC%89"><span class="toc-number">4.8.</span> <span class="toc-text">8、which 命令（查找命令路径）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9%E3%80%81find-%E5%91%BD%E4%BB%A4%EF%BC%88%E5%BC%BA%E5%A4%A7%E6%9F%A5%E6%89%BE%EF%BC%89"><span class="toc-number">4.9.</span> <span class="toc-text">9、find 命令（强大查找）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81grep-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.10.</span> <span class="toc-text">10、grep 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81wc-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.11.</span> <span class="toc-text">11、wc 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81tail-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.12.</span> <span class="toc-text">12、tail 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13%E3%80%81head-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.13.</span> <span class="toc-text">13、head 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14%E3%80%81%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="toc-number">4.14.</span> <span class="toc-text">14、管道符 |</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15%E3%80%81echo-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.15.</span> <span class="toc-text">15、echo 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#16%E3%80%81%E5%8F%8D%E5%BC%95%E5%8F%B7-%EF%BC%88%E5%91%BD%E4%BB%A4%E6%9B%BF%E6%8D%A2%EF%BC%89"><span class="toc-number">4.16.</span> <span class="toc-text">16、反引号 &#96;（命令替换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#17%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E7%AC%A6%EF%BC%88-%E3%80%81-%E3%80%812-%E3%80%81-%EF%BC%89"><span class="toc-number">4.17.</span> <span class="toc-text">17、重定向符（&gt;、&gt;&gt;、2&gt;、&amp;&gt;）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#18%E3%80%81vi-vim-%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">4.18.</span> <span class="toc-text">18、vi&#x2F;vim 编辑器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#19%E3%80%81awk-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.19.</span> <span class="toc-text">19、awk 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#20%E3%80%81yum-%E6%BA%90"><span class="toc-number">4.20.</span> <span class="toc-text">20、yum 源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#21%E3%80%81%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD"><span class="toc-number">4.21.</span> <span class="toc-text">21、软件安装和卸载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#22%E3%80%81%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E5%8C%BA"><span class="toc-number">4.22.</span> <span class="toc-text">22、日期和时区</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#23%E3%80%81systemctl-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.23.</span> <span class="toc-text">23、systemctl 命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#24%E3%80%81%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%EF%BC%88nmap-netstat-ping-wget-curl%EF%BC%89"><span class="toc-number">4.24.</span> <span class="toc-text">24、网络传输（nmap&#x2F;netstat&#x2F;ping&#x2F;wget&#x2F;curl）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#25%E3%80%81%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88ps-kill%EF%BC%89"><span class="toc-number">4.25.</span> <span class="toc-text">25、进程管理（ps&#x2F;kill）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#26%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5%EF%BC%88ln-s%EF%BC%89"><span class="toc-number">4.26.</span> <span class="toc-text">26、软链接（ln -s）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#27%E3%80%81IP-%E5%92%8C%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-number">4.27.</span> <span class="toc-text">27、IP 和主机名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#28%E3%80%81%E4%B8%BB%E6%9C%BA%E7%8A%B6%E6%80%81%EF%BC%88top%E3%80%81df%E3%80%81iostat%E3%80%81sar%EF%BC%89"><span class="toc-number">4.28.</span> <span class="toc-text">28、主机状态（top、df、iostat、sar）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#29%E3%80%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E6%A6%82%E5%BF%B5%E3%80%81env%E3%80%81PATH%E3%80%81-%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89"><span class="toc-number">4.29.</span> <span class="toc-text">29、环境变量（概念、env、PATH、$、自定义）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#30%E3%80%81%E5%8E%8B%E7%BC%A9%E6%89%93%E5%8C%85%EF%BC%88gzip%E3%80%81zip%E3%80%81bzip2%E3%80%81tar%EF%BC%89"><span class="toc-number">4.30.</span> <span class="toc-text">30、压缩打包（gzip、zip、bzip2、tar）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#31%E3%80%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%EF%BC%88useradd%E3%80%81passwd%E3%80%81usermod%E3%80%81userdel%EF%BC%89"><span class="toc-number">4.31.</span> <span class="toc-text">31、用户管理（useradd、passwd、usermod、userdel）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#32%E3%80%81%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86%EF%BC%88groupadd%E3%80%81groupmod%E3%80%81groupdel%E3%80%81%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E7%BB%84%EF%BC%89"><span class="toc-number">4.32.</span> <span class="toc-text">32、用户组管理（groupadd、groupmod、groupdel、查看用户组）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#33%E3%80%81%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E7%BB%84%E6%88%90%E5%91%98%EF%BC%88gpasswd%EF%BC%89"><span class="toc-number">4.33.</span> <span class="toc-text">33、管理用户组成员（gpasswd）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#34%E3%80%81%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.34.</span> <span class="toc-text">34、用户和用户组配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#35%E3%80%81%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="toc-number">4.35.</span> <span class="toc-text">35、免密登录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#36%E3%80%81%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E5%92%8C%E6%9D%83%E9%99%90"><span class="toc-number">4.36.</span> <span class="toc-text">36、文件属性和权限</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#37%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">4.37.</span> <span class="toc-text">37、小结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#38%E3%80%81%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-number">4.38.</span> <span class="toc-text">38、磁盘管理</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/Linux%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Linux面试题">Linux面试题</a><time datetime="2025-09-18T13:19:49.181Z" title="发表于 2025-09-18 21:19:49">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%A2%98/" title="MySQL面试题">MySQL面试题</a><time datetime="2025-09-18T13:18:22.257Z" title="发表于 2025-09-18 21:18:22">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/Oracle%E7%AC%94%E8%AE%B0(%E6%80%BB)/" title="Oracle笔记(总)">Oracle笔记(总)</a><time datetime="2025-09-18T13:17:11.610Z" title="发表于 2025-09-18 21:17:11">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E6%80%BB)/" title="MySQl学习笔记(总)">MySQl学习笔记(总)</a><time datetime="2025-09-18T13:14:54.830Z" title="发表于 2025-09-18 21:14:54">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E6%80%BB)/" title="Linux学习笔记(总)">Linux学习笔记(总)</a><time datetime="2025-09-18T13:13:17.748Z" title="发表于 2025-09-18 21:13:17">2025-09-18</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By NINGXIU</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
